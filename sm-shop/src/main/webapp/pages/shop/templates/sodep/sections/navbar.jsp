@@ -61,58 +61,34 @@ $(document).ready(function() {
 
             <!-- Start Navbar-->
             <div id="storeBar" class="row-fluid">
-
-				<div class="span4 pull-left">
-						<nav class="logo">
-							 <c:choose>
-	                		<c:when test="${not empty requestScope.MERCHANT_STORE.storeLogo}">
-	                			<img class="logoImage" src="<sm:storeLogo/>"/>
-	                		</c:when>
-	                		<c:otherwise>
-	                			<h1>
-	                			<a href="<c:url value="/shop/"/>">
-	                				<c:out value="${requestScope.MERCHANT_STORE.storename}"/>
-	                			</a>  
-	                			</h1>
-	                		</c:otherwise>
-	                	  </c:choose>  
-						</nav>
-				</div>
-				<div class="span8 pull-right">
-
-						<nav id="menu" class="pull-right">
-                    					<ul id="mainMenu">
-                    						<!-- request contains url and url contains /shop -->
-											<li class="">  
-	                    					       <a href="<c:url value="/shop"/>" class="current">          
-	                    					            <span class="name"><s:message code="menu.home" text="Home"/></span>     
-	                    								<span class="desc"><s:message code="menu.home" text="Home"/></span>                                  
-	                    						   </a>                         
-	                    					</li>
-	
-	                    		            
-	                    		            <c:forEach items="${requestScope.TOP_CATEGORIES}" var="category">
-	    										<li class="">
-	    											<a href="<c:url value="/shop/category/${category.description.friendlyUrl}.html"/><sm:breadcrumbParam categoryId="${category.id}"/>" class="current"> 
-	    												<span class="name">${category.description.name}</span>
-	    												<span class="desc">${category.description.highlights}</span> 
-	    											</a>
-	    										</li> 
-											</c:forEach>
-                    		            </ul>
-                    		            
-                    		            <div id="searchGroup" class="btn-group pull-right">
-											<form id="searchForm" class="form-inline" method="post" action="<c:url value="/shop/search/search.html"/>">
-												<input id="searchField" class="tt-query" name="q" type="text" placeholder="<s:message code="label.search.searchQuery" text="Search query" />" autocomplete="off" spellcheck="false" dir="auto" value="<c:out value="${q}"/>">
-												<button id="searchButton" class="btn" type="submit"><s:message code="label.generic.search" text="Search" /></button>
-											</form>
-										</div>
-                    		            
-                    		            
-						</nav>
+				<nav id="menu" class="pull-right">
+								<ul id="mainMenu">
+									<!-- request contains url and url contains /shop -->
+									<li class="">
+										   <a href="<c:url value="/shop"/>" class="current">
+												<span class="name"><s:message code="menu.home" text="Home"/></span>
+										   </a>
+									</li>
 
 
-				</div>
+									<c:forEach items="${requestScope.TOP_CATEGORIES}" var="category">
+										<li class="">
+											<a href="<c:url value="/shop/category/${category.description.friendlyUrl}.html"/><sm:breadcrumbParam categoryId="${category.id}"/>" class="current">
+												<span class="name">${category.description.name}</span>
+											</a>
+										</li>
+									</c:forEach>
+								</ul>
+
+								<div id="searchGroup" class="btn-group pull-right main-search">
+									<form id="searchForm" class="form-inline" method="post" action="<c:url value="/shop/search/search.html"/>">
+										<input id="searchField" class="tt-query" name="q" type="text" placeholder="<s:message code="label.search.searchQuery" text="Search query" />" autocomplete="off" spellcheck="false" dir="auto" value="<c:out value="${q}"/>">
+										<button id="searchButton" class="btn" type="submit"><i class="fas fa-search"></i></button>
+									</form>
+								</div>
+
+
+				</nav>
             </div>
 
 			<!-- End Navbar-->
