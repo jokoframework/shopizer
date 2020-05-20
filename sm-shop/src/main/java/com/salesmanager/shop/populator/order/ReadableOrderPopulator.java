@@ -89,6 +89,7 @@ public class ReadableOrderPopulator extends
 			address.setFirstName(source.getBilling().getFirstName());
 			address.setLastName(source.getBilling().getLastName());
 			address.setPostalCode(source.getBilling().getPostalCode());
+			address.setNeighborhood(source.getBilling().getNeighborhood());
 			address.setPhone(source.getBilling().getTelephone());
 			if(source.getBilling().getCountry()!=null) {
 				address.setCountry(source.getBilling().getCountry().getIsoCode());
@@ -118,6 +119,7 @@ public class ReadableOrderPopulator extends
 			address.setLastName(source.getDelivery().getLastName());
 			address.setPostalCode(source.getDelivery().getPostalCode());
 			address.setPhone(source.getDelivery().getTelephone());
+			address.setNeighborhood(source.getDelivery().getNeighborhood());
 			if(source.getDelivery().getCountry()!=null) {
 				address.setCountry(source.getDelivery().getCountry().getIsoCode());
 			}

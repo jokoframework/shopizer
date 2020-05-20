@@ -1005,7 +1005,7 @@ public class CustomerFacadeImpl implements CustomerFacade {
     Validate.notNull(customer.getBilling().getCity(), "Billing city can not be null");
     Validate.notNull(customer.getBilling().getPostalCode(), "Billing postal code can not be null");
     Validate.notNull(customer.getBilling().getCountryCode(), "Billing country can not be null");
-
+    Validate.notNull(customer.getBilling().getNeighborhood(), "Billing neighborhood can not be null");
     customer.getBilling().setBillingAddress(true);
     
     if(customer.getDelivery() == null) {
@@ -1017,8 +1017,7 @@ public class CustomerFacadeImpl implements CustomerFacade {
       Validate.notNull(customer.getDelivery().getCity(), "Delivery city can not be null");
       Validate.notNull(customer.getDelivery().getPostalCode(), "Delivery postal code can not be null");
       Validate.notNull(customer.getDelivery().getCountryCode(), "Delivery country can not be null");
-
-      
+      Validate.notNull(customer.getDelivery().getNeighborhood(), "Delivery neighborhood can not be null");
     }
     
     try {

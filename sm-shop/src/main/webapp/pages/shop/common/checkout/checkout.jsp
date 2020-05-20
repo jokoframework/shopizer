@@ -1099,6 +1099,21 @@ $(document).ready(function() {
 											  			</div>
 													</div>
 										   </div>
+
+											<!-- neighborhood -->
+											<div class="row-fluid common-row row">
+												<div class="span8 col-md-8">
+													<div class="control-group form-group">
+														<label><s:message code="label.generic.neighborhood" text="Neighborhood"/></label>
+														<div class="controls">
+															<s:message code="NotEmpty.customer.billing.neighborhood" text="Neighborhood is required" var="msgNeighborhood"/>
+															<form:input id="customer.billing.neighborhood" cssClass="input-large required form-control form-control-lg" path="customer.billing.neighborhood" title="${msgNeighborhood}"/>
+															<form:errors path="customer.billing.neighborhood" cssClass="error" />
+															<span id="error-customer.billing.neighborhood" class="error"></span>
+														</div>
+													</div>
+												</div>
+											</div>
 										   
 										   <!-- state province -->
 										   <div class="row-fluid common-row row">
@@ -1235,7 +1250,19 @@ $(document).ready(function() {
 											  			</div>
 													</div>
 										   </div>
-										   
+											<!-- neighborhood -->
+											<div class="row-fluid common-row row">
+												<div class="span4 col-md-4">
+													<div class="control-group form-group">
+														<label><s:message code="label.customer.shipping.neighborhood" text="Shipping neighborhood"/></label>
+														<div class="controls">
+															<s:message code="NotEmpty.customer.shipping.neighborhood" text="Neighborhood should not be empty" var="msgShippingNeighborhood"/>
+															<form:input id="customer.delivery.neighborhood" cssClass="input-large required form-control form-control-lg" path="customer.delivery.neighborhood" title="${msgShippingNeighborhood}"/>
+														</div>
+													</div>
+												</div>
+											</div>
+
 										   <!-- state province -->
 										   <div class="row-fluid common-row row">
 										   			<div class="span8 col-md-8">

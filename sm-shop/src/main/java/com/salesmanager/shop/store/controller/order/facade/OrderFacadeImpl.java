@@ -634,6 +634,7 @@ public class OrderFacadeImpl implements OrderFacade {
 			delivery.setState(billing.getState());
 			delivery.setCountry(billing.getCountry());
 			delivery.setZone(billing.getZone());
+			delivery.setNeighborhood(billing.getNeighborhood());
 		} else {
 			delivery = customer.getDelivery();
 		}
@@ -775,13 +776,19 @@ public class OrderFacadeImpl implements OrderFacade {
 						messages.getMessage("NotEmpty.customer.billing.postalCode", locale));
 			}
 
-			if (!order.isShipToBillingAdress()) {
-
-				if (StringUtils.isBlank(order.getCustomer().getDelivery().getFirstName())) {
-					FieldError error = new FieldError("customer.delivery.firstName", "customer.delivery.firstName",
+			if(StringUtils.isBlank(order.getCustomer().getBilling().getNeighborhood())) {
+				FieldError error = new FieldError("customer.billing.neighborhood", "customer.billing.neighborhood", messages.getMessage("NotEmpty.custom.billing.neighborhood", locale));
+				bindingResult.addError(error);
+				messagesResult.put("customer.billing.neighborhood",messages.getMessage("NotEmpty.customer.billing.neighborhood", locale));
+			}
+			
+			if(!order.isShipToBillingAdress()) {
+				
+				if(StringUtils.isBlank(order.getCustomer().getDelivery().getFirstName())) {
+					FieldError error = new FieldError("customer.delivery.firstName","customer.delivery.firstName",
 							messages.getMessage("NotEmpty.customer.shipping.firstName", locale));
-					bindingResult.addError(error);
-					messagesResult.put("customer.delivery.firstName",
+	            	bindingResult.addError(error);
+	            	messagesResult.put("customer.delivery.firstName",
 							messages.getMessage("NotEmpty.customer.shipping.firstName", locale));
 				}
 
@@ -835,6 +842,11 @@ public class OrderFacadeImpl implements OrderFacade {
 							messages.getMessage("NotEmpty.customer.shipping.postalCode", locale));
 				}
 
+				if(StringUtils.isBlank(order.getCustomer().getDelivery().getNeighborhood())) {
+					FieldError error = new FieldError("customer.delivery.neighborhood", "customer.delivery.neighborhood", messages.getMessage("NotEmpty.customer.shipping.neighborhood", locale));
+					bindingResult.addError(error);
+					messagesResult.put("customer.delivery.neighborhood",messages.getMessage("NotEmpty.customer.shipping.neighborhood", locale));
+				}
 			}
 
 			if (bindingResult.hasErrors()) {
@@ -982,6 +994,7 @@ public class OrderFacadeImpl implements OrderFacade {
 			delivery.setState(billing.getState());
 			delivery.setCountry(billing.getCountry());
 			delivery.setZone(billing.getZone());
+			delivery.setNeighborhood(billing.getNeighborhood());
 		} else {
 			delivery = customer.getDelivery();
 		}
@@ -1162,6 +1175,7 @@ public class OrderFacadeImpl implements OrderFacade {
 			delivery.setState(billing.getState());
 			delivery.setCountry(billing.getCountry());
 			delivery.setZone(billing.getZone());
+			delivery.setNeighborhood(billing.getNeighborhood());
 		} else {
 			delivery = customer.getDelivery();
 		}

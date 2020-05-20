@@ -49,6 +49,7 @@ public class ReadableShippingSummaryPopulator extends
 				deliveryAddress.setLatitude(source.getDeliveryAddress().getLatitude());
 				deliveryAddress.setLongitude(source.getDeliveryAddress().getLongitude());
 				deliveryAddress.setStateProvince(source.getDeliveryAddress().getState());
+				deliveryAddress.setNeighborhood(source.getDeliveryAddress().getNeighborhood());
 				
 				target.setDelivery(deliveryAddress);
 			}

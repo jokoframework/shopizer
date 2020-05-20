@@ -38,6 +38,9 @@ public class PersistableCustomerPopulator extends
 				if(source.getBilling().getZone()!=null) {
 					address.setZone(source.getBilling().getZone().getCode());
 				}
+				if(source.getBilling().getNeighborhood()!=null) {
+					address.setNeighborhood(source.getBilling().getNeighborhood());
+				}
 				
 				target.setBilling(address);
 			}
@@ -66,6 +69,9 @@ public class PersistableCustomerPopulator extends
 				}
 				if(source.getDelivery().getZone()!=null) {
 					address.setZone(source.getDelivery().getZone().getCode());
+				}
+				if(source.getDelivery().getNeighborhood()!=null) {
+					address.setNeighborhood(source.getDelivery().getNeighborhood());
 				}
 				
 				target.setDelivery(address);

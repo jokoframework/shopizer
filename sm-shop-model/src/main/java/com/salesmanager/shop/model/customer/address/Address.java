@@ -36,8 +36,8 @@ public class Address extends AddressLocation implements Serializable {
 	@ApiModelProperty(notes = "Customer billing city")
 	private String city;
 	
-
-	
+	@ApiModelProperty(notes = "Customer billing address 2")
+	private String neighborhood;
 	@ApiModelProperty(notes = "Customer billing state / province (if no 2 letter codes, example: North estate)")
 	private String stateProvince;
 	private boolean billingAddress;
@@ -166,4 +166,11 @@ public class Address extends AddressLocation implements Serializable {
 		this.longitude = StringEscapeUtils.escapeHtml4(longitude);
 	}
 
+	public String getNeighborhood() {
+		return neighborhood;
+	}
+
+	public void setNeighborhood(String neighborhood) {
+		this.neighborhood = neighborhood;
+	}
 }

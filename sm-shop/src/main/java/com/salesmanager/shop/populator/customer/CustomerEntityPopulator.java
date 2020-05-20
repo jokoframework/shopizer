@@ -63,6 +63,10 @@ public class CustomerEntityPopulator
                 {
                     address.setZone( source.getBilling().getZone().getCode() );
                 }
+
+                if(source.getBilling().getNeighborhood() != null) {
+                    address.setNeighborhood(source.getBilling().getNeighborhood());
+                }
                 
                 address.setStateProvince(source.getBilling().getState());
 
@@ -94,6 +98,10 @@ public class CustomerEntityPopulator
                 if ( source.getDelivery().getZone() != null )
                 {
                     address.setZone( source.getDelivery().getZone().getCode() );
+                }
+
+                if(source.getDelivery().getNeighborhood() != null) {
+                    address.setNeighborhood(source.getDelivery().getNeighborhood());
                 }
                 
                 address.setStateProvince(source.getDelivery().getState());

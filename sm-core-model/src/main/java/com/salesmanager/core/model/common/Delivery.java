@@ -39,6 +39,9 @@ public class Delivery {
 	
 	@Column (name ="DELIVERY_STATE", length=100)
 	private String state;
+
+	@Column (name = "DELIVERY_NEIGHBORHOOD")
+	private String neighborhood;
 	
 	@Column(name="DELIVERY_TELEPHONE", length=32)
 	private String telephone;
@@ -157,4 +160,8 @@ public class Delivery {
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
+
+	public String getNeighborhood() { return neighborhood; }
+
+	public void setNeighborhood(String neighborhood) { this.neighborhood = neighborhood; }
 }
