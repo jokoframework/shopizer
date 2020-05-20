@@ -29,6 +29,8 @@ public class CustomerBillingAddressPopulator extends AbstractDataPopulator<Custo
         target.setLastName(source.getBilling().getLastName());
         target.setPostalCode(source.getBilling().getPostalCode());
         target.setPhone(source.getBilling().getTelephone());
+        target.setNeighborhood(source.getBilling().getNeighborhood());
+
         if(source.getBilling().getTelephone()==null) {
             target.setPhone(source.getBilling().getTelephone());
         }

@@ -143,6 +143,15 @@ function isFormValid() {
 				 			<form:input  cssClass="input-large required form-control form-control-md"  maxlength="100" path="city" title="${msgCity}"/>
 			            </div>
 		            	</div>
+
+						<div class="control-group form-group">
+							<label><s:message code="label.customer.neighborhood" text="Neighborhood"/></label>
+							<div class="controls">
+
+								<s:message code="NotEmpty.customer.neighborhood" text="Neighborhood is required" var="msgNeighborhood"/>
+								<form:input  cssClass="input-large required form-control form-control-md"  maxlength="64" path="neighborhood" title="${msgNeighborhood}"/>
+							</div>
+						</div>
 		            
  	 		            <div class="control-group form-group">
 	                        <label><s:message code="label.customer.country" text="Country"/></label>

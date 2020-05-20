@@ -46,6 +46,10 @@ public class PersistableCustomerBillingAddressPopulator extends AbstractDataPopu
            if(StringUtils.isNotBlank( source.getStateProvince())){
                target.getBilling().setState(source.getStateProvince());
            }
+
+           if(StringUtils.isNotBlank(source.getNeighborhood())) {
+               target.getBilling().setNeighborhood(source.getNeighborhood());
+           }
            
            return target;
         

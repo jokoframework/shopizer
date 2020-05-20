@@ -112,6 +112,7 @@ public class CustomerPopulator extends
 				billing.setState(sourceBilling.getStateProvince());
 				billing.setLatitude(sourceBilling.getLatitude());
 				billing.setLongitude(sourceBilling.getLongitude());
+				billing.setNeighborhood(sourceBilling.getNeighborhood());
 				Country billingCountry = null;
 				if(!StringUtils.isBlank(sourceBilling.getCountry())) {
 					billingCountry = countries.get(sourceBilling.getCountry());
@@ -158,6 +159,7 @@ public class CustomerPopulator extends
 				delivery.setState(sourceShipping.getStateProvince());
 				delivery.setLatitude(sourceShipping.getLatitude());
 				delivery.setLongitude(sourceShipping.getLongitude());
+				delivery.setNeighborhood(sourceShipping.getNeighborhood());
 				Country deliveryCountry = null;
 				
 				

@@ -41,7 +41,10 @@ public class PersistableCustomerPopulator extends
 				if(source.getBilling().getState()!=null) {
 					address.setStateProvince(source.getBilling().getState());
 				}
-				
+				if(source.getBilling().getNeighborhood()!=null) {
+					address.setNeighborhood(source.getBilling().getNeighborhood());
+				}
+
 				target.setBilling(address);
 			}
 			
@@ -73,7 +76,10 @@ public class PersistableCustomerPopulator extends
 				if(source.getDelivery().getState()!=null) {
 					address.setStateProvince(source.getDelivery().getState());
 				}
-				
+				if(source.getDelivery().getNeighborhood()!=null) {
+					address.setNeighborhood(source.getDelivery().getNeighborhood());
+				}
+
 				target.setDelivery(address);
 			}
 			

@@ -42,6 +42,9 @@ public class Billing {
 	
 	@Column (name ="BILLING_STATE", length=100)
 	private String state;
+
+	@Column (name ="BILLING_NEIGHBORHOOD", length=64)
+	private String neighborhood;
 	
 	@Column (name ="LONGITUDE", length=100)
 	private String longitude;
@@ -157,5 +160,12 @@ public class Billing {
 	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
-	
+
+	public String getNeighborhood() {
+		return neighborhood;
+	}
+
+	public void setNeighborhood(String neighborhood) {
+		this.neighborhood = neighborhood;
+	}
 }

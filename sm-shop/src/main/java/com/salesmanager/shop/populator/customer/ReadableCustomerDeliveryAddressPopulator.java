@@ -82,6 +82,8 @@ public class ReadableCustomerDeliveryAddressPopulator extends AbstractDataPopula
             target.setPhone(source.getTelephone());
         }
         target.setAddress(source.getAddress());
+        target.setNeighborhood(source.getNeighborhood());
+
         if(source.getCountry()!=null) {
             target.setCountry(source.getCountry().getIsoCode());
             
