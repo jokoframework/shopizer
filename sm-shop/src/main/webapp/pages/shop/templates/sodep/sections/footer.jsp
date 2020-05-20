@@ -39,7 +39,7 @@ response.setDateHeader ("Expires", -1);
 							<div class="footer__social">
 								<h3 class="lead"><s:message code="label.generic.office.hours" text="Office Hours" /></h3>
 								<div>
-									<span>Lunes a viernes 8 a 18 hs</span>
+									<span>Lunes a viernes 8 a 18 hs | </span>
 									<span>Sábados de 8 a 13 hs. </span>
 								</div>
 								<!-- Social links -->
