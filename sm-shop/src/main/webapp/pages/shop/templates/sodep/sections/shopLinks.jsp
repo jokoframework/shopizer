@@ -13,7 +13,7 @@
     <script src="<c:url value="/resources/js/jquery-cookie.js" />"></script>
     <script src="<c:url value="/resources/js/shopping-cart.js" />"></script>
     <script src="<c:url value="/resources/js/login.js" />"></script>
-    <script src="<c:url value="/resources/js/jquery.showLoading.min.js" />"></script>
+    <script src="<c:url value="/resources/js/jquery.showModernLoading.min.js" />"></script>
 	<script src="<c:url value="/resources/js/leaflet.js" />"></script>
     
     <!-- specific css -->
@@ -22,8 +22,8 @@
     
     <!-- generic and common css file -->
     <link href="<c:url value="/resources/css/sm.css" />" rel="stylesheet">
-    <link href="<c:url value="/resources/css/showLoading.css" />" rel="stylesheet">
-    
+    <link href="<c:url value="/resources/css/modernLoading.css" />" rel="stylesheet">
+
     <!-- font awesome 5 css file -->
 	<link href="<c:url value="/resources/templates/sodep/fonts/fontawesome.min.css" />" rel="stylesheet" type="text/css">
 
@@ -54,7 +54,7 @@
 				<td>{{quantity}}</td>
 				<td>{{name}}</td>
 				<td>{{price}}</td>
-				<td><button productid="{{productId}}" class="close removeProductIcon" onclick="removeItemFromMinicart('{{id}}')">x</button></td>
+				<td><button productid="{{productId}}" class="close removeProductIcon" onclick="removeItemFromMinicart('{{id}}')"><i class="fas fa-trash"></i></button></td>
 			</tr>
 		{{/shoppingCartItems}}
 	</script>
