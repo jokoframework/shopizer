@@ -405,12 +405,118 @@ a:hover{
 	}
 
 
+
+.footer {
+	flex-direction: column;
+}
+
+.footer__logo {
+	display: flex;
+	flex-grow: 1;
+	border-bottom: 1px solid rgba(250, 250, 250, 0.1);
+}
+
+.footer__logo img {
+	border: 4px solid rgb(75, 78, 80);
+}
+
+.footer__menu {
+	flex-grow: 1;
+	font-weight: normal;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.footer__menu-item {
+	margin-left: 2rem;
+	font-size: 1rem;
+	transition: all 0.1s linear 0.1s;
+}
+
+.footer__menu-item:hover {
+	font-size: 1.1rem;
+}
+
+.footer__info {
+	padding-top: 0.5rem;
+	flex-grow: 1;
+}
+
+.footer__address {
+	font-weight: 600;
+	display: flex;
+	justify-content: center;
+	flex-grow: 0.4;
+	border-left: 1px solid rgba(250, 250, 250, 0.1);
+	border-right: 1px solid rgba(250, 250, 250, 0.1);
+}
+
+.footer__address h3 {
+	padding-top: 0.5rem;
+	padding-bottom: 0.3rem;
+	color: rgba(250, 250, 250, 1);
+}
+
+
+.footer__address span, div {
+	padding-top: 0.3rem;
+	color: rgba(250, 250, 250, 1);
+}
+
+.footer__address i {
+	margin-right: 0.3rem;
+}
+
+.footer__social {
+	flex-grow: 0.2;
+}
+
+.footer__social h3 {
+	padding-top: 0.5rem;
+	padding-bottom: 0.3rem;
+	margin-bottom: 0;
+	color: rgba(250, 250, 250, 1);
+}
+
+.footer__social span{
+	padding-top: 0.3rem;
+	color: rgba(250, 250, 250, 1);
+	font-weight: bold;
+}
+
+.footer__social i{
+	color: rgba(250, 250, 250, 0.8);
+	padding-top: 1rem;
+	padding-right: 0.5rem;
+}
+
+.footer__customer {
+	display: flex;
+	justify-content: flex-start;
+	flex-grow: 0.4;
+	flex-direction: column;
+	align-items: center;
+}
+
+.footer__customer h3 {
+	padding-top: 0.5rem;
+	padding-bottom: 0.3rem;
+	margin-bottom: 0;
+	color: rgba(250, 250, 250, 1);
+}
+
+.footer__customer li{
+	padding-top: 0.3rem;
+	color: rgba(250, 250, 250, 1);
+	font-weight: bold;
+}
+
 footer {
-    background: none repeat scroll 0 0 #2D3032;
+    background: none repeat scroll 0 0 #2d3032;
     color: #FFFFFF;
     margin-bottom: 0;
     margin-top: 30px;
-    padding-top: 15px;
+    padding-top: 0;
 }
 
 
@@ -433,9 +539,19 @@ footer div.company {
     background: none repeat scroll 0 0 #2D3032;
     color: #FFFFFF;
     font-size: 0.9em;
-    padding-left:10px;
-    padding-top:10px;
-    font-size: 12px;
+    padding-left:0;
+    padding-bottom: 1rem;
+    font-size: 0.8rem;
+	text-align: right;
+}
+
+#footer-bottom a{
+	color: rgba(250, 250, 250, 1);
+	font-weight: bold;
+}
+
+#footer-bottom i{
+	margin-right: 0.3rem;
 }
 
 
