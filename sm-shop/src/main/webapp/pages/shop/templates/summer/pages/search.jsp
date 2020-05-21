@@ -29,7 +29,7 @@ response.setDateHeader ("Expires", -1);
  });
  
  
-	<jsp:include page="/pages/shop/templates/summer/sections/shop-listing.jsp" />
+	<jsp:include page="/pages/shop/templates/sodep/sections/shop-listing.jsp" />
 	 
  
  	function search() {

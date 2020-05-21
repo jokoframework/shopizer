@@ -32,6 +32,8 @@ response.setDateHeader ("Expires", -1);
     			<meta name="description" content="<c:out value="${requestScope.PAGE_INFORMATION.pageDescription}" />">
     			<meta name="author" content="<c:out value="${requestScope.MERCHANT_STORE.storename}"/>">
 
+				 <!-- theme variables css file -->
+				 <link href="<c:url value="/resources/templates/sodep/css/vars.css" />" rel="stylesheet">
 
                 <jsp:include page="/pages/shop/templates/sodep/sections/shopLinks.jsp" />
  	</head>

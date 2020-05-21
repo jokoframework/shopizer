@@ -97,7 +97,7 @@ response.setDateHeader ("Expires", -1);
 							<sec:authorize access="!hasRole('AUTH_CUSTOMER') and !fullyAuthenticated">
 								<!-- login box -->
 								<ul class="pull-right" style="list-style-type: none;padding-top: 8px;z-index:500000;">
-									<li id="fat-menu" class="dropdown">
+									<li id="fat-menu" class="dropdown pull-right">
 										<a href="#" id="signinDrop" role="button" class="dropdown-toggle noboxshadow" data-toggle="dropdown"><s:message code="button.label.signin" text="Signin" /><b class="caret"></b></a>
 
 
@@ -118,7 +118,7 @@ response.setDateHeader ("Expires", -1);
 													</div>
 												</div>
 												<input id="signin_storeCode" name="storeCode" type="hidden" value="<c:out value="${requestScope.MERCHANT_STORE.code}"/>"/>
-												<button type="submit" style="width:100%" class="btn btn-large" id="login-button"><s:message code="button.label.login" text="Login" /></button>
+												<button type="submit" style="width:100%" class="button btn btn-large" id="login-button"><s:message code="button.label.login" text="Login" /></button>
 
 											</form>
 											<a onClick="javascript:location.href='<c:url value="/shop/customer/registration.html" />';" href="" role="button" class="" data-toggle="modal"><s:message code="label.register.notyetregistered" text="Not yet registered ?" /></a>

@@ -138,7 +138,7 @@ response.setDateHeader ("Expires", -1);
 
 							<ul class="dropdown-menu minicart" id="minicartComponent">
 								<li>
-									<jsp:include page="/pages/shop/templates/summer/sections/minicart.jsp" />
+									<jsp:include page="/pages/shop/templates/sodep/sections/minicart.jsp" />
 								</li>
 							</ul>
 						</div>
