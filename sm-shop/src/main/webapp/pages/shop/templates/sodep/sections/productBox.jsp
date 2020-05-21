@@ -24,7 +24,11 @@ response.setDateHeader ("Expires", -1);
 															<h3>
 															<c:choose>
 																<c:when test="${product.discounted}">
-																	<del><c:out value="${product.originalPrice}" /></del>&nbsp;<span class="specialPrice"><c:out value="${product.finalPrice}" /></span>
+																	<del><c:out value="${product.originalPrice}" /></del>
+																	<div class="specialPrice">
+																		<c:out value="${product.finalPrice}" />
+																		<i class="fas fa-tag"></i>
+																	</div>
 																</c:when>
 																<c:otherwise>
 																	<c:out value="${product.finalPrice}" />
@@ -33,7 +37,7 @@ response.setDateHeader ("Expires", -1);
 														</h3>
 															<a href="<c:url value="/shop/product/" /><c:out value="${product.description.friendlyUrl}"/>.html<sm:breadcrumbParam productId="${product.id}"/>"><h4><c:out value="${product.description.name}"/></h4></a>
 															<div class="bottom">
-																<a class="productDetail" data-toggle="tooltip" title="Detalle" href="<c:url value="/shop/product/" /><c:out value="${product.description.friendlyUrl}"/>.html<sm:breadcrumbParam productId="${product.id}"/>"><i class="far fa-eye"></i></a> <c:choose><c:when test="${requestScope.FEATURED==true}"><c:if test="${requestScope.CONFIGS['displayAddToCartOnFeaturedItems']==true}"><a class="addToCart" data-toggle="tooltip" title="Añadir al carrito" href="#" productId="${product.id}"><i class="fas fa-cart-plus"></i></a></c:if></c:when><c:otherwise>/ <a class="addToCart" data-toggle="tooltip" title="Añadir al carrito" href="#" productId="${product.id}"><i class="fas fa-cart-plus"></i></a></c:otherwise></c:choose>
+																<a class="productDetail" data-toggle="tooltip" title="<s:message code="label.product.details" text="Details"/>" href="<c:url value="/shop/product/" /><c:out value="${product.description.friendlyUrl}"/>.html<sm:breadcrumbParam productId="${product.id}"/>"><i class="far fa-eye"></i></a> <c:choose><c:when test="${requestScope.FEATURED==true}"><c:if test="${requestScope.CONFIGS['displayAddToCartOnFeaturedItems']==true}"><a class="addToCart" data-toggle="tooltip" title="<s:message code="label.cart.add" text="Add to cart"/>" href="#" productId="${product.id}"><i class="fas fa-cart-plus"></i></a></c:if></c:when><c:otherwise>/ <a class="addToCart" data-toggle="tooltip" title="<s:message code="label.cart.add" text="Add to cart"/>" href="#" productId="${product.id}"><i class="fas fa-cart-plus"></i></a></c:otherwise></c:choose>
 															</div>
 														</div>
 													</div>

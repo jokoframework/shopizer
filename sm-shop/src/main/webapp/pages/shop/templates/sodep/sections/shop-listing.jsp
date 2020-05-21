@@ -24,13 +24,13 @@ function buildProductsList(productList, divProductsContainer) {
 			productHtml = productHtml + '</div>'
 			productHtml = productHtml + '<div class="product-box__info">';
 			if(productList.products[i].discounted) {
-			productHtml = productHtml + '<h3><del>' + productList.products[i].originalPrice +'</del>&nbsp;<span class="specialPrice">' + productList.products[i].finalPrice + '</span></h3>';
+			productHtml = productHtml + '<h3><del>' + productList.products[i].originalPrice +'</del><div class="specialPrice">' + productList.products[i].finalPrice + '<i class="fas fa-tag"></i></div></h3>';
 			} else {
 			productHtml = productHtml + '<h3>' + productList.products[i].finalPrice +'</h3>';
 			}
 			productHtml = productHtml + '<a href="<c:url value="/shop/product/" />' + productList.products[i].description.friendlyUrl + '.html<sm:breadcrumbParam/>"><h4 class="name" itemprop="name">' + productList.products[i].description.name +'</h4></a>';
 			productHtml = productHtml + '<div class="bottom">'
-			productHtml = productHtml + '<a href="' + productUrl + '" class="view productDetail"  data-toggle="tooltip" title="Detalle"><i class="far fa-eye"></i></a><a productid="' + productList.products[i].id + '" href="#" class="addToCart" data-toggle="tooltip" title="Añadir al carrito"><i class="fas fa-cart-plus"></i></a>';
+			productHtml = productHtml + '<a href="' + productUrl + '" class="view productDetail"  data-toggle="tooltip" title="<s:message code="label.product.details" text="Details"/>"><i class="far fa-eye"></i></a><a productid="' + productList.products[i].id + '" href="#" class="addToCart" data-toggle="tooltip" title="<s:message code="label.cart.add" text="Add to cart"/>"><i class="fas fa-cart-plus"></i></a>';
 			productHtml = productHtml + '</div>'
 			productHtml = productHtml + '</div>'
 			productHtml = productHtml + '</div>'

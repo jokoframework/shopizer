@@ -24,6 +24,7 @@ body{
 
 .page__content {
 	min-height: 80vh;
+	padding: 0.3rem 0;
 }
 
 .flex {
@@ -100,11 +101,6 @@ a:hover{
 	padding:0;
 	color:#a2a1a1;
 }
-
-.specialPrice{
-	color:#ff0000;
-}
-
 
 /* Main Menu */
 .res-menu{display: none;}
@@ -682,10 +678,26 @@ footer div.company {
 .product-list li .product-box h3{
 	font-size:1rem;
 	font-weight: 600;
-	color: #ff6c00;
+	color: rgba(255, 107, 0, 0.9);
 	text-shadow:1px 1px #F4F4F4;
 	padding: 0.5rem 0 0.2rem 0;
+	line-height: 1.75rem;
 }
+
+.product-list li .product-box h3 del{
+	font-size: 0.8rem;
+	color: rgba(255, 107, 0, 0.52);
+}
+
+.specialPrice{
+	color: rgba(255, 78, 0, 0.9);
+	background-color: rgba(255, 78, 0, 0.05);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.1rem 0.2rem;
+}
+
 .product-list li .product-box h4{
 	font-size:0.75rem;
 	font-weight: bold;
@@ -708,6 +720,11 @@ footer div.company {
 	font-size: 1.7em;
 }
 
+.product-list li .product-box .bottom .addToCart i{
+	font-size: 0.8em;
+	padding-left: 0.3rem;
+}
+
 .product-list li .product-box .bottom .addToCart:hover{
 	color: rgba(255, 108, 0, 1);
 }
@@ -715,6 +732,11 @@ footer div.company {
 .product-list li .product-box .bottom .productDetail{
 	color: rgba(30, 130, 253, 0.7);
 	font-size: 1.7em;
+}
+
+.product-list li .product-box .bottom .productDetail i{
+	font-size: 0.8em;
+	padding-left: 0.3rem;
 }
 
 .product-list li .product-box .bottom .productDetail:hover{
