@@ -129,17 +129,18 @@ response.setDateHeader ("Expires", -1);
 						</c:if>
 						<c:if test="${not fn:contains(requestScope['javax.servlet.forward.servlet_path'], 'order') && not fn:contains(requestScope['javax.servlet.forward.servlet_path'], 'cart')}">
 						<!-- not displayed in checkout (order) and cart -->
-						<div id="miniCart" style="padding-top: 8px;padding-bottom:10px;" class="btn-group pull-right">
-									&nbsp;&nbsp;&nbsp;
-									<i class="fas fa-shopping-cart"></i>
-									<a style="box-shadow:none;color:FF8C00;" href="#" data-toggle="dropdown" class="open noboxshadow dropdown-toggle" id="open-cart"><s:message code="label.mycart" text="My cart"/></a>
-									<jsp:include page="/pages/shop/common/cart/minicartinfo.jsp" />
+						<div id="miniCart" style="padding-top: 8px;padding-bottom:10px;" class="dropdown pull-right">
+							<a style="box-shadow:none;color:FF8C00;" href="#" data-toggle="dropdown" class="dropdown-toggle" id="open-cart">
+								<i class="fas fa-shopping-cart"></i>
+								<s:message code="label.mycart" text="My cart"/>
+							</a>
+							<jsp:include page="/pages/shop/common/cart/minicartinfo.jsp" />
 
-									<ul class="dropdown-menu minicart" id="minicartComponent">
-										<li>
-											<jsp:include page="/pages/shop/templates/sodep/sections/minicart.jsp" />
-										</li>
-									</ul>
+							<ul class="dropdown-menu minicart" id="minicartComponent">
+								<li>
+									<jsp:include page="/pages/shop/templates/sodep/sections/minicart.jsp" />
+								</li>
+							</ul>
 						</div>
 						</c:if>
 					</div>

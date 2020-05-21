@@ -19,10 +19,12 @@ response.setDateHeader ("Expires", -1);
 
 
 			<c:if test="${page!=null}">
-			<div class="row-fluid">
-          		    <div class="span12">
-          			    <span id="homeText"><c:out value="${page.description}" escapeXml="false"/></span>
-          		    </div>
+			<div id="mainCarousel" class="carousel slide">
+				<!-- Carousel items - In DB-->
+				<c:out value="${page.description}" escapeXml="false"/>
+				<!-- Carousel nav -->
+				<a class="carousel-control left" href="#mainCarousel" data-slide="prev">&lsaquo;</a>
+				<a class="carousel-control right" href="#mainCarousel" data-slide="next">&rsaquo;</a>
 			</div>
 			</c:if>
 			

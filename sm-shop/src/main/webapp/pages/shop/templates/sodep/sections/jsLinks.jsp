@@ -6,18 +6,7 @@
 <%@ page session="false" %>
 
 
-    <script src="<c:url value="/resources/templates/sodep/js/bootstrap-button.js" />"></script>
-    <script src="<c:url value="/resources/templates/sodep/js/bootstrap-modal.js" />"></script>
-    <script src="<c:url value="/resources/templates/sodep/js/bootstrap-tab.js" />"></script>
-    <!--<script src="<c:url value="/resources/templates/sodep/js/bootstrap-transition.js" />"></script>-->
-    <!--<script src="<c:url value="/resources/templates/sodep/js/bootstrap-alert.js" />"></script>-->
-    <script src="<c:url value="/resources/templates/sodep/js/bootstrap-dropdown.js" />"></script>
-    <!--<script src="<c:url value="/resources/templates/sodep/js/bootstrap-scrollspy.js" />"></script>-->
-    <script src="<c:url value="/resources/templates/sodep/js/bootstrap-tooltip.js" />"></script>
-    <!--<script src="<c:url value="/resources/templates/sodep/js/bootstrap-popover.js" />"></script>-->
-    <script src="<c:url value="/resources/templates/sodep/js/bootstrap-collapse.js" />"></script>
-    <!--<script src="<c:url value="/resources/templates/sodep/js/bootstrap-carousel.js" />"></script>-->
-
+    <script src="<c:url value="/resources/templates/sodep/js/bootstrap.min.js" />"></script>
 
         <script type="text/javascript">
 
