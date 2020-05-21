@@ -1270,6 +1270,7 @@ $(document).ready(function() {
 												<p class="p-title"><s:message code="label.customer.shippinglocation" text="Shipping location"/></p>
 											</span>
 										<div class="row-fluid common-row row">
+											<p class="p-title"><s:message code="label.customer.shippinglocation.disclaimer" text="Mark your shipping location on the map"/></p>
 											<div class="span8 col-md-8">
 												<div id="LocationMap" class="location-map"></div>
 											</div>
