@@ -1307,6 +1307,14 @@ $(document).ready(function() {
 														 maxlength="100" name="longitude" path="customer.billing.longitude" />
 										</div>
 									</div>
+
+									<div class="order-notes">
+												<div class="checkout-form-list">
+													<label><s:message code="label.order.notes" text="Order notes"/></label>
+													<s:message code="label.order.notes.eg" text="Notes for the order or delivery" var="msgNotes"/>
+													<form:textarea id="comments" cols="30" rows="10" path="comments" placeholder="${msgNotes}" />
+												</div>
+											</div>
 									</c:if>
 									
 									
