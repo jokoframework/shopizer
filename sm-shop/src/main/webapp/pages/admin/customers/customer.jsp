@@ -451,6 +451,10 @@ function setCredentials(customerId, userName, password){
 			            	<label><s:message code="label.customer.billing.city" text="City"/></label>
 				 			<form:input  cssClass="input-large highlight"  maxlength="100" path="billing.city"/>
 			            </div>
+						<div class="controls">
+							<label><s:message code="label.customer.billing.neighborhood" text="Neigborhood"/></label>
+							<form:input  cssClass="input-large highlight"  maxlength="100" path="billing.neighborhood"/>
+						</div>
 		            
  	 		            <div class="control-group">
 	                        <label><s:message code="label.customer.billing.country" text="Country"/></label>
@@ -527,7 +531,10 @@ function setCredentials(customerId, userName, password){
 			            	<label><s:message code="label.customer.shipping.city" text="City"/></label>
 				 			<form:input  cssClass="input-large"  maxlength="100" path="delivery.city"/>
 			            </div>
-	            
+						<div class="controls">
+							<label><s:message code="label.customer.shipping.neighborhood" text="Neighborhood"/></label>
+							<form:input  cssClass="input-large"  maxlength="100" path="delivery.neighborhood"/>
+						</div>
  	 		           <div class="control-group">
 	                        <label><s:message code="label.customer.shipping.country" text="Country"/></label>
 	                        <div class="controls"> 				       							
