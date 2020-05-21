@@ -19,7 +19,7 @@ response.setDateHeader ("Expires", -1);
             <footer>
 				<div class="container">
 					<div id="footer" class="footer row-fluid flex">
-						<div class="footer__logo logo flex">
+						<div class="footer__logo logo light flex">
 							<c:if test="${not empty requestScope.MERCHANT_STORE.storeLogo}">
 								<!--  use merchant store logo -->
 								<a class="grey store-name" href="<c:url value="/shop/"/>">
