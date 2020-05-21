@@ -17,26 +17,26 @@
 	<script src="<c:url value="/resources/js/leaflet.js" />"></script>
     
     <!-- specific css -->
-    <link href="<c:url value="/resources/templates/summer/css/bootstrap.min.css" />" rel="stylesheet">
-    <link href="<c:url value="/resources/templates/summer/css/bootstrap-responsive.min.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/templates/sodep/css/bootstrap.min.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/templates/sodep/css/bootstrap-responsive.min.css" />" rel="stylesheet">
     
     <!-- generic and common css file -->
     <link href="<c:url value="/resources/css/sm.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/css/modernLoading.css" />" rel="stylesheet">
 
     <!-- font awesome 5 css file -->
-	<link href="<c:url value="/resources/templates/summer/fonts/fontawesome.min.css" />" rel="stylesheet" type="text/css">
+	<link href="<c:url value="/resources/templates/sodep/fonts/fontawesome.min.css" />" rel="stylesheet" type="text/css">
 
 	<!-- template css file -->
-    <link href="<c:url value="/resources/templates/summer/css/theme.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/templates/sodep/css/theme.css" />" rel="stylesheet">
 
 	<link href="<c:url value="/resources/css/leaflet/leaflet.css" />"
 	  rel="stylesheet" />
     
-    <script src="<c:url value="/resources/templates/summer/js/bootstrap-tooltip.js" />"></script>
-    <script src="<c:url value="/resources/templates/summer/js/bootstrap-popover.js" />"></script>
+    <script src="<c:url value="/resources/templates/sodep/js/bootstrap-tooltip.js" />"></script>
+    <script src="<c:url value="/resources/templates/sodep/js/bootstrap-popover.js" />"></script>
     
-    <link rel="icon" href="<c:url value="/resources/templates/summer/img/favicon.ico"/> ">
+    <link rel="icon" href="<c:url value="/resources/templates/sodep/img/favicon.ico"/> ">
 
     
     <!-- mini shopping cart template -->

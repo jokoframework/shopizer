@@ -19,7 +19,7 @@ response.setDateHeader ("Expires", -1);
 
 
 
-			<jsp:include page="/pages/shop/templates/summer/sections/breadcrumb.jsp" />
+			<jsp:include page="/pages/shop/templates/sodep/sections/breadcrumb.jsp" />
             
             <div class="row-fluid product__detail">
 
@@ -127,7 +127,7 @@ response.setDateHeader ("Expires", -1);
 									<ul class="thumbnails product-list">
 										<!-- Iterate over featuredItems -->
                          				<c:set var="ITEMS" value="${relatedProducts}" scope="request" />
-	                         			<jsp:include page="/pages/shop/templates/summer/sections/productBox.jsp" />
+	                         			<jsp:include page="/pages/shop/templates/sodep/sections/productBox.jsp" />
 									</ul>
 						</c:if>
 						

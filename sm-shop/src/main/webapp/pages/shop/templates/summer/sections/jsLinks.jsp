@@ -6,7 +6,7 @@
 <%@ page session="false" %>
 
 
-    <script src="<c:url value="/resources/templates/summer/js/bootstrap.min.js" />"></script>
+    <script src="<c:url value="/resources/templates/sodep/js/bootstrap.min.js" />"></script>
 
         <script type="text/javascript">
 

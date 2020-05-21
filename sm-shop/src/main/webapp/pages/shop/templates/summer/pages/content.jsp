@@ -14,7 +14,7 @@ response.setDateHeader ("Expires", -1);
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
 
-			<jsp:include page="/pages/shop/templates/summer/sections/breadcrumb.jsp" />
+			<jsp:include page="/pages/shop/templates/sodep/sections/breadcrumb.jsp" />
             
             
             <div class="row-fluid">

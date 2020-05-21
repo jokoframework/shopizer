@@ -40,7 +40,7 @@ response.setDateHeader ("Expires", -1);
  });
  
  
-	<jsp:include page="/pages/shop/templates/summer/sections/shop-listing.jsp" />
+	<jsp:include page="/pages/shop/templates/sodep/sections/shop-listing.jsp" />
 	 
 	  
 	function orderProducts(attribute) {
@@ -135,7 +135,7 @@ response.setDateHeader ("Expires", -1);
  
 </script>
 
-       <jsp:include page="/pages/shop/templates/summer/sections/breadcrumb.jsp" />
+       <jsp:include page="/pages/shop/templates/sodep/sections/breadcrumb.jsp" />
  
 <%--	   <c:if test="${category.description.description!=null}">--%>
 <%--	   		<!-- category description -->--%>

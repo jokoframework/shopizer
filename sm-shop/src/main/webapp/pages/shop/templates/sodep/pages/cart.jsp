@@ -158,7 +158,7 @@
 										class=""><strong>${shoppingCartItem.subTotal}</strong></td>
 
 									<td width="10%" class="actions" data-th="">
-										<button type="button" class="button btn btn-danger btn-sm"
+										<button type="button" class="button btn btn-danger btn-sm min-width"
 											onclick="javascript:updateLineItem('${shoppingCartItem.id}','${removeShoppingCartItemUrl}'); return false;"
 											style="margin-top: 0px !important;">
 											<i class="fas fa-trash"></i>&nbsp;

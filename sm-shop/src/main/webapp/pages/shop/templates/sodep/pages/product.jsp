@@ -21,7 +21,7 @@ response.setDateHeader ("Expires", -1);
 
 			<jsp:include page="/pages/shop/templates/sodep/sections/breadcrumb.jsp" />
             
-            <div class="row-fluid">
+            <div class="row-fluid product__detail">
 
                 <div itemscope class="span12" itemtype="http://data-vocabulary.org/Product">
                     	<!-- Image column -->
@@ -62,10 +62,11 @@ response.setDateHeader ("Expires", -1);
 							<span itemprop="offerDetails" itemscope itemtype="http://data-vocabulary.org/Offer">
 							<meta itemprop="seller" content="${requestScope.MERCHANT_STORE.storename}"/>
 							<meta itemprop="currency" content="<c:out value="${requestScope.MERCHANT_STORE.currency.code}" />" />
-							<h3 id="productPrice">
+							<h3 id="productPrice" class="product__detail-price">
 									<c:choose>
 										<c:when test="${product.discounted}">
-												<del><c:out value="${product.originalPrice}" /></del>&nbsp;<span class="specialPrice"><span itemprop="price"><c:out value="${product.finalPrice}" /></span></span>
+												<del><c:out value="${product.originalPrice}" /></del>
+												<div class="specialPrice"><span itemprop="price"><c:out value="${product.finalPrice}" /></span></div>
 										</c:when>
 										<c:otherwise>
 												<span itemprop="price"><c:out value="${product.finalPrice}" /></span>
@@ -93,7 +94,7 @@ response.setDateHeader ("Expires", -1);
 								<c:if test="${attributes!=null}"><li><a href="#specifications"><s:message code="label.product.attribute.specifications" text="Specifications" /></a></li></c:if>
 								<li><a href="#reviews"><s:message code="label.product.customer.reviews" text="Customer reviews" /></a></li>
 							</ul>							 
-							<div class="tab-content">
+							<div class="tab-content product__detail-desc">
 								<div class="tab-pane active" id="description">
 									<c:out value="${product.description.description}" escapeXml="false"/>
 								</div>	
