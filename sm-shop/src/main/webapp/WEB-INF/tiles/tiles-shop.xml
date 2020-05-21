@@ -85,7 +85,14 @@
   		<put-attribute name="body" value="/pages/shop/templates/december/pages/cart.jsp" />
   		<put-attribute name="footer" value="/pages/shop/templates/december/sections/footer.jsp" />
   	</definition>
-  	
+
+	<definition name="maincart.sodep" template="/pages/shop/templates/sodep/catalogLayout.jsp">
+		<put-attribute name="header" value="/pages/shop/templates/sodep/sections/header.jsp" />
+		<put-attribute name="navbar" value="/pages/shop/templates/sodep/sections/navbar.jsp" />
+		<put-attribute name="body" value="/pages/shop/templates/sodep/pages/cart.jsp" />
+		<put-attribute name="footer" value="/pages/shop/templates/sodep/sections/footer.jsp" />
+	</definition>
+
   	<!-- Contact us -->
   	<definition name="contactus.*" template="/pages/shop/templates/{1}/catalogLayout.jsp">
   	  	<put-attribute name="header" value="/pages/shop/templates/{1}/sections/header.jsp" />
