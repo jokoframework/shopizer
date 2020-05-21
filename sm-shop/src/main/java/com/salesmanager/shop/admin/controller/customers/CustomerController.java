@@ -317,6 +317,10 @@ public class CustomerController {
 			 ObjectError error = new ObjectError("billingPostalCode", messages.getMessage("NotEmpty.customer.billingPostCode", locale));
 			 result.addError(error);
 		}
+
+		if(StringUtils.isBlank(customer.getBilling().getNeighborhood())) {
+			ObjectError error = new ObjectError("billingNeighborhood", messages.getMessage("NotEmty.customer.billingNeighborhood", locale));
+		}
 		
 		//check if error from the @valid
 		if (result.hasErrors()) {

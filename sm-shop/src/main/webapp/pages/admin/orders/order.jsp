@@ -442,6 +442,12 @@ function captureOrder(orderId){
 				 				<form:input id="billingCity" cssClass="input-large highlight" path="order.billing.city"/>
 				 				<span class="help-inline"><form:errors path="order.billing.city" cssClass="error" /></span>
 			            </div>
+
+						<label><s:message code="label.customer.billing.neighborhood" text="Billing Neigborhood"/></label>
+						<div class="controls">
+							<form:input id="billingNeighborhood" cssClass="input-large highlight" path="order.billing.neighborhood"/>
+							<span class="help-inline"><form:errors path="order.billing.neighborhood" cssClass="error" /></span>
+						</div>
 			            
 			            <div class="control-group"> 
 	                        <label><s:message code="label.customer.billing.zone" text="State / Province"/></label>
@@ -500,6 +506,11 @@ function captureOrder(orderId){
 			            <div class="controls">
 				 				<form:input  cssClass="input-large" path="order.delivery.city"/>
 			            </div>
+
+						<label><s:message code="label.customer.shipping.neighborhood" text="Shipping neighborhood"/></label>
+						<div class="controls">
+							<form:input  cssClass="input-large" path="order.delivery.neighborhood"/>
+						</div>
 
 			            
 			            <div class="control-group"> 
