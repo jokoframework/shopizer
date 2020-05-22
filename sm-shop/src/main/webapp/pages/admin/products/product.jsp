@@ -24,6 +24,7 @@ var priceFormatMessage = '<s:message code="message.price.cents" text="Wrong form
 	$(function(){
 		$('#sku').alphanumeric();
 		$('#productPriceAmount').numeric({allow:"."});
+		$('#productItemWeight').numeric({allow:'.'})
 		$('#quantity').numeric();
 		$('#ordermin').numeric();
 		$('#ordermax').numeric();
@@ -87,7 +88,7 @@ var priceFormatMessage = '<s:message code="message.price.cents" text="Wrong form
 
 								<div class="sm-ui-component">
 								
-								
+
 								<c:if test="${product.product.id!=null && product.product.id>0}">
 									<c:set value="${product.product.id}" var="productId" scope="request"/>
 									<jsp:include page="/pages/admin/products/product-menu.jsp" />
@@ -385,7 +386,15 @@ var priceFormatMessage = '<s:message code="message.price.cents" text="Wrong form
                                     <form:input id="length" cssClass="" path="product.productLength"/>
                                     <span class="help-inline"><form:errors path="product.productLength" cssClass="error" /></span>
                         </div>
-                  </div>          
+                  </div>
+
+                    <div class="control-group">
+                        <label><s:message code="label.product.itemWeight" text="Weight Increment"/></label>
+                        <div class="controls">
+                            <form:input cssClass="" id="productWeight" path="product.productItemWeight"/>
+                            <span class="help-inline"><form:errors path="product.productItemWeight" cssClass="error" /></span>
+                        </div>
+                    </div>
     
                   <div class="control-group">
                         <label><s:message code="label.entity.order" text="Sort order"/></label>
