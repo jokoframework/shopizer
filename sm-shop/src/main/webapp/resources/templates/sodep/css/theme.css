@@ -965,6 +965,21 @@ select {
 	margin: 0;
 }
 
+.whatsapp-button {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	padding: 7px 10px 8px 10px;
+	margin: 1rem 1rem 4rem 1rem;
+	background: var(--float-button-color);
+	border-radius: 100%;
+	box-shadow: 0 0 10px rgba(var(--dark-color-rgb), 0.2);
+}
+
+.whatsapp-button:link, .whatsapp-button:visited {
+	color: var(--light-color);
+}
+
 @media (min-width: 1200px) {
 	.thumbnails > li {
 		margin-left: 16px;

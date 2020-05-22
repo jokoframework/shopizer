@@ -99,6 +99,8 @@ public class Constants {
 	public final static String REQUEST_CONFIGS = "CONFIGS";
 
 	public final static String KEY_FACEBOOK_PAGE_URL = "facebook_page_url";
+	public final static String KEY_WHATSAPP = "whatsapp";
+	public final static String KEY_WHATSAPP_DEFAULT_TEXT = "whatsapp_default_text";
 	public final static String KEY_PINTEREST_PAGE_URL = "pinterest";
 	public final static String KEY_GOOGLE_ANALYTICS_URL = "google_analytics_url";
 	public final static String KEY_INSTAGRAM_URL = "instagram";
