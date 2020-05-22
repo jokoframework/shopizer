@@ -41,15 +41,17 @@ response.setDateHeader ("Expires", -1);
  	<body>
  	
 	<div id="pageContainer" class="page">
-				<tiles:insertAttribute name="header" ignore="true"/>
+		<tiles:insertAttribute name="header" ignore="true"/>
 
-				<tiles:insertAttribute name="navbar" ignore="true"/>
+		<tiles:insertAttribute name="navbar" ignore="true"/>
 
-				<div class="page__content container">
-					<tiles:insertAttribute name="body" ignore="true"/>
-				</div>
+		<div class="page__content container">
+			<tiles:insertAttribute name="body" ignore="true"/>
+		</div>
 
-				<tiles:insertAttribute name="footer" ignore="true"/>
+		<tiles:insertAttribute name="footer" ignore="true"/>
+
+		<jsp:include page="/pages/shop/common/whatsappButton.jsp" />
 	</div>
 	<!-- end container -->
 	   <jsp:include page="/pages/shop/templates/sodep/sections/jsLinks.jsp" />

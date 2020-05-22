@@ -68,6 +68,24 @@ public class ConfigurationController {
 			merchantFBConfiguration.setMerchantConfigurationType(MerchantConfigurationType.SOCIAL);
 		}
 		configs.add(merchantFBConfiguration);
+
+		MerchantConfiguration merchantWsConfiguration = merchantConfigurationService.getMerchantConfiguration(Constants.KEY_WHATSAPP,store);
+		if(null == merchantWsConfiguration)
+		{
+			merchantWsConfiguration = new MerchantConfiguration();
+			merchantWsConfiguration.setKey(Constants.KEY_WHATSAPP);
+			merchantWsConfiguration.setMerchantConfigurationType(MerchantConfigurationType.SOCIAL);
+		}
+		configs.add(merchantWsConfiguration);
+
+		MerchantConfiguration merchantWsMsgConfiguration = merchantConfigurationService.getMerchantConfiguration(Constants.KEY_WHATSAPP_DEFAULT_TEXT,store);
+		if(null == merchantWsMsgConfiguration)
+		{
+			merchantWsMsgConfiguration = new MerchantConfiguration();
+			merchantWsMsgConfiguration.setKey(Constants.KEY_WHATSAPP_DEFAULT_TEXT);
+			merchantWsMsgConfiguration.setMerchantConfigurationType(MerchantConfigurationType.SOCIAL);
+		}
+		configs.add(merchantWsMsgConfiguration);
 		
 		MerchantConfiguration merchantGoogleAnalyticsConfiguration = merchantConfigurationService.getMerchantConfiguration(Constants.KEY_GOOGLE_ANALYTICS_URL,store);
 		if(null == merchantGoogleAnalyticsConfiguration)
