@@ -413,6 +413,10 @@ public class ProductController {
 			newProduct.setTaxClass(product.getProduct().getTaxClass());
 			newProduct.setSortOrder(product.getProduct().getSortOrder());
 
+			if(product.getProduct().getProductItemWeight() != null) {
+				newProduct.setProductItemWeight(product.getProduct().getProductItemWeight());
+			}
+
 			Set<ProductAvailability> avails = newProduct.getAvailabilities();
 			if(avails !=null && avails.size()>0) {
 				
@@ -738,6 +742,7 @@ public class ProductController {
 		newProduct.setSku(UUID.randomUUID().toString().replace("-",""));
 		newProduct.setProductVirtual(dbProduct.isProductVirtual());
 		newProduct.setProductShipeable(dbProduct.isProductShipeable());
+		newProduct.setProductItemWeight(dbProduct.getProductItemWeight());
 		
 		productService.update(newProduct);
 		

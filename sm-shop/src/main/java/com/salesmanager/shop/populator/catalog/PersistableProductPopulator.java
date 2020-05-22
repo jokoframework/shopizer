@@ -177,6 +177,7 @@ public class PersistableProductPopulator extends
     			target.setProductLength(source.getProductSpecifications().getLength());
     			target.setProductWeight(source.getProductSpecifications().getWeight());
     			target.setProductWidth(source.getProductSpecifications().getWidth());
+    			target.setProductItemWeight(source.getProductItemWeight());
     			
     			
     	         if(source.getProductSpecifications().getManufacturer()!=null) {
