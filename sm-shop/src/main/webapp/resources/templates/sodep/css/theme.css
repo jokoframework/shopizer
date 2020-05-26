@@ -686,8 +686,12 @@ footer div.company {
 }
 
 .product-list li .product-box__info{
-	display: block;
+	display: flex;
 	padding: 1rem;
+	padding: 1rem;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 110px;
 }
 
 .product-list li .product-box img{
@@ -709,7 +713,7 @@ footer div.company {
 
 .product-list li .product-box h3{
 	font-size:1rem;
-	font-weight: 600;
+	font-weight: 400;
 	color: rgba(var(--primary-color-rgb), 0.9);
 	text-shadow: none;
 	padding: 0.5rem 0 0.2rem 0;
@@ -733,8 +737,8 @@ footer div.company {
 .product-list li .product-box h4{
 	font-size:0.75rem;
 	font-weight: bold;
-	color: rgb(52, 52, 52);
-	text-shadow:1px 1px #F4F4F4;
+	color: var(--dark-color);
+	text-shadow: none;
 }
 .product-list li .product-box .bottom{
 	position: relative;
