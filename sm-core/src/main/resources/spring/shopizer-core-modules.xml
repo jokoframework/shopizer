@@ -51,6 +51,9 @@
     			<beans:entry key="moneyorder" value-ref="moneyorder"/>
     			<beans:entry key="stripe" value-ref="stripe"/>
     			<beans:entry key="braintree" value-ref="braintree"/>
+				<beans:entry key="cash" value-ref="cash"/>
+				<beans:entry key="transfer" value-ref="transfer"/>
+				<beans:entry key="pos" value-ref="pos"/>
     </util:map>
 
 	<!-- Shipping -->
@@ -86,6 +89,12 @@
 		class="com.salesmanager.core.business.modules.integration.payment.impl.StripePayment"/>
 	<beans:bean id="braintree"
 		class="com.salesmanager.core.business.modules.integration.payment.impl.BraintreePayment"/>
+	<beans:bean id="cash"
+		class="com.salesmanager.core.business.modules.integration.payment.impl.CashPayment"/>
+	<beans:bean id="transfer"
+		class="com.salesmanager.core.business.modules.integration.payment.impl.WireTransferPayment"/>
+	<beans:bean id="pos"
+				class="com.salesmanager.core.business.modules.integration.payment.impl.PosPayment"/>
 
 
 
