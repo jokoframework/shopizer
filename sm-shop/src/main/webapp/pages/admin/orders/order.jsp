@@ -220,8 +220,29 @@ function captureOrder(orderId){
 	});
 }
 
-	$(document).ready(function(){ 
-	
+// Creates the location map instance and attach click event
+function initializeMap() {
+	var mapMarkers;
+	var latitude = '<c:out value="${order.billing.latitude}"/>';
+	var longitude = '<c:out value="${order.billing.longitude}"/>';
+	console.log("latitude", latitude, longitude);
+	var initLatLng = [latitude, longitude];
+	var map = L.map('LocationMap').setView(initLatLng, 13);
+
+	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+	}).addTo(map);
+
+	if(!mapMarkers){
+		mapMarkers =  L.layerGroup().addTo(map);
+		mapMarkers.clearLayers();
+	}
+	L.marker(initLatLng).addTo(mapMarkers);
+}
+
+	$(document).ready(function(){
+
+		initializeMap(); // initialize the location map
 		$("#refundAction").click(function() {
 			resetMessages();
 			$('#refundModal').modal();
@@ -531,7 +552,14 @@ function captureOrder(orderId){
 			            <label><s:message code="label.customer.shipping.postalcode" text="Postal code"/></label>
 			            <div class="controls">
 				 				<form:input  cssClass="input-large" path="order.delivery.postalCode"/>
-			            </div>	            	            	            	            				
+			            </div>
+
+						<div class="control-group">
+							<p class="p-title"><s:message code="label.order.shippinglocation.disclaimer" text="Ubicación de envío"/></p>
+							<div class="controls">
+								<div id="LocationMap" class="location-map"></div>
+							</div>
+						</div>
 				</address>	
 	            
 	            

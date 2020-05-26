@@ -101,5 +101,8 @@ input.highlight, select.highlight, checkbox.highlight, textarea.highlight {
     position: relative;
 }
 
+.location-map {
+    min-height: 400px;
+}
 
 
