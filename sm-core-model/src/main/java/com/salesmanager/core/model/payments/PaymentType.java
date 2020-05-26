@@ -4,7 +4,7 @@ public enum PaymentType {
 	
 	
 	
-	CREDITCARD("creditcard"), FREE("free"), COD("cod"), MONEYORDER("moneyorder"), PAYPAL("paypal");
+	CREDITCARD("creditcard"), FREE("free"), COD("cod"), MONEYORDER("moneyorder"), PAYPAL("paypal"), CASH("cash"), TRANSFER("transfer"), POS("pos");
 
 	
 	private String paymentType;
