@@ -1,11 +1,11 @@
 package com.salesmanager.shop.admin.controller.payments;
 
-import com.salesmanager.core.business.modules.integration.IntegrationException;
 import com.salesmanager.core.business.services.payments.PaymentService;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.payments.TransactionType;
 import com.salesmanager.core.model.system.IntegrationConfiguration;
 import com.salesmanager.core.model.system.IntegrationModule;
+import com.salesmanager.core.modules.integration.IntegrationException;
 import com.salesmanager.shop.admin.controller.ControllerConstants;
 import com.salesmanager.shop.admin.model.web.Menu;
 import com.salesmanager.shop.constants.Constants;
@@ -113,20 +113,18 @@ public class PaymentsController {
 
 		try {
 			paymentService.savePaymentModuleConfiguration(configuration, store);
-		} catch (Exception e) {
-			if(e instanceof com.salesmanager.core.business.modules.integration.IntegrationException) {
-				if(((IntegrationException)e).getErrorCode()==IntegrationException.ERROR_VALIDATION_SAVE) {
-					
-					List<String> errorCodes = ((IntegrationException)e).getErrorFields();
-					for(String errorCode : errorCodes) {
-						model.addAttribute(errorCode,messages.getMessage("message.fielderror", locale));
-					}
-					model.addAttribute("validationError","validationError");
-					return ControllerConstants.Tiles.Payment.paymentMethod;
+		} catch (IntegrationException iEx) {
+			if ((iEx.getErrorCode() == IntegrationException.ERROR_VALIDATION_SAVE)) {
+
+				List<String> errorCodes = iEx.getErrorFields();
+				for (String errorCode : errorCodes) {
+					model.addAttribute(errorCode, messages.getMessage("message.fielderror", locale));
 				}
-			} else {
-				throw new Exception(e);
+				model.addAttribute("validationError", "validationError");
+				return ControllerConstants.Tiles.Payment.paymentMethod;
 			}
+		} catch (Exception e) {
+			throw new Exception(e);
 		}
 		
 		
