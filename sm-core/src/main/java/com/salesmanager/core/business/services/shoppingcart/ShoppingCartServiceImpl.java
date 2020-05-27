@@ -574,13 +574,11 @@ public class ShoppingCartServiceImpl extends SalesManagerEntityServiceImpl<Long,
 			//refresh
 			item = shoppingCartItemRepository.findOne(id);
 
+			//Workaround - Cascasde delete was not working
+			shoppingCartAttributeItemRepository.deleteByCartItemId(id);
 			//delete
-			shoppingCartItemRepository.deleteById(id);
-			
-			
+			shoppingCartItemRepository.deleteById(id);	
 		}
-		
-
 	}
 
 }
