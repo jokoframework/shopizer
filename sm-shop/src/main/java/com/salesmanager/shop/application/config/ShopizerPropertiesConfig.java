@@ -13,7 +13,7 @@ public class ShopizerPropertiesConfig {
 
   @Bean
   public List<String> templates() {
-    return Arrays.asList("bootstrap", "generic", "exoticamobilia", "december", "sodep", "summer");
+    return Arrays.asList("bootstrap", "generic", "exoticamobilia", "december", "sodep", "summer", "lincoln");
   }
 
   @Bean
