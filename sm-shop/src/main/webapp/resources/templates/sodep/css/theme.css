@@ -66,6 +66,10 @@ a:hover{
 	max-width:120px;
 }
 
+.logoImage.large {
+	max-width:160px;
+}
+
 
 .logo > h1{
 	font: 24px "SalarymanRegular", Arial, sans-serif;
@@ -84,7 +88,7 @@ a:hover{
 
 .menu__content a{
 	font-weight: 600;
-	color: var(--dark-color);
+	color: var(--menu-link-color);
 	transition: all 0.2s linear 0.2s;
 }
 
@@ -272,7 +276,7 @@ a:hover{
 
 #mainmenu .active a{
 	background-color: var(--active-bg-color);
-	color:var(--white-color);
+	color:var(--menu-active-color);
 }
 
 #mainmenu .nav{
@@ -837,6 +841,11 @@ footer div.company {
 	left: 840px;
 	top:290px;
 }
+
+.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+	width: 1400px;
+}
+
 .bg_slider{
 	background: url(../img/bg_slider.png) center no-repeat;
 	height:18px;
