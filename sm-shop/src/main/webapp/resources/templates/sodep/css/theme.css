@@ -695,7 +695,7 @@ footer div.company {
 	padding: 1rem;
 	flex-direction: column;
 	justify-content: space-between;
-	height: 110px;
+	height: 130px;
 }
 
 .product-list li .product-box img{
@@ -745,7 +745,9 @@ footer div.company {
 	text-shadow: none;
 }
 .product-list li .product-box .bottom{
+	display: flex;
 	position: relative;
+	justify-content: space-around;
 	bottom: 0;
 	right: 0;
 	color: rgba(var(--black-color-rgb),0.7);
@@ -781,6 +783,29 @@ footer div.company {
 
 .product-list li .product-box .bottom .productDetail:hover{
 	color: var(--info-color);
+}
+
+.product-list li .product-box .bottom .product-qty{
+	display: flex;
+}
+
+.product-list li .product-box .bottom .product-qty input{
+	max-width: 35px;
+	border-radius: 0;
+	padding: 2px 4px;
+}
+
+.product-list li .product-box .bottom .product-qty .btn{
+	padding: 5px 8px;
+	color: var(--light-color);
+	margin: 0 3px;
+}
+
+.product-list li .product-box .bottom .product-qty .btn i{
+	display: flex;
+	align-content: center;
+	align-items: center;
+	height: 100%;
 }
 
 .listing-item {
