@@ -160,7 +160,7 @@
 				 $('#pageContainer').hideLoading();
 			 } 
 		});
-		
+		$(qty).val(parseFloat("1"));
 	}
 	
 function removeLineItem(lineItemId){

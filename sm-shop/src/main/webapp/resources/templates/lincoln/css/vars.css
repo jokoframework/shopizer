@@ -38,6 +38,6 @@
 	--footer-logo-border-color: rgb(75, 78, 80);
 	--box-color: rgb(237, 237, 237);
 	--box-color-rgb: 237, 237, 237;
-	--product-img-border-color: var(--main-bg-color);
+	--product-img-border-color: var(--info-color);
 	--float-button-color: rgb(38, 173, 57);
 }
