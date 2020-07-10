@@ -26,6 +26,7 @@ public class ShoppingCartItem extends ShopEntity implements Serializable {
 	private String subTotal;
 	
 	private List<ShoppingCartAttribute> shoppingCartAttributes;
+	private Double itemWeight;
 	
 	public String getName() {
 		return name;
@@ -100,4 +101,7 @@ public class ShoppingCartItem extends ShopEntity implements Serializable {
 	}
 
 
+	public Double getItemWeight() { return itemWeight; }
+
+	public void setItemWeight(Double itemWeight) { this.itemWeight = itemWeight; }
 }

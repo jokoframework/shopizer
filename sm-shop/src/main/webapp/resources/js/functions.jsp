@@ -84,14 +84,14 @@ function getInvalidCheckPasswordMessage() {
 }
 
 function cartInfoLabel(cart){
-	 var labelItem = getItemLabel(cart.quantity);
+	 var labelItem = getItemLabel(cart.shoppingCartItems.length);
 	 <!-- A configuration is required to display quantity and price -->
 	 <c:choose>
 	 <c:when test="${requestScope.CONFIGS['displayFullMiniCartInfo'] == true}">
-	 $("#cartinfo").html('<span id="cartqty">(' + cart.quantity + ' ' + labelItem + ')</span>&nbsp;<span id="cartprice">' + cart.total + '</span>');
+	 $("#cartinfo").html('<span id="cartqty">(' + cart.shoppingCartItems.length + ' ' + labelItem + ')</span>&nbsp;<span id="cartprice">' + cart.total + '</span>');
 	 </c:when>
 	 <c:otherwise>
-	 $("#cartinfo").html('<span id="cartqty">(' + cart.quantity + ' ' + labelItem + ')</span>');
+	 $("#cartinfo").html('<span id="cartqty">(' + cart.shoppingCartItems.length + ' ' + labelItem + ')</span>');
 	 </c:otherwise>
 	 </c:choose>
 }

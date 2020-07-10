@@ -29,7 +29,7 @@ public class ProductEntity extends Product implements Serializable {
 	private boolean productIsFree;
 	private boolean available;
 	private boolean visible = true;
-
+	private Double productItemWeight = 1d;
 	/*
 	 * private BigDecimal productLength; private BigDecimal productWidth;
 	 * private BigDecimal productHeight; private BigDecimal productWeight;
@@ -236,4 +236,7 @@ public class ProductEntity extends Product implements Serializable {
 	}
 
 
+	public Double getProductItemWeight() { return productItemWeight; }
+
+	public void setProductItemWeight(Double productItemWeight) { this.productItemWeight = productItemWeight; }
 }

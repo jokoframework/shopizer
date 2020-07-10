@@ -436,7 +436,8 @@ public class ReadableProductPopulator extends
 			
 	
 			target.setSku(source.getSku());
-	
+			target.setProductItemWeight(source.getProductItemWeight());
+			
 			FinalPrice price = pricingService.calculateProductPrice(source);
 			
 			if(price != null) {
