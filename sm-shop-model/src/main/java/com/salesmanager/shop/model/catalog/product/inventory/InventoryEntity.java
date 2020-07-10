@@ -8,7 +8,7 @@ public class InventoryEntity extends Entity {
    * 
    */
   private static final long serialVersionUID = 1L;
-  private int quantity;
+  private double quantity;
   private String region;
   private String regionVariant;
   private String owner;
@@ -16,10 +16,10 @@ public class InventoryEntity extends Entity {
   private boolean available;
   private int productQuantityOrderMin = 0;
   private int productQuantityOrderMax = 0;
-  public int getQuantity() {
+  public double getQuantity() {
     return quantity;
   }
-  public void setQuantity(int quantity) {
+  public void setQuantity(double quantity) {
     this.quantity = quantity;
   }
   public String getRegion() {

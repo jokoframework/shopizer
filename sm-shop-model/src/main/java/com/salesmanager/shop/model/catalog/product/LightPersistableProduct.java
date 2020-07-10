@@ -15,7 +15,7 @@ public class LightPersistableProduct implements Serializable {
   private static final long serialVersionUID = 1L;
   private String price;
   private boolean available;
-  private int quantity;
+  private double quantity;
   public String getPrice() {
     return price;
   }
@@ -23,10 +23,10 @@ public class LightPersistableProduct implements Serializable {
     this.price = price;
   }
 
-  public int getQuantity() {
+  public double getQuantity() {
     return quantity;
   }
-  public void setQuantity(int quantity) {
+  public void setQuantity(double quantity) {
     this.quantity = quantity;
   }
   public boolean isAvailable() {

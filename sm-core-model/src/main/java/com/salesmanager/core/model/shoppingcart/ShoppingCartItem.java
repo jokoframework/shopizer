@@ -52,7 +52,7 @@ public class ShoppingCartItem extends SalesManagerEntity<Long, ShoppingCartItem>
 	private ShoppingCart shoppingCart;
 
 	@Column(name="QUANTITY")
-	private Integer quantity = new Integer(1);
+	private Double quantity = new Double(1d);
 
 
 	@Embedded
@@ -94,7 +94,7 @@ public class ShoppingCartItem extends SalesManagerEntity<Long, ShoppingCartItem>
 	public ShoppingCartItem(ShoppingCart shoppingCart, Product product) {
 		this.product = product;
 		this.productId = product.getId();
-		this.quantity = 1;
+		this.quantity = 1d;
 		this.shoppingCart = shoppingCart;
 		
 	}
@@ -102,7 +102,7 @@ public class ShoppingCartItem extends SalesManagerEntity<Long, ShoppingCartItem>
 	public ShoppingCartItem(Product product) {
 		this.product = product;
 		this.productId = product.getId();
-		this.quantity = 1;
+		this.quantity = 1d;
 
 	}
 	
@@ -150,11 +150,11 @@ public class ShoppingCartItem extends SalesManagerEntity<Long, ShoppingCartItem>
 		return itemPrice;
 	}
 
-	public void setQuantity(Integer quantity) {
+	public void setQuantity(Double quantity) {
 		this.quantity = quantity;
 	}
 
-	public Integer getQuantity() {
+	public Double getQuantity() {
 		return quantity;
 	}
 

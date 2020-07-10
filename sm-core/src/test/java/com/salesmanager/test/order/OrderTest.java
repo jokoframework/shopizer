@@ -219,7 +219,7 @@ public class OrderTest extends com.salesmanager.test.common.AbstractSalesManager
 	    //availability
 	    ProductAvailability availability = new ProductAvailability();
 	    availability.setProductDateAvailable(new Date());
-	    availability.setProductQuantity(100);
+	    availability.setProductQuantity(100d);
 	    availability.setRegion("*");
 	    availability.setProduct(product);// associate with product
 	    
@@ -317,7 +317,7 @@ public class OrderTest extends com.salesmanager.test.common.AbstractSalesManager
 		oproduct.setOneTimeCharge(dprice.getProductPriceAmount());
 		oproduct.setOrder(order);		
 		oproduct.setProductName( description.getName() );
-		oproduct.setProductQuantity(1);
+		oproduct.setProductQuantity(1d);
 		oproduct.setSku(product.getSku());
 		
 		//set order product price

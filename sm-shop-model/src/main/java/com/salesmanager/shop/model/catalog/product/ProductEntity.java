@@ -19,7 +19,7 @@ public class ProductEntity extends Product implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private BigDecimal price;
-	private int quantity = 0;
+	private Double quantity = 0d;
 	private String sku;
 	private boolean productShipeable = false;
 	private boolean preOrder = false;
@@ -67,11 +67,11 @@ public class ProductEntity extends Product implements Serializable {
 		this.price = price;
 	}
 
-	public int getQuantity() {
+	public Double getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(Double quantity) {
 		this.quantity = quantity;
 	}
 

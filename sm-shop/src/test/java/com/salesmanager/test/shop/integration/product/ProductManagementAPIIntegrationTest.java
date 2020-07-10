@@ -329,7 +329,7 @@ public class ProductManagementAPIIntegrationTest extends ServicesTestSupport {
         specifications.setWidth(new BigDecimal(23));
 
         product.setProductSpecifications(specifications);
-        product.setQuantity(5);
+        product.setQuantity(5d);
         product.setQuantityOrderMaximum(2);
 
         final PersistableProductPrice productPrice = new PersistableProductPrice();

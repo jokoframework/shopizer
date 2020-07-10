@@ -7,7 +7,7 @@ public class PackageDetails {
 	private double shippingLength;
 	private double shippingHeight;
 	private double shippingWidth;
-	private int shippingQuantity;
+	private Double shippingQuantity;
 	private int treshold;
 	
 	private String itemName = "";
@@ -49,10 +49,10 @@ public class PackageDetails {
 	public void setShippingWidth(double shippingWidth) {
 		this.shippingWidth = shippingWidth;
 	}
-	public int getShippingQuantity() {
+	public Double getShippingQuantity() {
 		return shippingQuantity;
 	}
-	public void setShippingQuantity(int shippingQuantity) {
+	public void setShippingQuantity(Double shippingQuantity) {
 		this.shippingQuantity = shippingQuantity;
 	}
 	public int getTreshold() {

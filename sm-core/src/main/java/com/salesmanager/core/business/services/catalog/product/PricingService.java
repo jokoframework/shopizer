@@ -115,5 +115,5 @@ public interface PricingService {
 	 * @param quantity
 	 * @return
 	 */
-	BigDecimal calculatePriceQuantity(BigDecimal price, int quantity);
+	BigDecimal calculatePriceQuantity(BigDecimal price, Double quantity);
 }

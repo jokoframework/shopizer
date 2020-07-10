@@ -82,7 +82,7 @@ public class DefaultPackagingImpl implements Packaging {
 				continue;
 			}
 
-			int qty = shippingProduct.getQuantity();
+			Double qty = shippingProduct.getQuantity();
 
 			Set<ProductAttribute> attrs = shippingProduct.getProduct().getAttributes();
 

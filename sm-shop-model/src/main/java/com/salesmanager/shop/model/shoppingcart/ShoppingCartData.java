@@ -20,7 +20,7 @@ public class ShoppingCartData extends ShopEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String message;
 	private String code;
-	private int quantity;
+	private double quantity;
 	private String total;
 	private String subTotal;
 	
@@ -41,10 +41,10 @@ public class ShoppingCartData extends ShopEntity implements Serializable {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	public int getQuantity() {
+	public double getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(int quantity) {
+	public void setQuantity(double quantity) {
 		this.quantity = quantity;
 	}
 	public String getTotal() {

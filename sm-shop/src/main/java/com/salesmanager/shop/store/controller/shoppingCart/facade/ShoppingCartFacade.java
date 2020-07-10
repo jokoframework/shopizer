@@ -51,7 +51,7 @@ public interface ShoppingCartFacade {
     public ShoppingCartData getShoppingCartData(String code, MerchantStore store, Language lnguage) throws Exception;
     
     public ShoppingCartData removeCartItem(final Long itemID, final String cartId,final MerchantStore store,final Language language ) throws Exception;
-    public ShoppingCartData updateCartItem(final Long itemID, final String cartId, final long quantity,final MerchantStore store,Language language ) throws Exception;
+    public ShoppingCartData updateCartItem(final Long itemID, final String cartId, final double quantity,final MerchantStore store,Language language ) throws Exception;
     public void deleteShoppingCart(final Long id, final MerchantStore store) throws Exception;
 	ShoppingCartData updateCartItems(Optional<String> promoCode, List<ShoppingCartItem> shoppingCartItems,
 			MerchantStore store, Language language) throws Exception;

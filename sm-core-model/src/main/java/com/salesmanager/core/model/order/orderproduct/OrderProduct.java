@@ -39,7 +39,7 @@ public class OrderProduct extends SalesManagerEntity<Long, OrderProduct> {
 	private String productName;
 
 	@Column (name="PRODUCT_QUANTITY")
-	private int productQuantity;
+	private Double productQuantity;
 
 	@Column (name="ONETIME_CHARGE" , nullable=false )
 	private BigDecimal oneTimeCharge;
@@ -78,11 +78,11 @@ public class OrderProduct extends SalesManagerEntity<Long, OrderProduct> {
 		this.productName = productName;
 	}
 
-	public int getProductQuantity() {
+	public Double getProductQuantity() {
 		return productQuantity;
 	}
 
-	public void setProductQuantity(int productQuantity) {
+	public void setProductQuantity(Double productQuantity) {
 		this.productQuantity = productQuantity;
 	}
 

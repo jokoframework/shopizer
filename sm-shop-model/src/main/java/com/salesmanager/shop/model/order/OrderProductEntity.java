@@ -10,16 +10,16 @@ public class OrderProductEntity extends OrderProduct implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int orderedQuantity;
+	private Double orderedQuantity;
 	private ReadableProduct product;
 
 
 	
 	
-	public void setOrderedQuantity(int orderedQuantity) {
+	public void setOrderedQuantity(Double orderedQuantity) {
 		this.orderedQuantity = orderedQuantity;
 	}
-	public int getOrderedQuantity() {
+	public Double getOrderedQuantity() {
 		return orderedQuantity;
 	}
 	public ReadableProduct getProduct() {

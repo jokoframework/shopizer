@@ -512,7 +512,7 @@ public class ShoppingCartFacadeImpl
     }
 
     @Override
-    public ShoppingCartData updateCartItem( final Long itemID, final String cartId, final long newQuantity,final MerchantStore store, final Language language )
+    public ShoppingCartData updateCartItem( final Long itemID, final String cartId, final double newQuantity,final MerchantStore store, final Language language )
         throws Exception
     {
         if ( newQuantity < 1 )
@@ -535,7 +535,7 @@ public class ShoppingCartFacadeImpl
                 entryToUpdate.getProduct();
 
                 LOG.info( "Updating cart entry quantity to" + newQuantity );
-                entryToUpdate.setQuantity( (int) newQuantity );
+                entryToUpdate.setQuantity( newQuantity );
                 List<ProductAttribute> productAttributes = new ArrayList<ProductAttribute>();
                 productAttributes.addAll( entryToUpdate.getProduct().getAttributes() );
                 final FinalPrice finalPrice =
@@ -585,7 +585,7 @@ public class ShoppingCartFacadeImpl
                 entryToUpdate.getProduct();
 
                 LOG.info( "Updating cart entry quantity to" + item.getQuantity() );
-                entryToUpdate.setQuantity( (int) item.getQuantity() );
+                entryToUpdate.setQuantity( item.getQuantity() );
                 
                 List<ProductAttribute> productAttributes = new ArrayList<ProductAttribute>();
                 productAttributes.addAll( entryToUpdate.getProduct().getAttributes() );

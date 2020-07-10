@@ -177,7 +177,7 @@ public class TaxServiceImpl
 				
 				BigDecimal itemPrice = item.getItemPrice();
 				TaxClass taxClass = item.getProduct().getTaxClass();
-				int quantity = item.getQuantity();
+				Double quantity = item.getQuantity();
 				itemPrice = itemPrice.multiply(new BigDecimal(quantity));
 				if(taxClass==null) {
 					taxClass = taxClassService.getByCode(DEFAULT_TAX_CLASS);

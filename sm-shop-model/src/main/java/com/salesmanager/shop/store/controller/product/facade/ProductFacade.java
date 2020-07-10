@@ -99,7 +99,7 @@ public interface ProductFacade {
    * @return
    * @throws Exception
    */
-  ReadableProduct updateProductQuantity(ReadableProduct product, int quantity, Language language)
+  ReadableProduct updateProductQuantity(ReadableProduct product, double quantity, Language language)
       throws Exception;
 
   /**

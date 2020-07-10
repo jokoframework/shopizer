@@ -171,7 +171,7 @@ public class ShoppingCartTest extends com.salesmanager.test.common.AbstractSales
 	    //availability
 	    ProductAvailability availability = new ProductAvailability();
 	    availability.setProductDateAvailable(new Date());
-	    availability.setProductQuantity(100);
+	    availability.setProductQuantity(100d);
 	    availability.setRegion("*");
 	    availability.setProduct(product);// associate with product
 	    
@@ -232,7 +232,7 @@ public class ShoppingCartTest extends com.salesmanager.test.common.AbstractSales
 	    FinalPrice price = pricingService.calculateProductPrice(product);
 
 	    item.setItemPrice(price.getFinalPrice());
-	    item.setQuantity(1);
+	    item.setQuantity(1d);
 	    
 	    /** user selects black **/
 	    ShoppingCartAttributeItem attributeItem = new ShoppingCartAttributeItem(item,blackAttribute);
