@@ -164,6 +164,9 @@ public class Product extends SalesManagerEntity<Long, Product> implements Audita
 	@Column(name = "SORT_ORDER")
 	private Integer sortOrder = new Integer(0);
 
+	@Column(name = "PRODUCT_ITEM_WEIGHT")
+	private Double productItemWeight;
+
 	@NotEmpty
 	@Pattern(regexp="^[a-zA-Z0-9_]*$")
 	@Column(name = "SKU")
@@ -515,6 +518,7 @@ public class Product extends SalesManagerEntity<Long, Product> implements Audita
 	}
 
 
+	public Double getProductItemWeight() { return productItemWeight; }
 
-
+	public void setProductItemWeight(Double productItemWeight) { this.productItemWeight = productItemWeight; }
 }

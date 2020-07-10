@@ -147,7 +147,7 @@
 										<input type="number" min="1"
 										class="input-small quantity form-control text-center"
 										value="${shoppingCartItem.quantity}" name="quantity"
-										id="${shoppingCartItem.id}"
+										id="${shoppingCartItem.id}" step="${shoppingCartItem.itemWeight}"
 										<c:if test="${shoppingCartItem.productVirtual==true}">readonly</c:if>>
 									</td>
 

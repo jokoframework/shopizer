@@ -21,6 +21,15 @@ $(function(){
 	initProduct('<c:out value="${product.id}"/>','#input-<c:out value="${product.id}" />');//pass form div
 });
 
+function updateProductQty(stepBy) {
+	let qty = '#qty-productId-' + '${product.id}';
+	var qtyValue = $(qty).val();
+	if (!qtyValue || qtyValue == null) {
+		qtyValue = "1";
+	}
+	$(qty).val(parseFloat(qtyValue) + parseFloat(stepBy));
+}
+
 </script>
 
 								<c:set var="SKU" value="product_${product.sku}" scope="request" />
@@ -79,7 +88,9 @@ $(function(){
 								<c:if test="${product.quantityOrderMaximum==-1 || product.quantityOrderMaximum>1 && not product.productVirtual}" >
 									
 									<div class="form-group product-qty" style="width: 40%; margin-top: 5px;">
-										<input id="qty-productId-<c:out value="${product.id}" />" class="input-mini form-control form-control-sm" placeholder="1" type="number" min="<c:choose><c:when test="${product.quantityOrderMinimum != null}">${product.quantityOrderMinimum}</c:when><c:otherwise>1</c:otherwise></c:choose>" max="<c:choose><c:when test="${product.quantityOrderMaximum != null && product.quantityOrderMaximum!=-1}">${product.quantityOrderMaximum}</c:when><c:otherwise>5</c:otherwise></c:choose>" style="width:100% !important;">
+										<input type="button" class="btn" value="-" onclick="updateProductQty('-${product.productItemWeight}')">
+                                        <input id="qty-productId-<c:out value="${product.id}" />" class="input-mini form-control form-control-sm" placeholder="1" type="number" min="<c:choose><c:when test="${product.quantityOrderMinimum != null}">${product.quantityOrderMinimum}</c:when><c:otherwise>1</c:otherwise></c:choose>" max="<c:choose><c:when test="${product.quantityOrderMaximum != null && product.quantityOrderMaximum!=-1}">${product.quantityOrderMaximum}</c:when><c:otherwise>5</c:otherwise></c:choose>" style="width:100% !important;">
+                                        <input type="button" class="btn" value="+" onclick="updateProductQty('${product.productItemWeight}')">
 									</div>
 							      
 								</c:if>

@@ -168,6 +168,7 @@ public class ShoppingCartDataPopulator extends AbstractDataPopulator<ShoppingCar
                         }
                         shoppingCartItem.setShoppingCartAttributes(cartAttributes);
                     }
+                    shoppingCartItem.setItemWeight(item.getProduct().getProductItemWeight());
                     shoppingCartItemsList.add(shoppingCartItem);
                 }
             }
