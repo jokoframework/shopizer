@@ -176,8 +176,8 @@ public class PayPalExpressCheckoutPayment implements PaymentModule {
 				amt.setCurrencyID(urn.ebay.apis.eBLBaseComponents.CurrencyCodeType.fromValue(payment.getCurrency().getCode()));
 				amt.setValue(pricingService.getStringAmount(cartItem.getFinalPrice().getFinalPrice(), store));
 				//itemsTotal = itemsTotal.add(cartItem.getSubTotal());
-				int itemQuantity = cartItem.getQuantity();
-				item.setQuantity(itemQuantity);
+				Double itemQuantity = cartItem.getQuantity();
+				item.setQuantity(itemQuantity.intValue());
 				item.setName(cartItem.getProduct().getProductDescription().getName());
 				item.setAmount(amt);
 				//System.out.println(pricingService.getStringAmount(cartItem.getSubTotal(), store));

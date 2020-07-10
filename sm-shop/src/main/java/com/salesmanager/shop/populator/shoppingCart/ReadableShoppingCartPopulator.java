@@ -59,7 +59,7 @@ public class ReadableShoppingCartPopulator extends AbstractDataPopulator<Shoppin
     		target = new ReadableShoppingCart();
     	}
     	target.setCode(source.getShoppingCartCode());
-    	int cartQuantity = 0;
+    	double cartQuantity = 0;
     	
     	target.setCustomer(source.getCustomerId());
     	

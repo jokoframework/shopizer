@@ -43,7 +43,7 @@ public class ShoppingCartAPIIntegrationTest extends ServicesTestSupport {
 
         PersistableShoppingCartItem cartItem = new PersistableShoppingCartItem();
         cartItem.setProduct(product.getId());
-        cartItem.setQuantity(1);
+        cartItem.setQuantity(1d);
 
         final HttpEntity<PersistableShoppingCartItem> cartEntity = new HttpEntity<>(cartItem, getHeader());
         final ResponseEntity<ReadableShoppingCart> response = testRestTemplate.postForEntity(String.format("/api/v1/cart/"), cartEntity, ReadableShoppingCart.class);

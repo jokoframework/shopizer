@@ -25,7 +25,7 @@ public class ReadableShoppingCart extends ShoppingCartEntity {
 	private String displaySubTotal;
 	private BigDecimal total;
 	private String displayTotal;
-	private int quantity;
+	private double quantity;
 	
 	List<ReadableShoppingCartItem> products = new ArrayList<ReadableShoppingCartItem>();
 	List<ReadableOrderTotal> totals;
@@ -128,13 +128,13 @@ public class ReadableShoppingCart extends ShoppingCartEntity {
 
 
 
-	public int getQuantity() {
+	public double getQuantity() {
 		return quantity;
 	}
 
 
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(double quantity) {
 		this.quantity = quantity;
 	}
 

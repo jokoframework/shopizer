@@ -93,7 +93,7 @@ public class ShippingQuoteByWeightTest extends com.salesmanager.test.common.Abst
 	    // Availability
 	    ProductAvailability availability = new ProductAvailability();
 	    availability.setProductDateAvailable(new Date());
-	    availability.setProductQuantity(100);
+	    availability.setProductQuantity(100d);
 	    availability.setRegion("*");
 	    availability.setProduct(product);// associate with product
 	    

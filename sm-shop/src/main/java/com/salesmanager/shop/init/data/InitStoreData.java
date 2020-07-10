@@ -427,7 +427,7 @@ public class InitStoreData implements InitData {
 		    // Availability
 		    ProductAvailability availability = new ProductAvailability();
 		    availability.setProductDateAvailable(date);
-		    availability.setProductQuantity(100);
+		    availability.setProductQuantity(1d);
 		    availability.setRegion("*");
 		    availability.setProduct(product);// associate with product
 		    
@@ -499,7 +499,7 @@ public class InitStoreData implements InitData {
 		    // Availability
 		    ProductAvailability availability2 = new ProductAvailability();
 		    availability2.setProductDateAvailable(date);
-		    availability2.setProductQuantity(100);
+		    availability2.setProductQuantity(100d);
 		    availability2.setRegion("*");
 		    availability2.setProduct(product2);// associate with product
 
@@ -556,7 +556,7 @@ public class InitStoreData implements InitData {
 		    // Availability
 		    ProductAvailability availability3 = new ProductAvailability();
 		    availability3.setProductDateAvailable(date);
-		    availability3.setProductQuantity(100);
+		    availability3.setProductQuantity(100d);
 		    availability3.setRegion("*");
 		    availability3.setProduct(product3);// associate with product
 
@@ -612,7 +612,7 @@ public class InitStoreData implements InitData {
 		    // Availability
 		    ProductAvailability availability4 = new ProductAvailability();
 		    availability4.setProductDateAvailable(date);
-		    availability4.setProductQuantity(100);
+		    availability4.setProductQuantity(100d);
 		    availability4.setRegion("*");
 		    availability4.setProduct(product4);// associate with product
 
@@ -670,7 +670,7 @@ public class InitStoreData implements InitData {
 		    // Availability
 		    ProductAvailability availability5 = new ProductAvailability();
 		    availability5.setProductDateAvailable(date);
-		    availability5.setProductQuantity(100);
+		    availability5.setProductQuantity(10d);
 		    availability5.setRegion("*");
 		    availability5.setProduct(product5);// associate with product
 
@@ -729,7 +729,7 @@ public class InitStoreData implements InitData {
 		    // Availability
 		    ProductAvailability availability6 = new ProductAvailability();
 		    availability6.setProductDateAvailable(date);
-		    availability6.setProductQuantity(100);
+		    availability6.setProductQuantity(100d);
 		    availability6.setRegion("*");
 		    availability6.setProduct(product6);// associate with product
 
@@ -910,7 +910,7 @@ public class InitStoreData implements InitData {
 			oproduct.setOneTimeCharge( new BigDecimal(19.99) );
 			oproduct.setOrder(order);		
 			oproduct.setProductName( "Product name" );
-			oproduct.setProductQuantity(1);
+			oproduct.setProductQuantity(1d);
 			oproduct.setSku("TB12345" );		
 			oproduct.getPrices().add(oproductprice ) ;
 			

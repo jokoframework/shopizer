@@ -391,7 +391,7 @@ public class OrderFacadeImpl implements OrderFacade {
 				LOGGER.debug("Validate inventory");
 				for (ProductAvailability availability : product.getAvailabilities()) {
 					if (availability.getRegion().equals(Constants.ALL_REGIONS)) {
-						int qty = availability.getProductQuantity();
+						double qty = availability.getProductQuantity();
 						if (qty < item.getQuantity()) {
 							throw new ServiceException(ServiceException.EXCEPTION_INVENTORY_MISMATCH);
 						}

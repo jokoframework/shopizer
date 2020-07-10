@@ -90,7 +90,7 @@ public class ShoppingCartDataPopulator extends AbstractDataPopulator<ShoppingCar
 
     	Validate.notNull(shoppingCart, "Requires ShoppingCart");
     	Validate.notNull(language, "Requires Language not null");
-    	int cartQuantity = 0;
+    	double cartQuantity = 0;
         cart.setCode(shoppingCart.getShoppingCartCode());
         Set<com.salesmanager.core.model.shoppingcart.ShoppingCartItem> items = shoppingCart.getLineItems();
         List<ShoppingCartItem> shoppingCartItemsList=Collections.emptyList();

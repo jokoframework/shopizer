@@ -232,7 +232,7 @@ public class ProductFacadeImpl implements ProductFacade {
 	}
 
 	@Override
-	public ReadableProduct updateProductQuantity(ReadableProduct product, int quantity, Language language)
+	public ReadableProduct updateProductQuantity(ReadableProduct product, double quantity, Language language)
 			throws Exception {
 		Product persistable = productService.getById(product.getId());
 

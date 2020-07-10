@@ -199,7 +199,7 @@ public class OrderServiceImpl  extends SalesManagerEntityServiceImpl<Long, Order
             if(p == null) 
                 throw new ServiceException(ServiceException.EXCEPTION_INVENTORY_MISMATCH);
             for(ProductAvailability availability : p.getAvailabilities()) {
-                int qty = availability.getProductQuantity();
+                double qty = availability.getProductQuantity();
                 if(qty < orderProduct.getProductQuantity()) {
                     throw new ServiceException(ServiceException.EXCEPTION_INVENTORY_MISMATCH);
                 }

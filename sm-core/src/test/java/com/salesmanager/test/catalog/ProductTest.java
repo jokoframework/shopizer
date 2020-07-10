@@ -239,7 +239,7 @@ public class ProductTest extends com.salesmanager.test.common.AbstractSalesManag
 	    // Availability
 	    ProductAvailability availability = new ProductAvailability();
 	    availability.setProductDateAvailable(date);
-	    availability.setProductQuantity(100);
+	    availability.setProductQuantity(100d);
 	    availability.setRegion("*");
 	    availability.setProduct(product);// associate with product
 
@@ -628,7 +628,7 @@ public class ProductTest extends com.salesmanager.test.common.AbstractSalesManag
 	    // Availability
 	    ProductAvailability availability = new ProductAvailability();
 	    availability.setProductDateAvailable(date);
-	    availability.setProductQuantity(200);
+	    availability.setProductQuantity(200d);
 	    availability.setRegion("*");
 	    availability.setProduct(related);// associate with product
 

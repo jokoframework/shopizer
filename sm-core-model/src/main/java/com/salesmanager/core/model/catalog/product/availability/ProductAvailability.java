@@ -62,7 +62,7 @@ public class ProductAvailability extends SalesManagerEntity<Long, ProductAvailab
 
 	@NotNull
 	@Column(name = "QUANTITY")
-	private Integer productQuantity = 0;
+	private double productQuantity = 0;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "DATE_AVAILABLE")
@@ -118,11 +118,11 @@ public class ProductAvailability extends SalesManagerEntity<Long, ProductAvailab
 		this.merchantStore = store;
 	}
 
-	public Integer getProductQuantity() {
+	public Double getProductQuantity() {
 		return productQuantity;
 	}
 
-	public void setProductQuantity(Integer productQuantity) {
+	public void setProductQuantity(Double productQuantity) {
 		this.productQuantity = productQuantity;
 	}
 

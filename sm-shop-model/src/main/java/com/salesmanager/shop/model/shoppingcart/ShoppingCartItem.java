@@ -17,7 +17,7 @@ public class ShoppingCartItem extends ShopEntity implements Serializable {
 	private String price;
 	private String image;
 	private BigDecimal productPrice;
-	private int quantity;
+	private Double quantity;
 	private long productId;
 	private String productCode;
 	private String code;//shopping cart code
@@ -39,13 +39,13 @@ public class ShoppingCartItem extends ShopEntity implements Serializable {
 	public void setPrice(String price) {
 		this.price = price;
 	}
-	public int getQuantity() {
+	public Double getQuantity() {
 		if(quantity <= 0) {
-			quantity = 1;
+			quantity = 1d;
 		}
 		return quantity;
 	}
-	public void setQuantity(int quantity) {
+	public void setQuantity(Double quantity) {
 		this.quantity = quantity;
 	}
 

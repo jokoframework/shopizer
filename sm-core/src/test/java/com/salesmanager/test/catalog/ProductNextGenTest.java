@@ -231,7 +231,7 @@ public class ProductNextGenTest extends com.salesmanager.test.common.AbstractSal
 	 * @param product
 	 * @throws Exception
 	 */
-	private ProductAvailability createInventory(MerchantStore store, int quantity, BigDecimal price) throws Exception {
+	private ProductAvailability createInventory(MerchantStore store, double quantity, BigDecimal price) throws Exception {
 		
 		//add inventory
 	    ProductAvailability availability = new ProductAvailability();

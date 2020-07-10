@@ -10,17 +10,17 @@ public class ShippingProduct {
 
 	}
 	
-	private int quantity = 1;
+	private Double quantity = 1d;
 	private Product product;
 	
 	private FinalPrice finalPrice;
 	
 	
 	
-	public void setQuantity(int quantity) {
+	public void setQuantity(Double quantity) {
 		this.quantity = quantity;
 	}
-	public int getQuantity() {
+	public Double getQuantity() {
 		return quantity;
 	}
 	public void setProduct(Product product) {
