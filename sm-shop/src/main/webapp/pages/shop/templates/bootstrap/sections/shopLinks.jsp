@@ -14,6 +14,7 @@
     <script src="<c:url value="/resources/js/shopping-cart.js" />"></script>
     <script src="<c:url value="/resources/js/login.js" />"></script>
     <script src="<c:url value="/resources/js/jquery.showLoading.min.js" />"></script>
+	<script src="<c:url value="/resources/js/leaflet.js" />"></script>
     
     <!-- specific css -->
     <link href="<c:url value="/resources/templates/bootstrap/css/bootstrap.min.css" />" rel="stylesheet">
@@ -25,6 +26,9 @@
     
     <!-- template css file -->
     <link href="<c:url value="/resources/templates/bootstrap/css/theme.css" />" rel="stylesheet">
+
+	<link href="<c:url value="/resources/css/leaflet/leaflet.css" />"
+	  rel="stylesheet" />
     
     <script src="<c:url value="/resources/templates/bootstrap/js/bootstrap-tooltip.js" />"></script>
     <script src="<c:url value="/resources/templates/bootstrap/js/bootstrap-popover.js" />"></script>

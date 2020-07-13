@@ -438,13 +438,15 @@ function bindActions() {
     
     //shipping / billing decision checkbox
     $("#shipToBillingAdress").click(function() {
-    	shippingQuotes();	
+    	shippingQuotes();
     	if ($('#shipToBillingAdress').is(':checked')) {
     		$('#deliveryBox').hide();
     		isFormValid();
+			reloadMapLayers(); // reload map markers when shipToBillingAdress check value changes
     	} else {
     		$('#deliveryBox').show();
     		isFormValid();
+			reloadMapLayers(); // reload map markers when shipToBillingAdress check value changes
     	}
     });
     
@@ -813,10 +815,54 @@ function calculateTotal(){
 	});
 }
 
+var mapMarkers;
+
+// Populate hidden latitude and longitude fields
+function populateLocation(lat, lng){
+	$('#latitude').val(lat);
+	$('#longitude').val(lng);
+}
+
+// Reload location map layers
+function reloadMapLayers(){
+	var initLatLng = [-25.299376, -57.571739];
+	if(mapMarkers){
+		mapMarkers.clearLayers();
+		L.marker(initLatLng).addTo(mapMarkers);
+		populateLocation(-25.299376, -57.571739);
+	}
+}
+
+// Creates the location map instance and attach click event
+function initializeMap() {
+    var initLatLng = [-25.299376, -57.571739];
+	var map = L.map('LocationMap').setView(initLatLng, 13);
+
+	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+	}).addTo(map);
+
+    if(!mapMarkers){
+        mapMarkers =  L.layerGroup().addTo(map);
+        mapMarkers.clearLayers();
+    }
+	L.marker(initLatLng).addTo(mapMarkers);
+
+	populateLocation(-25.299376, -57.571739)
+
+	function onMapClick(e) {
+		populateLocation(e.latlng.lat, e.latlng.lng)
+
+        mapMarkers.clearLayers();
+		L.marker([e.latlng.lat, e.latlng.lng]).addTo(mapMarkers);
+	}
+	map.on('click', onMapClick);
+}
 
 
 $(document).ready(function() {
-	
+
+		initializeMap(); // initialize the location map
 		$("#confirmShippingAddress").hide();
 	
         formValid = false;	
@@ -1217,6 +1263,21 @@ $(document).ready(function() {
 										  			</div>
 										  			</div>
 									  	  </div>
+
+									</div>
+									<div id="deliveryBox" class="checkout-box">
+											<span class="box-title">
+												<p class="p-title"><s:message code="label.customer.shippinglocation" text="Shipping location"/></p>
+											</span>
+										<div class="row-fluid common-row row">
+											<div class="span8 col-md-8">
+												<div id="LocationMap" class="location-map"></div>
+											</div>
+											<form:input  type="hidden" class="input-large required form-control form-control-lg" id="latitude"
+														 maxlength="100" name="latitude" path="customer.billing.latitude" />
+											<form:input  type="hidden" class="input-large required form-control form-control-lg" id="longitude"
+														 maxlength="100" name="longitude" path="customer.billing.longitude" />
+										</div>
 									</div>
 									</c:if>
 									
@@ -1236,14 +1297,14 @@ $(document).ready(function() {
 								        <c:choose>
 								        <c:when test="${fn:length(shippingQuote.shippingOptions)>0}">
 								        	<input type="hidden" id="shippingModule" name="shippingModule" value="${shippingQuote.shippingModuleCode}">
-									        <div id="shippingSection" class="control-group"> 
+									        <div id="shippingSection" class="control-group">
 							 					<label class="control-label">
 							 						<s:message code="label.shipping.options" text="Shipping options"/>
 							 						<c:if test="${shippingQuote.handlingFees!=null && shippingQuote.handlingFees>0}">
 								       					&nbsp;(<s:message code="label.shipping.handlingfees" text="Handling fees" />&nbsp;<sm:monetary value="${shippingQuote.handlingFees}"/>)
 								       				</c:if>
-							 					</label> 
-							 					<div id="shippingOptions" class="controls"> 
+							 					</label>
+							 					<div id="shippingOptions" class="controls">
 							 						<c:if test="${shippingQuote.shippingReturnCode=='NO_POSTAL_CODE'}">
 							 								<strong>
 									       						<s:message code="label.shipping.nopostalcode" text="A shipping quote will be available after filling the postal code"/>
@@ -1251,14 +1312,14 @@ $(document).ready(function() {
 							 						</c:if>
 							 						<c:forEach items="${shippingQuote.shippingOptions}" var="option" varStatus="status">
 														<label class="radio">
-															<input type="radio" name="selectedShippingOption.optionId" class="shippingOption" code="${option.shippingModuleCode}" id="${option.optionId}" value="${option.optionId}" <c:if test="${shippingQuote.selectedShippingOption!=null && shippingQuote.selectedShippingOption.optionId==option.optionId}">checked="checked"</c:if>> 
+															<input type="radio" name="selectedShippingOption.optionId" class="shippingOption" code="${option.shippingModuleCode}" id="${option.optionId}" value="${option.optionId}" <c:if test="${shippingQuote.selectedShippingOption!=null && shippingQuote.selectedShippingOption.optionId==option.optionId}">checked="checked"</c:if>>
 															<s:message code="module.shipping.${option.shippingModuleCode}" arguments="${requestScope.MERCHANT_STORE.storename}" text="${option.shippingModuleCode}"/> - ${option.optionPriceText}
 															<c:if test="${option.note!=null}">
 																<br/><small><c:out value="${option.note}"/></small>
 															</c:if>
-														</label> 
+														</label>
 													</c:forEach>
-												</div> 
+												</div>
 									       	</div>
 								       	</c:when>
 								       	<c:otherwise>
@@ -1279,7 +1340,7 @@ $(document).ready(function() {
 									       					<c:otherwise>
 									       						<c:choose>
 									       							<c:when test="${shippingQuote.shippingReturnCode=='NO_POSTAL_CODE'}">
-									       								<div id="shippingSection" class="control-group"> 
+									       								<div id="shippingSection" class="control-group">
 									       								<strong>
 									       									<s:message code="label.shipping.nopostalcode" text="A shipping quote will be available after filling the postal code"/>
 									       								</strong>
@@ -1293,10 +1354,10 @@ $(document).ready(function() {
 								       					</c:choose>
 								       				  </c:otherwise>
 								       				</c:choose>
-								       			</c:otherwise>								       	
+								       			</c:otherwise>
 								       		</c:choose>
 								       	</c:otherwise>
-								       	</c:choose> 
+								       	</c:choose>
 									</div>
 									<!-- end shipping box -->
 									</c:if>
