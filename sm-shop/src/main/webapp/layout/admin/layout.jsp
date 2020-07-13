@@ -191,11 +191,11 @@ response.setDateHeader ("Expires", -1);
     <script src="<c:url value="/resources/js/bootstrap/bootstrap-collapse.js" />"></script>
     <script src="<c:url value="/resources/js/bootstrap/bootstrap-carousel.js" />"></script>
     <script src="<c:url value="/resources/js/bootstrap/bootstrap-typeahead.js" />"></script>
-     
 
-    
-     	
-     	
+
+
+
+
      <script>
 	
 		$(document).ready(function(){ 

@@ -402,3 +402,7 @@ form input.valid {
 .btn-warning:hover, .btn-warning:focus, .btn-warning.focus {
     color: #ffffff !important;
 }
+
+.location-map {
+    min-height: 400px;
+}
