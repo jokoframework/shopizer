@@ -161,8 +161,8 @@ public class ShippingDistancePreProcessorImpl implements ShippingQuotePrePostPro
 		}
 		destinationAddress.append(delivery.getCountry().getIsoCode());
 		
-		
-		try {
+		//Desactivamos porque se requiere un key pagado de Google
+		/*try {
 			GeocodingResult[] originAdressResult =  GeocodingApi.geocode(context,
 					originAddress.toString()).await();
 
@@ -199,6 +199,9 @@ public class ShippingDistancePreProcessorImpl implements ShippingQuotePrePostPro
 		} catch (Exception e) {
 			LOGGER.error("Exception while calculating the shipping distance",e);
 		}
+		*/
+		double DEFAULT_DISTANCE_MOCK = 15d;
+		quote.getQuoteInformations().put(Constants.DISTANCE_KEY, 0.001 * DEFAULT_DISTANCE_MOCK);
 
 	}
 
