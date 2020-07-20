@@ -112,14 +112,13 @@ public class ShippingDecisionPreProcessorImpl implements ShippingQuotePrePostPro
 		inputParameters.setCountry(delivery.getCountry().getIsoCode());
 		if(delivery.getZone()!=null) {
 			inputParameters.setProvince(delivery.getZone().getCode());
+			if(delivery.getZone().getCode()!=null) {
+				inputParameters.setProvince(delivery.getZone().getCode());
+			}
 		} else {
 			inputParameters.setProvince(delivery.getState());
 		}
 		//inputParameters.setModuleName(currentModule.getCode());
-		
-		if(delivery.getZone().getCode()!=null) {
-			inputParameters.setProvince(delivery.getZone().getCode());
-		}
 		
 		if(size!=null) {
 			inputParameters.setSize((long)size.doubleValue());
