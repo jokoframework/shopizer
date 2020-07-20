@@ -42,18 +42,14 @@ public class UserReset
   {
     int randomInt = 0;
     Random randomGenerator;
-    try {
-      randomGenerator = SecureRandom.getInstanceStrong();
-      randomInt = randomGenerator.nextInt(CHAR_LIST.length());
-      if (randomInt - 1 == -1) {
-        return randomInt;
-      }
-    } catch (NoSuchAlgorithmException e) {
-      LOGGER.error("Error while generating error", e);
+    randomGenerator = new Random(System.currentTimeMillis());
+    randomInt = randomGenerator.nextInt(CHAR_LIST.length());
+    if (randomInt - 1 == -1) {
+      return randomInt;
     }
-
     return randomInt - 1;
   }
+
 
   
 }
