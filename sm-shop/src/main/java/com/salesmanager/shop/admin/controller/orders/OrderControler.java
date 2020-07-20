@@ -412,16 +412,46 @@ private static final Logger LOGGER = LoggerFactory.getLogger(OrderControler.clas
 
 				StringBuilder customerName = new StringBuilder();
 				customerName.append(newOrder.getBilling().getFirstName()).append(" ").append(newOrder.getBilling().getLastName());
-				
-				
+
+
+				Set<OrderStatusHistory> orderStatus = entityOrder.getOrder().getOrderHistory();
+				OrderStatusHistory lastHistory = null;
+				if(orderStatus!=null) {
+					int count = 1;
+					for(OrderStatusHistory history : orderStatus) {
+						if(count==orderStatus.size()) {
+							lastHistory = history;
+							break;
+						}
+						count++;
+					}
+				} else {
+					lastHistory = new OrderStatusHistory();
+					lastHistory.setComments("procesando.");
+					lastHistory.setDateAdded(new Date());
+				}
+
 				Map<String, String> templateTokens = emailUtils.createEmailObjectsMap(request.getContextPath(), store, messages, customerLocale);
+				String hi = messages.getMessage("label.generic.hi", customerLocale);
+				String[] statusMessageText = {String.valueOf(entityOrder.getOrder().getId()),DateUtil.formatDate(entityOrder.getOrder().getDatePurchased())};
+				String status = messages.getMessage("label.order." + entityOrder.getOrder().getStatus().name(), customerLocale, entityOrder.getOrder().getStatus().name());
+				String[] statusMessage = {DateUtil.formatDate(lastHistory.getDateAdded()),status};
+				templateTokens.put(EmailConstants.LABEL_HI, hi);
 				templateTokens.put(EmailConstants.EMAIL_CUSTOMER_NAME, customerName.toString());
+				templateTokens.put(EmailConstants.EMAIL_CUSTOMER_FIRSTNAME, customer.getBilling().getFirstName());
+				templateTokens.put(EmailConstants.EMAIL_CUSTOMER_LASTNAME, customer.getBilling().getLastName());
 				templateTokens.put(EmailConstants.EMAIL_TEXT_ORDER_NUMBER, messages.getMessage("email.order.confirmation", new String[]{String.valueOf(newOrder.getId())}, customerLocale));
 				templateTokens.put(EmailConstants.EMAIL_TEXT_DATE_ORDERED, messages.getMessage("email.order.ordered", new String[]{entityOrder.getDatePurchased()}, customerLocale));
-				templateTokens.put(EmailConstants.EMAIL_TEXT_STATUS_COMMENTS, messages.getMessage("email.order.comments", new String[]{entityOrder.getOrderHistoryComment()}, customerLocale));
+				templateTokens.put(EmailConstants.EMAIL_TEXT_STATUS_COMMENTS, messages.getMessage("email.order.comments", new String[]{lastHistory.getComments()}, customerLocale));
 				templateTokens.put(EmailConstants.EMAIL_TEXT_DATE_UPDATED, messages.getMessage("email.order.updated", new String[]{DateUtil.formatDate(new Date())}, customerLocale));
+				templateTokens.put(EmailConstants.EMAIL_ORDER_STATUS_TEXT, messages.getMessage("email.order.statustext", statusMessageText, customerLocale));
 
-				
+				templateTokens.put(EmailConstants.EMAIL_ORDER_STATUS, messages.getMessage("email.order.status", statusMessage, customerLocale));
+
+
+
+
+
 				Email email = new Email();
 				email.setFrom(store.getStorename());
 				email.setFromEmail(store.getStoreEmailAddress());
