@@ -201,7 +201,7 @@ public class ShippingDistancePreProcessorImpl implements ShippingQuotePrePostPro
 		}
 		*/
 		double DEFAULT_DISTANCE_MOCK = 15d;
-		quote.getQuoteInformations().put(Constants.DISTANCE_KEY, 0.001 * DEFAULT_DISTANCE_MOCK);
+		quote.getQuoteInformations().put(Constants.DISTANCE_KEY, 0.1 * DEFAULT_DISTANCE_MOCK);
 
 	}
 

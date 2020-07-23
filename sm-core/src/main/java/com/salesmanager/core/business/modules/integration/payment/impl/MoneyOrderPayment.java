@@ -34,7 +34,7 @@ public class MoneyOrderPayment implements PaymentModule {
 		Map<String,String> keys = integrationConfiguration.getIntegrationKeys();
 		
 		//validate integrationKeys['address']
-		if(keys==null) {
+		if(keys==null || StringUtils.isBlank(keys.get("address"))) {
 			errorFields = new ArrayList<String>();
 			errorFields.add("address");
 		}
