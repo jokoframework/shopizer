@@ -35,7 +35,10 @@
     			This will activate drules-->
     			<beans:entry key="customQuotesRules" value-ref="customShippingPriceModule"/>
 
-    </util:map>
+				<beans:entry key="granAsuncion" value-ref="granAsuncion"/>
+				<beans:entry key="interior" value-ref="interior"/>
+
+	</util:map>
     
     <!-- deprecated - now in ProcessorConfiguration -->
 <!--     Discounts processors processors (defined in  shopizer-core-ordertotal-processors.xml)
@@ -72,8 +75,12 @@
 		class="com.salesmanager.core.business.modules.integration.shipping.impl.StorePickupShippingQuote"/>
 	<beans:bean id="customShippingPriceModule"
 		class="com.salesmanager.core.business.modules.integration.shipping.impl.CustomShippingQuoteRules"/>
-	
-	
+	<beans:bean id="granAsuncion"
+				class="com.salesmanager.core.business.modules.integration.shipping.impl.GranAsuncionShippingQuote"/>
+	<beans:bean id="interior"
+				class="com.salesmanager.core.business.modules.integration.shipping.impl.InteriorShippingQuote"/>
+
+
 	<!--Default packaging-->
 	<beans:bean id="boxPackaging"
 		class="com.salesmanager.core.business.modules.integration.shipping.impl.DefaultPackagingImpl"/>
