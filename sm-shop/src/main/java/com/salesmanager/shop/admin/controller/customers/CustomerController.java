@@ -352,7 +352,7 @@ public class CustomerController {
 		List<Group> submitedGroups = customer.getGroups();
 		Set<Integer> ids = new HashSet<Integer>();
 		for(Group group : submitedGroups) {
-			ids.add(Integer.parseInt(group.getGroupName()));
+			ids.add(group.getId());
 		}
 		
 		List<Group> newGroups = groupService.listGroupByIds(ids);
