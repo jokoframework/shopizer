@@ -10,8 +10,8 @@ response.setDateHeader ("Expires", -1);
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="/WEB-INF/shopizer-tags.tld" prefix="sm" %> 
- 
+<%@ taglib uri="/WEB-INF/shopizer-tags.tld" prefix="sm" %>
+
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
 
@@ -20,32 +20,32 @@ response.setDateHeader ("Expires", -1);
 
 
      <div id="shop" class="container">
-            
-            
+
+
             <jsp:include page="/pages/shop/templates/exoticamobilia/sections/breadcrumb.jsp" />
-            
+
             <c:if test="${product.images!=null && fn:length(product.images) gt 1}">
             	<c:forEach items="${product.images}" var="thumbnail">
             		<c:if test="${thumbnail.videoUrl!=null}">
             			<c:set var="VIDEO_URL" value="${thumbnail.videoUrl}" scope="request" />
             		</c:if>
-            		
+
             	</c:forEach>
             </c:if>
-            
+
             <section class="main-container">
 
 						<div class="main col-md-12 no-left-padding no-right-padding">
-						
-						
+
+
 							<!-- page-title start -->
 							<h1 class="page-title margin-top-clear">${product.description.name}</h1>
 							<!-- page-title end -->
-							
+
 							<div class="row">
 
 							<div class="col-md-4">
-								
+
 								<ul role="tablist" class="nav nav-pills white space-top">
 									<li class="active">
 										<a title="images" data-toggle="tab" role="tab" href="#product-images">
@@ -63,8 +63,8 @@ response.setDateHeader ("Expires", -1);
 								<div class="tab-content clear-style">
 								    <c:if test="${product.image!=null}">
 									<div id="product-images" class="tab-pane active">
-										
-										
+
+
 											<div style="width:100%;" class="owl-item">
 													<div id="largeImg" class="overlay-container image-container">
 																<img src="<c:url value="${product.image.imageUrl}"/>" alt="<c:out value="${product.description.name}"/>">
@@ -74,7 +74,7 @@ response.setDateHeader ("Expires", -1);
 
 											<c:if test="${product.images!=null && fn:length(product.images) gt 1}">
 											<div id="imageGallery" class="row">
-												<c:forEach items="${product.images}" var="thumbnail">	
+												<c:forEach items="${product.images}" var="thumbnail">
 													<c:if test="${thumbnail.imageType==0}">
 													<div class="col-xs-6 col-md-3">
 														<c:choose>
@@ -92,7 +92,7 @@ response.setDateHeader ("Expires", -1);
 											</c:if>
 									</div>
 									</c:if>
-									
+
 									<c:if test="${requestScope.VIDEO_URL!=null}">
 									<div class="tab-pane" id="product-video">
 										<div class="embed-responsive embed-responsive-16by9">
@@ -101,8 +101,8 @@ response.setDateHeader ("Expires", -1);
 										</div>
 									</div>
 									</c:if>
-									
-									
+
+
 									<hr>
 									<c:set var="HIDEACTION" value="TRUE" scope="request" />
 									<!-- product rating -->
@@ -122,7 +122,7 @@ response.setDateHeader ("Expires", -1);
 									</span>
 								   <c:if test="${not product.productVirtual}">
 								   <address>
-								   		<strong><s:message code="label.product.available" text="Availability"/></strong>:&nbsp;<span><c:choose><c:when test="${product.quantity>0}"><span itemprop="availability" content="in_stock">${product.quantity}</span></c:when><c:otherwise><span itemprop="availability" content="out_of_stock"><s:message code="label.product.outofstock" text="Out of stock" /></c:otherwise></c:choose></span><br>								
+								   		<strong><s:message code="label.product.available" text="Availability"/></strong>:&nbsp;<span><c:choose><c:when test="${product.quantity>0}"><span itemprop="availability" content="in_stock">${product.quantity}</span></c:when><c:otherwise><span itemprop="availability" content="out_of_stock"><s:message code="label.product.outofstock" text="Out of stock" /></c:otherwise></c:choose></span><br>
 								   </address>
 							      </c:if>
 								  </span>
@@ -135,7 +135,7 @@ response.setDateHeader ("Expires", -1);
 						</div>
 
 					<!--</div>-->
-					
+
 					<aside class="col-md-8">
 								<div class="sidebar">
 										<div class="side product-item vertical-divider-left">
@@ -150,9 +150,9 @@ response.setDateHeader ("Expires", -1);
 												<div class="tab-content padding-top-clear padding-bottom-clear">
 													<div id="h2tab1" class="tab-pane fade  active in">
 														<h4 class="space-top"></h4>
-														
+
 														<c:out value="${product.description.description}" escapeXml="false"/>
-														
+
 														<p>
 															<dl class="dl-horizontal">
 																<!--<dt><s:message code="label.product.weight" text="Weight" />:</dt>
@@ -174,12 +174,12 @@ response.setDateHeader ("Expires", -1);
 													<div id="h2tab2" class="tab-pane fade">
 
 														<!--  read only properties -->
-														
+
 															<h4 class="space-top"><s:message code="label.product.attribute.specifications" text="Specifications" /></h4>
-														    
-														
+
+
 															<dl class="dl-horizontal">
-															
+
 															<c:if test="${attributes!=null}">
 															<c:forEach items="${attributes}" var="attribute" varStatus="status">
 						                        				<dt><c:out value="${attribute.name}"/></dt>
@@ -187,22 +187,21 @@ response.setDateHeader ("Expires", -1);
 															</c:forEach>
 															</c:if>
 															</dl>
-													  
-														
-														
+
+
+
 													</div>
-													<div id="h2tab3" class="tab-pane fade">
-														<!-- comments start -->
-															<h4 class="space-top">
-																<s:message code="label.product.customer.reviews" text="Customer reviews" />
-															</h4>
-
-														<!-- reviews -->
-														<jsp:include page="/pages/shop/common/catalog/reviews.jsp" />
-
-
-													
-												</div>
+													<c:if test="${allowRantingAndReviews}">
+														<div id="h2tab3" class="tab-pane fade">
+															<!-- comments start -->
+																<h4 class="space-top">
+																	<s:message code="label.product.customer.reviews" text="Customer reviews" />
+																	exotica
+																</h4>
+															<!-- reviews -->
+															<jsp:include page="/pages/shop/common/catalog/reviews.jsp" />
+														</div>
+													</c:if>
 											</div>
 										</div>
 									</div>
@@ -212,9 +211,9 @@ response.setDateHeader ("Expires", -1);
 			</div>
 			-->
 		</section>
-		
+
 		<!-- Related items -->
-        <c:if test="${relatedProducts!=null}">	
+        <c:if test="${relatedProducts!=null}">
 		<div class="section clearfix main-container">
 				<div class="container no-left-padding no-right-padding">
 					<div class="row">
@@ -229,18 +228,18 @@ response.setDateHeader ("Expires", -1);
 				</div>
 		</div>
 		</c:if>
-		
-		</div>
-					
 
-	
+		</div>
+
+
+
 		<script>
-		
+
 		$(function () {
-			
+
 			$('.popup-img').magnificPopup({type:'image'});
-		
-		
+
+
 		    $('.thumbImg').click(function(){
 		    	var igId = $(this).attr('imgId');
 		        var url = $(this).attr('rel');
@@ -249,10 +248,10 @@ response.setDateHeader ("Expires", -1);
 		        //re bind action
 		        $('.popup-img').magnificPopup({type:'image'});
 		    })
-		    
-		})
-		
 
-			
+		})
+
+
+
 		</script>
-    
+

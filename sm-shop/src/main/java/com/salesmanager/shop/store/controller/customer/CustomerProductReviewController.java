@@ -5,11 +5,13 @@ import com.salesmanager.core.business.services.catalog.product.ProductService;
 import com.salesmanager.core.business.services.catalog.product.review.ProductReviewService;
 import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
+import com.salesmanager.core.business.services.system.MerchantConfigurationService;
 import com.salesmanager.core.model.catalog.product.Product;
 import com.salesmanager.core.model.catalog.product.review.ProductReview;
 import com.salesmanager.core.model.customer.Customer;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
+import com.salesmanager.core.model.system.MerchantConfig;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.shop.model.catalog.product.PersistableProductReview;
 import com.salesmanager.shop.model.catalog.product.ReadableProduct;
@@ -23,7 +25,10 @@ import com.salesmanager.shop.store.controller.customer.facade.CustomerFacade;
 import com.salesmanager.shop.utils.DateUtil;
 import com.salesmanager.shop.utils.ImageFilePath;
 import com.salesmanager.shop.utils.LabelUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -34,7 +39,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.apache.commons.lang3.StringEscapeUtils;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -45,186 +49,201 @@ import java.util.Locale;
 
 /**
  * Entry point for logged in customers
- * 
- * @author Carl Samson
  *
+ * @author Carl Samson
  */
 @Controller
 @RequestMapping(Constants.SHOP_URI + "/customer")
 public class CustomerProductReviewController extends AbstractController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CustomerProductReviewController.class);
 
-	@Inject
-	private ProductService productService;
+    @Inject
+    private ProductService productService;
 
-	@Inject
-	private LanguageService languageService;
+    @Inject
+    private LanguageService languageService;
 
-	@Inject
-	private PricingService pricingService;
+    @Inject
+    private PricingService pricingService;
 
-	@Inject
-	private ProductReviewService productReviewService;
+    @Inject
+    private ProductReviewService productReviewService;
 
-	@Inject
-	private CustomerService customerService;
+    @Inject
+    private CustomerService customerService;
 
-	@Inject
-	private CustomerFacade customerFacade;
+    @Inject
+    private CustomerFacade customerFacade;
 
-	@Inject
-	private LabelUtils messages;
+    @Inject
+    private MerchantConfigurationService merchantConfigurationService;
 
-	@Inject
-	@Qualifier("img")
-	private ImageFilePath imageUtils;
+    @Inject
+    private LabelUtils messages;
 
-	@PreAuthorize("hasRole('AUTH_CUSTOMER')")
-	@RequestMapping(value = "/review.html", method = RequestMethod.GET)
-	public String displayProductReview(@RequestParam Long productId, Model model, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+    @Inject
+    @Qualifier("img")
+    private ImageFilePath imageUtils;
 
-		MerchantStore store = getSessionAttribute(Constants.MERCHANT_STORE, request);
-		Language language = super.getLanguage(request);
+    @PreAuthorize("hasRole('AUTH_CUSTOMER')")
+    @RequestMapping(value = "/review.html", method = RequestMethod.GET)
+    public String displayProductReview(@RequestParam Long productId, Model model, HttpServletRequest request,
+                                       HttpServletResponse response) throws Exception {
 
-		// get product
-		Product product = productService.getById(productId);
-		if (product == null) {
-			return "redirect:" + Constants.SHOP_URI;
-		}
+        MerchantStore store = getSessionAttribute(Constants.MERCHANT_STORE, request);
+        MerchantConfig merchantConfig = merchantConfigurationService.getMerchantConfig(store);
+        if (merchantConfig.isAllowRatingAndReviews()) {
+            Language language = super.getLanguage(request);
 
-		if (product.getMerchantStore().getId().intValue() != store.getId().intValue()) {
-			return "redirect:" + Constants.SHOP_URI;
-		}
+            // get product
+            Product product = productService.getById(productId);
+            if (product == null) {
+                return "redirect:" + Constants.SHOP_URI;
+            }
 
-		// create readable product
-		ReadableProduct readableProduct = new ReadableProduct();
-		ReadableProductPopulator readableProductPopulator = new ReadableProductPopulator();
-		readableProductPopulator.setPricingService(pricingService);
-		readableProductPopulator.setimageUtils(imageUtils);
-		readableProductPopulator.populate(product, readableProduct, store, language);
-		model.addAttribute("product", readableProduct);
+            if (product.getMerchantStore().getId().intValue() != store.getId().intValue()) {
+                return "redirect:" + Constants.SHOP_URI;
+            }
 
-		Customer customer = customerFacade.getCustomerByUserName(request.getRemoteUser(), store);
+            // create readable product
+            ReadableProduct readableProduct = new ReadableProduct();
+            ReadableProductPopulator readableProductPopulator = new ReadableProductPopulator();
+            readableProductPopulator.setPricingService(pricingService);
+            readableProductPopulator.setimageUtils(imageUtils);
+            readableProductPopulator.populate(product, readableProduct, store, language);
+            model.addAttribute("product", readableProduct);
 
-		List<ProductReview> reviews = productReviewService.getByProduct(product, language);
-		for (ProductReview r : reviews) {
-			if (r.getCustomer().getId().longValue() == customer.getId().longValue()) {
+            Customer customer = customerFacade.getCustomerByUserName(request.getRemoteUser(), store);
 
-				ReadableProductReviewPopulator reviewPopulator = new ReadableProductReviewPopulator();
-				ReadableProductReview rev = new ReadableProductReview();
-				reviewPopulator.populate(r, rev, store, language);
+            List<ProductReview> reviews = productReviewService.getByProduct(product, language);
+            for (ProductReview r : reviews) {
+                if (r.getCustomer().getId().longValue() == customer.getId().longValue()) {
 
-				model.addAttribute("customerReview", rev);
-				break;
-			}
-		}
+                    ReadableProductReviewPopulator reviewPopulator = new ReadableProductReviewPopulator();
+                    ReadableProductReview rev = new ReadableProductReview();
+                    reviewPopulator.populate(r, rev, store, language);
 
-		ProductReview review = new ProductReview();
-		review.setCustomer(customer);
-		review.setProduct(product);
+                    model.addAttribute("customerReview", rev);
+                    break;
+                }
+            }
 
-		ReadableProductReview productReview = new ReadableProductReview();
-		ReadableProductReviewPopulator reviewPopulator = new ReadableProductReviewPopulator();
-		reviewPopulator.populate(review, productReview, store, language);
+            ProductReview review = new ProductReview();
+            review.setCustomer(customer);
+            review.setProduct(product);
 
-		model.addAttribute("review", productReview);
-		model.addAttribute("reviews", reviews);
+            ReadableProductReview productReview = new ReadableProductReview();
+            ReadableProductReviewPopulator reviewPopulator = new ReadableProductReviewPopulator();
+            reviewPopulator.populate(review, productReview, store, language);
 
-		/** template **/
-		StringBuilder template = new StringBuilder().append(ControllerConstants.Tiles.Customer.review).append(".")
-				.append(store.getStoreTemplate());
+            model.addAttribute("review", productReview);
+            model.addAttribute("reviews", reviews);
 
-		return template.toString();
+            /** template **/
+            StringBuilder template = new StringBuilder().append(ControllerConstants.Tiles.Customer.review).append(".")
+                    .append(store.getStoreTemplate());
 
-	}
+            return template.toString();
+        } else {
+            LOGGER.error("Review not allowed");
+            return "redirect:" + Constants.SHOP_URI;
+        }
 
-	@PreAuthorize("hasRole('AUTH_CUSTOMER')")
-	@RequestMapping(value = "/review/submit.html", method = RequestMethod.POST)
-	public String submitProductReview(@ModelAttribute("review") PersistableProductReview review,
-			BindingResult bindingResult, Model model, HttpServletRequest request, HttpServletResponse response,
-			Locale locale) throws Exception {
+    }
 
-		MerchantStore store = getSessionAttribute(Constants.MERCHANT_STORE, request);
-		Language language = getLanguage(request);
+    @PreAuthorize("hasRole('AUTH_CUSTOMER')")
+    @RequestMapping(value = "/review/submit.html", method = RequestMethod.POST)
+    public String submitProductReview(@ModelAttribute("review") PersistableProductReview review,
+                                      BindingResult bindingResult, Model model, HttpServletRequest request, HttpServletResponse response,
+                                      Locale locale) throws Exception {
 
-		Customer customer = customerFacade.getCustomerByUserName(request.getRemoteUser(), store);
+        MerchantStore store = getSessionAttribute(Constants.MERCHANT_STORE, request);
+        MerchantConfig merchantConfig = merchantConfigurationService.getMerchantConfig(store);
+        if (merchantConfig.isAllowRatingAndReviews()) {
 
-		if (customer == null) {
-			return "redirect:" + Constants.SHOP_URI;
-		}
+            Language language = getLanguage(request);
 
-		Product product = productService.getById(review.getProductId());
-		if (product == null) {
-			return "redirect:" + Constants.SHOP_URI;
-		}
+            Customer customer = customerFacade.getCustomerByUserName(request.getRemoteUser(), store);
 
-		if (StringUtils.isBlank(review.getDescription())) {
-			FieldError error = new FieldError("description", "description",
-					messages.getMessage("NotEmpty.review.description", locale));
-			bindingResult.addError(error);
-		}
+            if (customer == null) {
+                return "redirect:" + Constants.SHOP_URI;
+            }
 
-		if (review.getRating() == null) {
-			FieldError error = new FieldError("rating", "rating",
-					messages.getMessage("NotEmpty.review.rating", locale, "Product rating is required"));
-			bindingResult.addError(error);
-		}
+            Product product = productService.getById(review.getProductId());
+            if (product == null) {
+                return "redirect:" + Constants.SHOP_URI;
+            }
 
-		review.setDescription(StringEscapeUtils.escapeHtml4(review.getDescription()));
+            if (StringUtils.isBlank(review.getDescription())) {
+                FieldError error = new FieldError("description", "description",
+                        messages.getMessage("NotEmpty.review.description", locale));
+                bindingResult.addError(error);
+            }
 
-		ReadableProduct readableProduct = new ReadableProduct();
-		ReadableProductPopulator readableProductPopulator = new ReadableProductPopulator();
-		readableProductPopulator.setPricingService(pricingService);
-		readableProductPopulator.setimageUtils(imageUtils);
-		readableProductPopulator.populate(product, readableProduct, store, language);
-		model.addAttribute("product", readableProduct);
+            if (review.getRating() == null) {
+                FieldError error = new FieldError("rating", "rating",
+                        messages.getMessage("NotEmpty.review.rating", locale, "Product rating is required"));
+                bindingResult.addError(error);
+            }
 
-		/** template **/
-		StringBuilder template = new StringBuilder().append(ControllerConstants.Tiles.Customer.review).append(".")
-				.append(store.getStoreTemplate());
+            review.setDescription(StringEscapeUtils.escapeHtml4(review.getDescription()));
 
-		if (bindingResult.hasErrors()) {
+            ReadableProduct readableProduct = new ReadableProduct();
+            ReadableProductPopulator readableProductPopulator = new ReadableProductPopulator();
+            readableProductPopulator.setPricingService(pricingService);
+            readableProductPopulator.setimageUtils(imageUtils);
+            readableProductPopulator.populate(product, readableProduct, store, language);
+            model.addAttribute("product", readableProduct);
 
-			return template.toString();
+            /** template **/
+            StringBuilder template = new StringBuilder().append(ControllerConstants.Tiles.Customer.review).append(".")
+                    .append(store.getStoreTemplate());
 
-		}
+            if (bindingResult.hasErrors()) {
 
-		// check if customer has already evaluated the product
-		List<ProductReview> reviews = productReviewService.getByProduct(product);
+                return template.toString();
 
-		for (ProductReview r : reviews) {
-			if (r.getCustomer().getId().longValue() == customer.getId().longValue()) {
-				ReadableProductReviewPopulator reviewPopulator = new ReadableProductReviewPopulator();
-				ReadableProductReview rev = new ReadableProductReview();
-				reviewPopulator.populate(r, rev, store, language);
+            }
 
-				model.addAttribute("customerReview", rev);
-				return template.toString();
-			}
-		}
+            // check if customer has already evaluated the product
+            List<ProductReview> reviews = productReviewService.getByProduct(product);
 
-		PersistableProductReviewPopulator populator = new PersistableProductReviewPopulator();
-		populator.setCustomerService(customerService);
-		populator.setLanguageService(languageService);
-		populator.setProductService(productService);
+            for (ProductReview r : reviews) {
+                if (r.getCustomer().getId().longValue() == customer.getId().longValue()) {
+                    ReadableProductReviewPopulator reviewPopulator = new ReadableProductReviewPopulator();
+                    ReadableProductReview rev = new ReadableProductReview();
+                    reviewPopulator.populate(r, rev, store, language);
 
-		review.setDate(DateUtil.formatDate(new Date()));
-		review.setCustomerId(customer.getId());
+                    model.addAttribute("customerReview", rev);
+                    return template.toString();
+                }
+            }
 
-		ProductReview productReview = populator.populate(review, store, language);
-		productReviewService.create(productReview);
+            PersistableProductReviewPopulator populator = new PersistableProductReviewPopulator();
+            populator.setCustomerService(customerService);
+            populator.setLanguageService(languageService);
+            populator.setProductService(productService);
 
-		model.addAttribute("review", review);
-		model.addAttribute("success", "success");
+            review.setDate(DateUtil.formatDate(new Date()));
+            review.setCustomerId(customer.getId());
 
-		ReadableProductReviewPopulator reviewPopulator = new ReadableProductReviewPopulator();
-		ReadableProductReview rev = new ReadableProductReview();
-		reviewPopulator.populate(productReview, rev, store, language);
+            ProductReview productReview = populator.populate(review, store, language);
+            productReviewService.create(productReview);
 
-		model.addAttribute("customerReview", rev);
+            model.addAttribute("review", review);
+            model.addAttribute("success", "success");
 
-		return template.toString();
+            ReadableProductReviewPopulator reviewPopulator = new ReadableProductReviewPopulator();
+            ReadableProductReview rev = new ReadableProductReview();
+            reviewPopulator.populate(productReview, rev, store, language);
 
-	}
+            model.addAttribute("customerReview", rev);
+            return template.toString();
+
+        } else {
+            LOGGER.error("Review not allowed");
+            return "redirect:" + Constants.SHOP_URI;
+        }
+    }
 
 }

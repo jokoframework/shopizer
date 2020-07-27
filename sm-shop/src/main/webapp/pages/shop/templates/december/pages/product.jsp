@@ -57,7 +57,7 @@
 														</c:when>
 														<c:otherwise>
 															<a href="javascript:;"
-																" class="detailsThumbImg thumbImg thumbnail image-link" 
+																" class="detailsThumbImg thumbImg thumbnail image-link"
 																imgId="im-<c:out value="${thumbnail.id}"/>"
 																title="<c:out value="${product.description.name}"/>"
 																rel="<c:url value="${thumbnail.externalUrl}"/>"><img
@@ -125,7 +125,7 @@
 												content="${requestScope.MERCHANT_STORE.storename}" />
 											<meta itemprop="currency"
 												content="<c:out value="${requestScope.MERCHANT_STORE.currency.code}" />" />
-											<span id="productPrice" class="price"> 
+											<span id="productPrice" class="price">
 												<c:choose>
 													<c:when test="${product.discounted}">
 														<del>
@@ -157,7 +157,7 @@
 									<!-- Nav tabs -->
 									<ul class="product-info-tab-menu" role="tablist">
 										<li class="active"><a href="#details"><i
-												class="fa fa-file-text-o pr-5"></i> 
+												class="fa fa-file-text-o pr-5"></i>
 													<s:message
 													code="label.productedit.productdesc"
 													text="Product description" /></a></li>
@@ -227,9 +227,9 @@
 						</div>
 						<!--fin col 9 -->
 					</div>
-				
+
 				<!-- product-simple-area-end -->
-				
+
  				<div class="product-info-detailed pb-80 ptb-40-md ptb-20-xs">
 						<div class="row">
 							<div class="col-lg-12">
@@ -239,7 +239,7 @@
 										<li class="active"><a href="#reviews" data-toggle="tab"><i
 												class="fa fa-star pr-5"></i> <s:message
 													code="label.product.customer.reviews"
-													text="Customer reviews" /></a></li>
+													text="Customer reviews december" /></a></li>
 									</ul>
 									<!-- Tab panes -->
 									<div>
@@ -259,8 +259,8 @@
 						</div>
 						<!--fin col 9 -->
 					</div>
-				
-				
+
+
 				<!-- customer review -->
 
 				<!-- Related items -->
@@ -304,12 +304,12 @@
 </div>
 
 <script>
-		
+
 		$(function () {
-			
+
 			$('.popup-img').magnificPopup({type:'image'});
-		
-		
+
+
 		    $('.thumbImg').click(function(){
 		    	var igId = $(this).attr('imgId');
 		        var url = $(this).attr('rel');
@@ -318,10 +318,10 @@
 		        //re bind action
 		        $('.popup-img').magnificPopup({type:'image'});
 		    })
-		    
-		})
-		
 
-			
+		})
+
+
+
 		</script>
 
