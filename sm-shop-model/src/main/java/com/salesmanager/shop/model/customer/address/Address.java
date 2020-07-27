@@ -51,7 +51,9 @@ public class Address extends AddressLocation implements Serializable {
 	@ApiModelProperty(notes = "Customer billing country code (2 letter code US, CA, UK, IT, IN, CN...)")
 	@NotEmpty(message="{NotEmpty.customer.billing.country}")
 	private String country;//code
-	
+
+	private String ruc;
+	private String dv;
 
 
 	public void setStateProvince(String stateProvince) {
@@ -172,5 +174,17 @@ public class Address extends AddressLocation implements Serializable {
 
 	public void setNeighborhood(String neighborhood) {
 		this.neighborhood = neighborhood;
+	}
+
+	public String getRuc() { return ruc; }
+
+	public void setRuc(String ruc) { this.ruc = ruc; }
+
+	public String getDv() {
+		return dv;
+	}
+
+	public void setDv(String dv) {
+		this.dv = dv;
 	}
 }

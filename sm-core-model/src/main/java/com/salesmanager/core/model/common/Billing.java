@@ -62,6 +62,11 @@ public class Billing {
 	@JoinColumn(name="BILLING_ZONE_ID", nullable=true)
 	private Zone zone;
 
+	@Column (name = "RUC", length = 20)
+	private String ruc;
+
+	@Column (name = "RUC_DV", length = 5)
+	private String dv;
 
 
 	public String getCompany() {
@@ -168,4 +173,12 @@ public class Billing {
 	public void setNeighborhood(String neighborhood) {
 		this.neighborhood = neighborhood;
 	}
+
+	public String getRuc() { return ruc; }
+
+	public void setRuc(String ruc) { this.ruc = ruc; }
+
+	public String getDv() { return dv; }
+
+	public void setDv(String dv) { this.dv = dv; }
 }

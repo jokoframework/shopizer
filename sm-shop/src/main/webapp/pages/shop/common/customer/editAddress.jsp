@@ -1,4 +1,4 @@
-<%
+    <%
     response.setCharacterEncoding( "UTF-8" );
     response.setHeader( "Cache-Control", "no-cache" );
     response.setHeader( "Pragma", "no-cache" );
@@ -19,10 +19,9 @@
 <script src="<c:url value="/resources/js/jquery.maskedinput.min.js" />"></script>
 <script src="<c:url value="/resources/js/shop-customer.js" />"></script>
 <script src="<c:url value="/resources/js/address.js" />"></script>
+<script src="<c:url value="/resources/js/ruc.js" />"></script>
 
-
-
-<script type="text/javascript">
+<script>
 
 $(document).ready(function() {
 	//triggers form validation
@@ -30,6 +29,12 @@ $(document).ready(function() {
 	$("input[type='text']").on("change keyup paste", function(){
 		isFormValid();
 	});
+
+	$("input[id=customerBillingRuc]").on('blur', function() {
+        var ruc = $("#customerBillingRuc").val();
+        $('#customerBillingDv').val(String(calculateDV(ruc)));
+    });
+
 	//apply mask
 	setCountrySettings('customer',$('#customer_country').val());
 	//populate zones combo
@@ -38,8 +43,6 @@ $(document).ready(function() {
 			getZones($(this).val(),'<c:out value="${address.zone}" />',isFormValid);
 			setCountrySettings('customer',$('#customer_country').val());
 	})
-	
-	
 });
 
 function isFormValid() {
@@ -125,6 +128,18 @@ function isFormValid() {
 		              		<form:input  cssClass="input-large form-control form-control-md"  maxlength="100" path="company"/>	
 			            </div>
 			            </div>
+
+			            <div class="control-group form-group">
+                            <label><s:message code="label.customer.ruc" text="RUC"/></label>
+                            <div class="controls">
+                                <form:input  id="customerBillingRuc" cssClass="input-large form-control form-control-md"  maxlength="100" path="ruc"/>
+                            </div>
+
+                            <label><s:message code="label.customer.dv" text="DV"/></label>
+                            <div class="controls">
+                                <form:input  id="customerBillingDv" cssClass="input-small form-control form-control-md"  maxlength="100" path="dv" disabled="true"/>
+                            </div>
+                        </div>
 
 						<div class="control-group form-group">
 			            	<label><s:message code="label.customer.streetaddress" text="Street Address"/></label>

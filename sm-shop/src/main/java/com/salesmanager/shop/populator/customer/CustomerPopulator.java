@@ -113,6 +113,8 @@ public class CustomerPopulator extends
 				billing.setLatitude(sourceBilling.getLatitude());
 				billing.setLongitude(sourceBilling.getLongitude());
 				billing.setNeighborhood(sourceBilling.getNeighborhood());
+				billing.setRuc(sourceBilling.getRuc());
+				billing.setDv(sourceBilling.getDv());
 				Country billingCountry = null;
 				if(!StringUtils.isBlank(sourceBilling.getCountry())) {
 					billingCountry = countries.get(sourceBilling.getCountry());
