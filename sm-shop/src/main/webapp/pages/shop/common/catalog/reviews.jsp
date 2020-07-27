@@ -14,8 +14,8 @@ response.setDateHeader ("Expires", -1);
 
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
+	<c:if test="${allowRantingAndReviews}">
 
-								
 										<sec:authorize access="!hasRole('AUTH_CUSTOMER') and fullyAuthenticated">
 											<!-- no dual login -->
 											<div id="signin" class="">
@@ -32,8 +32,8 @@ response.setDateHeader ("Expires", -1);
 								  		<sec:authorize access="!hasRole('AUTH_CUSTOMER') and !fullyAuthenticated">
 								  			<p class="muted"><s:message code="label.product.reviews.logon.write" text="You have to be authenticated to write a review" /></p>
 								  		</sec:authorize>
-									
-									
+
+
 									<c:if test="${reviews!=null}">
 										<c:forEach items="${reviews}" var="review" varStatus="status">
 											    <p>
@@ -47,8 +47,8 @@ response.setDateHeader ("Expires", -1);
    	 											</p>
    	 											<script>
 												  	$(function() {
-														$('#productRating<c:out value="${status.count}"/>').raty({ 
-															readOnly: true, 
+														$('#productRating<c:out value="${status.count}"/>').raty({
+															readOnly: true,
 															half: true,
 															path : '<c:url value="/resources/img/stars/"/>',
 															score: <c:out value="${review.rating}" />
@@ -58,3 +58,4 @@ response.setDateHeader ("Expires", -1);
 										</c:forEach>
 								 	 </c:if>
 
+	</c:if>

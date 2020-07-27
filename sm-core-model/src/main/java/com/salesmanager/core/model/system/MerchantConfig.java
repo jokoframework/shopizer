@@ -9,14 +9,14 @@ import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 
 public class MerchantConfig implements Serializable, JSONAware {
-	
+
 
 	/**
 	 * TODO
 	 * Add a generic key value in order to allow the creation of configuration
 	 * on the fly from the client application and read from a key value map
 	 */
-	
+
 	private static final long serialVersionUID = 1L;
 	private boolean displayCustomerSection =false;
 	private boolean displayContactUs =false;
@@ -26,9 +26,10 @@ public class MerchantConfig implements Serializable, JSONAware {
 	private boolean displayPagesMenu = true;
 	private boolean allowPurchaseItems = true;
 	private boolean displaySearchBox = true;
+	private boolean allowRatingAndReviews = false;
 	private boolean testMode = false;
 	private boolean debugMode = false;
-	
+
 	/** Store default search json config **/
 	private Map<String,Boolean> useDefaultSearchConfig= new HashMap<String,Boolean>();//language code | true or false
 	private Map<String,String> defaultSearchConfigPath= new HashMap<String,String>();//language code | file path
@@ -45,9 +46,10 @@ public class MerchantConfig implements Serializable, JSONAware {
 		data.put("displayCustomerAgreement", this.isDisplayCustomerAgreement());
 		data.put("allowPurchaseItems", this.isAllowPurchaseItems());
 		data.put("displaySearchBox", this.displaySearchBox);
+		data.put("allowRatingAndReviews", this.allowRatingAndReviews);
 		data.put("testMode", this.isTestMode());
 		data.put("debugMode", this.isDebugMode());
-		
+
 		if(useDefaultSearchConfig!=null) {
 			JSONObject obj = new JSONObject();
 			for(String key : useDefaultSearchConfig.keySet()) {
@@ -58,7 +60,7 @@ public class MerchantConfig implements Serializable, JSONAware {
 			}
 			data.put("useDefaultSearchConfig", obj);
 		}
-		
+
 		if(defaultSearchConfigPath!=null) {
 			JSONObject obj = new JSONObject();
 			for(String key : defaultSearchConfigPath.keySet()) {
@@ -69,8 +71,8 @@ public class MerchantConfig implements Serializable, JSONAware {
 			}
 			data.put("defaultSearchConfigPath", obj);
 		}
-		
-		
+
+
 		return data.toJSONString();
 	}
 
@@ -145,6 +147,14 @@ public class MerchantConfig implements Serializable, JSONAware {
 
 	public void setDisplaySearchBox(boolean displaySearchBox) {
 		this.displaySearchBox = displaySearchBox;
+	}
+
+	public boolean isAllowRatingAndReviews() {
+		return allowRatingAndReviews;
+	}
+
+	public void setAllowRatingAndReviews(boolean allowRatingAndReviews) {
+		this.allowRatingAndReviews = allowRatingAndReviews;
 	}
 
 	public boolean isTestMode() {

@@ -15,14 +15,14 @@ response.setDateHeader ("Expires", -1);
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
 <script src="<c:url value="/resources/js/jquery.raty.min.js" />"></script>
-
+	<!--c:if test="${allowRantingAndReviews}"-->
 					<div id="review" class="row-fluid container">
 
 					<p class="lead"><s:message code="label.product.rate"/></p>
 					<div id="store.success" class="alert alert-success"	style="<c:choose><c:when test="${success!=null}">display:block;</c:when><c:otherwise>display:none;</c:otherwise></c:choose>">
 						<s:message code="message.productreview.created" text="You have successfully created a product review" />
 					</div>
-					
+
 					<div class="span12 no_margin main col-md-12">
 					<div class="span6 col-md-8">
 						<table class="table" style="margin-bottom: 35px">
@@ -53,7 +53,7 @@ response.setDateHeader ("Expires", -1);
 								</tr>
 							</tbody>
 						</table>
-					
+
 						<br/>
 
 
@@ -72,15 +72,15 @@ response.setDateHeader ("Expires", -1);
    	 											</p>
    	 											<script>
 												  	$(function() {
-														$('#customerRating').raty({ 
-															readOnly: true, 
+														$('#customerRating').raty({
+															readOnly: true,
 															half: true,
 															path : '<c:url value="/resources/img/stars/"/>',
 															score: <c:out value="${customerReview.rating}" />
 														});
 												  	});
 								  			   </script>
-								
+
 								</p>
 							</c:when>
 							<c:otherwise>
@@ -91,7 +91,7 @@ response.setDateHeader ("Expires", -1);
 					    	<fieldset>
 					    	<form:hidden id="rating" path="rating"/>
 					    	<form:hidden path="productId"/>
-							    
+
 								<div class="control-group form-group">
 								<label><s:message code="label.generic.youropinion" text="Your opinion" /></label>
 									<div class="controls">
@@ -101,8 +101,8 @@ response.setDateHeader ("Expires", -1);
 										<div class="stars" id="rateMe" style="width: 100px;"></div>
 													<script>
 													$(function() {
-														$('#rateMe').raty({ 
-															readOnly: false, 
+														$('#rateMe').raty({
+															readOnly: false,
 															half: true,
 															path : '<c:url value="/resources/img/stars/"/>',
 															score: 5,
@@ -110,7 +110,7 @@ response.setDateHeader ("Expires", -1);
 																    $('#rating').val(score);
 														    }
 														});
-													});	
+													});
 													</script>
 									</div>
 								</div>
@@ -134,6 +134,7 @@ response.setDateHeader ("Expires", -1);
 					<sec:authorize access="!hasRole('AUTH_CUSTOMER') and !fullyAuthenticated">
 							<p class="muted"><s:message code="label.product.reviews.logon.write" text="You have to be authenticated to write a review" /></p>
 					</sec:authorize>
-					
+
 					<div>&nbsp;</div>
 
+	<!--/c:if-->

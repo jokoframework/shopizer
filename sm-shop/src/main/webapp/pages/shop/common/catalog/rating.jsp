@@ -14,20 +14,20 @@ response.setDateHeader ("Expires", -1);
 
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
-
+			<c:if test="${allowRantingAndReviews}">
 					<div id="review" class="review">
 								<div>
 									<div class="stars" id="productRating" style="width: 100px;">
 									</div>
 									<script>
 									$(function() {
-										$('#productRating').raty({ 
-											readOnly: true, 
+										$('#productRating').raty({
+											readOnly: true,
 											half: true,
 											path : '<c:url value="/resources/img/stars/"/>',
 											score: <c:out value="${product.rating}" />
 										});
-									});	
+									});
 									</script>
 									<c:choose>
 									   <c:when test="${product.ratingCount>0}">
@@ -39,10 +39,11 @@ response.setDateHeader ("Expires", -1);
 									</c:choose>
 									<c:if test="${requestScope.HIDEACTION==null}">
 									<sec:authorize access="hasRole('AUTH_CUSTOMER') and fullyAuthenticated">
-  										|  
+  										|
 									<a href="<c:url value="/shop/customer/review.html"/>?productId=${product.id}"><s:message code="label.product.reviews.write" text="Write a review" /></a>
 									</sec:authorize>
 									</c:if>
 								</div>
 							</div>
 
+			</c:if>
