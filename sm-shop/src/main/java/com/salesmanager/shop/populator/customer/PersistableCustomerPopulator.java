@@ -45,6 +45,14 @@ public class PersistableCustomerPopulator extends
 					address.setNeighborhood(source.getBilling().getNeighborhood());
 				}
 
+				if(source.getBilling().getRuc() != null) {
+					address.setRuc(source.getBilling().getRuc());
+				}
+
+				if(source.getBilling().getDv() != null) {
+					address.setDv(source.getBilling().getDv());
+				}
+
 				target.setBilling(address);
 			}
 			

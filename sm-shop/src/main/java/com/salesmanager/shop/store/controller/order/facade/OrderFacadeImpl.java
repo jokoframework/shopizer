@@ -781,6 +781,13 @@ public class OrderFacadeImpl implements OrderFacade {
 				bindingResult.addError(error);
 				messagesResult.put("customer.billing.neighborhood",messages.getMessage("NotEmpty.customer.billing.neighborhood", locale));
 			}
+
+//			if(StringUtils.isBlank(order.getCustomer().getBilling().getRuc())) {
+//				FieldError error = new FieldError("customer.billing.ruc", "customer.billing.ruc", messages.getMessage("NotEmpty.custom.billing.ruc", locale));
+//				bindingResult.addError(error);
+//				messagesResult.put("customer.billing.ruc", messages.getMessage("NotEmpty.customer.billing.ruc", locale));
+//			}
+
 			
 			if(!order.isShipToBillingAdress()) {
 				

@@ -16,7 +16,8 @@
 <script src="<c:url value="/resources/js/adminFunctions.js" />"></script>
 
 <script src="<c:url value="/resources/js/jquery.showLoading.min.js" />"></script>
-<link href="<c:url value="/resources/css/showLoading.css" />" rel="stylesheet">	
+<link href="<c:url value="/resources/css/showLoading.css" />" rel="stylesheet">
+<script src="<c:url value="/resources/js/ruc.js" />"></script>
 
 <script>
 
@@ -310,7 +311,10 @@ function initializeMap() {
 			getZones('#shippingZoneList','#shippingZoneText','<c:out value="${order.delivery.country.isoCode}" />','<c:out value="${order.delivery.zone.code}" />');
 		</c:if>
 		
-		
+		$("input[id=customerBillingRuc]").on('blur', function() {
+            var ruc = $("#customerBillingRuc").val()
+            $('#customerBillingDv').val(String(calculateDV(ruc)));
+        });
 		
 	}); 
 
@@ -503,7 +507,19 @@ function initializeMap() {
 		 				<form:input id="customerEmailAddress" cssClass="input-large highlight" path="order.customerEmailAddress"/>
 		 				<span class="help-inline"><form:errors path="order.customerEmailAddress" cssClass="error" /></span>
 	            </div>
-	            
+
+	            <label><s:message code="label.customer.ruc" text="RUC"/></label>
+                <div class="controls">
+                        <form:input id="customerBillingRuc" cssClass="input-large highlight" path="order.billing.ruc"/>
+                        <span class="help-inline"><form:errors path="order.customerEmailAddress" cssClass="error" /></span>
+                </div>
+
+                <label><s:message code="label.customer.dv" text="DV"/></label>
+                <div class="controls">
+                        <form:input id="customerBillingDv" cssClass="input-small highlight" path="order.billing.dv" disabled="true"/>
+                        <span class="help-inline"><form:errors path="order.customerEmailAddress" cssClass="error" /></span>
+                </div>
+
 	            </div>
 	            
 	            <div span="4">

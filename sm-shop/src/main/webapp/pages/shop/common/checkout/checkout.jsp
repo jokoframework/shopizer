@@ -15,7 +15,6 @@ response.setDateHeader ("Expires", -1);
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
 
-
 <c:if test="${googleMapsKey != ''}">
 	<script src="https://maps.googleapis.com/maps/api/js?key=<c:out value="${googleMapsKey}"/>&libraries=places&callback=googleInitialize"
 		        async defer></script>
@@ -26,6 +25,7 @@ response.setDateHeader ("Expires", -1);
 <c:set var="creditCardInformationsPage" value="creditCardInformations" scope="request" />
 
 <script src="<c:url value="/resources/js/jquery.maskedinput.min.js" />"></script>
+<script src="<c:url value="/resources/js/ruc.js" />"></script>
 
 
 <!-- subtotals template -->
@@ -437,6 +437,11 @@ function bindActions() {
 		if (!$('#shipToBillingAdress').is(':checked')) {
 			shippingQuotes();
 		}
+     });
+
+     $("input[id=customerBillingRuc]").on('blur', function() {
+            var ruc = $("#customerBillingRuc").val()
+            $('#customerBillingDV').val(String(calculateDV(ruc)));
      });
     
     //shipping / billing decision checkbox
@@ -1165,7 +1170,28 @@ $(document).ready(function() {
 										  			</div>
 													
 									  	  </div>
-									  	  
+
+                                           <!-- RUC/CI - DV -->
+									       <div class="row-fluid common-row row">
+									       			<div class="span4 col-md-4">
+										  			<div class="control-group form-group">
+														<label><s:message code="label.generic.ruc" text="RUC"/></label>
+										    				<div class="controls">
+                                                                <form:input id="customerBillingRuc" cssClass="input-large billing-ruc form-control form-control-lg" path="customer.billing.ruc" title="${msgRuc}"/>
+										    				</div>
+										  			</div>
+										  			</div>
+
+													<div class="span4 col-md-4">
+									  				   <div class="control-group form-group">
+														<label><s:message code="label.generic.dv" text="DV"/></label>
+									    					<div class="controls">
+										      					<form:input id="customerBillingDV" cssClass="input-large form-control form-control-lg" path="customer.billing.dv" disabled="true"/>
+									    					</div>
+									  				   </div>
+													</div>
+									  	  </div>
+
 									  	  <c:if test="${shippingQuote!=null}">
 											<!-- display only if a shipping quote exist -->
 											<div class="row-fluid common-row row">
