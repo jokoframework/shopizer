@@ -112,6 +112,8 @@ public class GranAsuncionShippingQuote implements ShippingQuoteModule {
 		String region = null;
 
 		String price = globalShippingConfiguration.getIntegrationKeys().get("price");
+		String note = globalShippingConfiguration.getIntegrationKeys().get("note");
+
 
 
 		if(delivery.getZone()!=null) {
@@ -128,6 +130,7 @@ public class GranAsuncionShippingQuote implements ShippingQuoteModule {
 		shippingOption.setOptionPrice(productPriceUtils.getAmount(price));
 
 		shippingOption.setOptionPriceText(productPriceUtils.getStoreFormatedAmountWithCurrency(store, productPriceUtils.getAmount(price)));
+		shippingOption.setNote(note);
 
 		List<ShippingOption> options = quote.getShippingOptions();
 
