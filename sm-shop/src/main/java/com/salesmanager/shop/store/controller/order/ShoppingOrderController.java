@@ -315,11 +315,13 @@ public class ShoppingOrderController extends AbstractController {
 								
 								
 						String carrier = messages.getMessage(moduleName.toString(),locale);	
-						String note = messages.getMessage(moduleName.append(".note").toString(), locale, "");
-								
+
 						shipOption.setDescription(carrier);
-						shipOption.setNote(note);
-						
+						if(StringUtils.isEmpty(shipOption.getNote())) {
+							String note = messages.getMessage(moduleName.append(".note").toString(), locale, "");
+							shipOption.setNote(note);
+						}
+
 						//option name
 						if(!StringUtils.isBlank(shipOption.getOptionCode())) {
 							//try to get the translate

@@ -42,6 +42,7 @@
 		<util:list id="shippingModulePostProcessors" value-type="com.salesmanager.core.business.modules.integration.shipping.model.ShippingQuotePrePostProcessModule">
 			<!-- Not configured by default, should be configured to be used -->
 			<ref bean="storePickUp"/><!-- defined in core-modules -->
+			<ref bean="interior"/>
 		</util:list>
 
 	

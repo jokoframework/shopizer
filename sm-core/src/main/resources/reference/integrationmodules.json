@@ -53,6 +53,18 @@
 		"regions": ["*"]
 	},
 	{
+		"module": "SHIPPING",
+		"code": "granAsuncion",
+		"version":"1.0",
+		"regions": ["*"]
+	},
+	{
+		"module": "SHIPPING",
+		"code": "interior",
+		"version":"1.0",
+		"regions": ["*"]
+	},
+	{
 		"module": "PAYMENT",
 		"code": "moneyorder",
 		"type":"moneyorder",
