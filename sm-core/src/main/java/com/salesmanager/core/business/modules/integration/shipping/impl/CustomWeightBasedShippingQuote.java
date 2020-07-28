@@ -30,13 +30,17 @@ import com.salesmanager.core.modules.integration.shipping.model.CustomShippingQu
 import com.salesmanager.core.modules.integration.shipping.model.CustomShippingQuotesConfiguration;
 import com.salesmanager.core.modules.integration.shipping.model.CustomShippingQuotesRegion;
 import com.salesmanager.core.modules.integration.shipping.model.ShippingQuoteModule;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class CustomWeightBasedShippingQuote implements ShippingQuoteModule {
 	
 	public final static String MODULE_CODE = "weightBased";
 	private final static String CUSTOM_WEIGHT = "CUSTOM_WEIGHT";
-	
+	private static final Logger LOGGER = LoggerFactory.getLogger(CustomWeightBasedShippingQuote.class);
+
+
 	@Inject
 	private MerchantConfigurationService merchantConfigurationService;
 	
@@ -107,6 +111,7 @@ public class CustomWeightBasedShippingQuote implements ShippingQuoteModule {
 		
 		ShippingBasisType shippingType =  shippingConfiguration.getShippingBasisType();
 		ShippingOption shippingOption = null;
+		List<ShippingOption> options = new ArrayList<ShippingOption>();
 		try {
 			
 
@@ -124,14 +129,21 @@ public class CustomWeightBasedShippingQuote implements ShippingQuoteModule {
 						
 						//see the price associated with the width
 						List<CustomShippingQuoteWeightItem> quoteItems = region.getQuoteItems();
-						for(CustomShippingQuoteWeightItem quoteItem : quoteItems) {
-							if(weight<= quoteItem.getMaximumWeight()) {
-								shippingOption = new ShippingOption();
-								shippingOption.setOptionCode(new StringBuilder().append(CUSTOM_WEIGHT).toString());
-								shippingOption.setOptionId(new StringBuilder().append(CUSTOM_WEIGHT).append("_").append(region.getCustomRegionName()).toString());
-								shippingOption.setOptionPrice(quoteItem.getPrice());
-								shippingOption.setOptionPriceText(productPriceUtils.getStoreFormatedAmountWithCurrency(store, quoteItem.getPrice()));
-								break;
+						if(quoteItems == null) {
+							LOGGER.warn("Region {} does not have quote items. ", region.getCustomRegionName());
+						} else {
+							for (CustomShippingQuoteWeightItem quoteItem : quoteItems) {
+								if (weight <= quoteItem.getMaximumWeight()) {
+									shippingOption = new ShippingOption();
+									shippingOption.setOptionCode(new StringBuilder().append(CUSTOM_WEIGHT).toString());
+									shippingOption.setOptionId(new StringBuilder().append(CUSTOM_WEIGHT).append("_").append(region.getCustomRegionName()).toString());
+									shippingOption.setOptionPrice(quoteItem.getPrice());
+									shippingOption.setOptionPriceText(productPriceUtils.getStoreFormatedAmountWithCurrency(store, quoteItem.getPrice()));
+									if(shippingOption!=null) {
+										options.add(shippingOption);
+									}
+									break;
+								}
 							}
 						}
 						
@@ -142,9 +154,7 @@ public class CustomWeightBasedShippingQuote implements ShippingQuoteModule {
 				
 			}
 			
-			if(shippingOption!=null) {
-				List<ShippingOption> options = new ArrayList<ShippingOption>();
-				options.add(shippingOption);
+			if(!options.isEmpty()) {
 				return options;
 			}
 			

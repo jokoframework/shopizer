@@ -425,7 +425,7 @@ public class ProductController {
 			newProduct.setTaxClass(product.getProduct().getTaxClass());
 			newProduct.setSortOrder(product.getProduct().getSortOrder());
 
-			if (product.getProduct().getProductItemWeight() != null) {
+			if(product.getProduct().getProductItemWeight() != null) {
 				newProduct.setProductItemWeight(product.getProduct().getProductItemWeight());
 			}
 
@@ -999,12 +999,12 @@ public class ProductController {
 			return "redirect:/admin/products/products.html";
 		}
 
-		// get parent categories
-		List<Category> categories = categoryService.listByStore(store, language);
-
+		//get parent categories
+		List<Category> categories = categoryService.listByStore(store,language);
+		
 		Category category = categoryService.getById(categoryId, language.getId());
-
-		if (category == null) {
+		
+		if(category==null) {
 			return "redirect:/admin/products/products.html";
 		}
 

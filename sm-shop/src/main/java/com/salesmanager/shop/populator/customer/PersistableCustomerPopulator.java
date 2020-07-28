@@ -38,10 +38,21 @@ public class PersistableCustomerPopulator extends
 				if(source.getBilling().getZone()!=null) {
 					address.setZone(source.getBilling().getZone().getCode());
 				}
+				if(source.getBilling().getState()!=null) {
+					address.setStateProvince(source.getBilling().getState());
+				}
 				if(source.getBilling().getNeighborhood()!=null) {
 					address.setNeighborhood(source.getBilling().getNeighborhood());
 				}
-				
+
+				if(source.getBilling().getRuc() != null) {
+					address.setRuc(source.getBilling().getRuc());
+				}
+
+				if(source.getBilling().getDv() != null) {
+					address.setDv(source.getBilling().getDv());
+				}
+
 				target.setBilling(address);
 			}
 			
@@ -70,10 +81,13 @@ public class PersistableCustomerPopulator extends
 				if(source.getDelivery().getZone()!=null) {
 					address.setZone(source.getDelivery().getZone().getCode());
 				}
+				if(source.getDelivery().getState()!=null) {
+					address.setStateProvince(source.getDelivery().getState());
+				}
 				if(source.getDelivery().getNeighborhood()!=null) {
 					address.setNeighborhood(source.getDelivery().getNeighborhood());
 				}
-				
+
 				target.setDelivery(address);
 			}
 			

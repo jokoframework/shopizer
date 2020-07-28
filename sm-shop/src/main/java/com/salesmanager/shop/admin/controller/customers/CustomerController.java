@@ -319,7 +319,7 @@ public class CustomerController {
 		}
 
 		if(StringUtils.isBlank(customer.getBilling().getNeighborhood())) {
-			ObjectError error = new ObjectError("billingNeighborhood", messages.getMessage("NotEmty.customer.billingNeighborhood", locale));
+			ObjectError error = new ObjectError("billingNeighborhood", messages.getMessage("NotEmpty.customer.billing.neighborhood", locale));
 		}
 		
 		//check if error from the @valid
@@ -352,7 +352,7 @@ public class CustomerController {
 		List<Group> submitedGroups = customer.getGroups();
 		Set<Integer> ids = new HashSet<Integer>();
 		for(Group group : submitedGroups) {
-			ids.add(Integer.parseInt(group.getGroupName()));
+			ids.add(group.getId());
 		}
 		
 		List<Group> newGroups = groupService.listGroupByIds(ids);

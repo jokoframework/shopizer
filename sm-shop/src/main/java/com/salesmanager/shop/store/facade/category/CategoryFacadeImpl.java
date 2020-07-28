@@ -49,7 +49,7 @@ public class CategoryFacadeImpl implements CategoryFacade {
 
 	@Inject
 	private CategoryService categoryService;
-	
+
 	@Inject
 	private MerchantStoreService merchantStoreService;
 
@@ -68,35 +68,34 @@ public class CategoryFacadeImpl implements CategoryFacade {
 	@Override
 	public ReadableCategoryList getCategoryHierarchy(MerchantStore store, ListCriteria criteria, int depth,
 			Language language, List<String> filter, int page, int count) {
-		
+
 		Validate.notNull(store,"MerchantStore can not be null");
 
-		
+
 		//get parent store
 		try {
-			
+
 			MerchantStore parent = merchantStoreService.getParent(store.getCode());
 
 
 			List<Category> categories = null;
 			ReadableCategoryList returnList = new ReadableCategoryList();
-			// total count
-			int total = categoryService.count(parent);
-			returnList.setTotalPages(total);
 			if (!CollectionUtils.isEmpty(filter) && filter.contains(FEATURED_CATEGORY)) {
 				categories = categoryService.getListByDepthFilterByFeatured(parent, depth, language);
 				returnList.setRecordsTotal(categories.size());
 				returnList.setNumber(categories.size());
+				returnList.setTotalPages(1);
 			} else {
 				org.springframework.data.domain.Page<Category> pageable = categoryService.getListByDepth(parent, language,
 						criteria != null ? criteria.getName() : null, depth, page, count);
 				categories = pageable.getContent();
 				returnList.setRecordsTotal(pageable.getTotalElements());
-				returnList.setNumber(pageable.getNumber());
+				returnList.setTotalPages(pageable.getTotalPages());
+				returnList.setNumber(categories.size());
 			}
-	
-	
-	
+
+
+
 			List<ReadableCategory> readableCategories = null;
 			if (filter != null && filter.contains(VISIBLE_CATEGORY)) {
 				readableCategories = categories.stream().filter(Category::isVisible)
@@ -107,10 +106,10 @@ public class CategoryFacadeImpl implements CategoryFacade {
 						.map(cat -> categoryReadableCategoryConverter.convert(cat, store, language))
 						.collect(Collectors.toList());
 			}
-	
+
 			Map<Long, ReadableCategory> readableCategoryMap = readableCategories.stream()
 					.collect(Collectors.toMap(ReadableCategory::getId, Function.identity()));
-	
+
 			readableCategories.stream()
 					// .filter(ReadableCategory::isVisible)
 					.filter(cat -> Objects.nonNull(cat.getParent()))
@@ -120,14 +119,14 @@ public class CategoryFacadeImpl implements CategoryFacade {
 							parentCategory.getChildren().add(readableCategory);
 						}
 					});
-	
+
 			List<ReadableCategory> filteredList = readableCategoryMap.values().stream().filter(cat -> cat.getDepth() == 0)
 					.sorted(Comparator.comparing(ReadableCategory::getSortOrder)).collect(Collectors.toList());
-	
+
 			returnList.setCategories(filteredList);
-	
+
 			return returnList;
-		
+
 		} catch (ServiceException e) {
 			throw new ServiceRuntimeException(e);
 		}
@@ -214,7 +213,7 @@ public class CategoryFacadeImpl implements CategoryFacade {
 		}
 
 		categoryService.saveOrUpdate(category);
-		
+
 		if (!CollectionUtils.isEmpty(saveAfter)) {
 			parent = category;
 			for(Category c: saveAfter) {
@@ -412,7 +411,7 @@ public class CategoryFacadeImpl implements CategoryFacade {
 			Category c = categoryService.getById(child, store.getId());
 			Category p = categoryService.getById(parent, store.getId());
 
-			if (c.getParent().getId() == parent) {
+			if (c.getParent() != null && c.getParent().getId() == parent) {
 				return;
 			}
 

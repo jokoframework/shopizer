@@ -35,7 +35,10 @@
     			This will activate drules-->
     			<beans:entry key="customQuotesRules" value-ref="customShippingPriceModule"/>
 
-    </util:map>
+				<beans:entry key="granAsuncion" value-ref="granAsuncion"/>
+				<beans:entry key="interior" value-ref="interior"/>
+
+	</util:map>
     
     <!-- deprecated - now in ProcessorConfiguration -->
 <!--     Discounts processors processors (defined in  shopizer-core-ordertotal-processors.xml)
@@ -50,6 +53,7 @@
     			<beans:entry key="paypal-express-checkout" value-ref="paypal-ec"/>
     			<beans:entry key="moneyorder" value-ref="moneyorder"/>
     			<beans:entry key="stripe" value-ref="stripe"/>
+				<beans:entry key="stripe3" value-ref="stripe3"/>
     			<beans:entry key="braintree" value-ref="braintree"/>
 				<beans:entry key="cash" value-ref="cash"/>
 				<beans:entry key="transfer" value-ref="transfer"/>
@@ -71,8 +75,12 @@
 		class="com.salesmanager.core.business.modules.integration.shipping.impl.StorePickupShippingQuote"/>
 	<beans:bean id="customShippingPriceModule"
 		class="com.salesmanager.core.business.modules.integration.shipping.impl.CustomShippingQuoteRules"/>
-	
-	
+	<beans:bean id="granAsuncion"
+				class="com.salesmanager.core.business.modules.integration.shipping.impl.GranAsuncionShippingQuote"/>
+	<beans:bean id="interior"
+				class="com.salesmanager.core.business.modules.integration.shipping.impl.InteriorShippingQuote"/>
+
+
 	<!--Default packaging-->
 	<beans:bean id="boxPackaging"
 		class="com.salesmanager.core.business.modules.integration.shipping.impl.DefaultPackagingImpl"/>
@@ -87,6 +95,8 @@
 		class="com.salesmanager.core.business.modules.integration.payment.impl.PayPalExpressCheckoutPayment"/>
 	<beans:bean id="stripe"
 		class="com.salesmanager.core.business.modules.integration.payment.impl.StripePayment"/>
+	<beans:bean id="stripe3"
+		class="com.salesmanager.core.business.modules.integration.payment.impl.Stripe3Payment"/>
 	<beans:bean id="braintree"
 		class="com.salesmanager.core.business.modules.integration.payment.impl.BraintreePayment"/>
 	<beans:bean id="cash"

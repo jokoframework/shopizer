@@ -8,7 +8,7 @@
 
 <script src="<c:url value="/resources/js/jquery.alphanumeric.pack.js" />"></script>
 <script src="<c:url value="/resources/js/bootstrap/bootstrap-datepicker.js" />"></script>
-
+<script src="<c:url value="/resources/js/ruc.js" />"></script>
 
 <script>
 
@@ -111,6 +111,11 @@ $(document).ready(function() {
 	    	var customerId = this.id;
 			$('#credentialsModal').modal();
 		});
+
+		$("input[id=customerBillingRuc]").on('blur', function() {
+            var ruc = $("#customerBillingRuc").val()
+            $('#customerBillingDv').val(String(calculateDV(ruc)));
+        });
 	    
 });
 
@@ -442,6 +447,16 @@ function setCredentials(customerId, userName, password){
 		              		<label><s:message code="label.customer.billing.company" text="Company"/></label>
 		              		<form:input  cssClass="input-large"  maxlength="100" path="billing.company"/>	
 			            </div>
+
+                        <div class="controls">
+                            <label><s:message code="label.customer.billing.ruc" text="RUC"/></label>
+                            <form:input id="customerBillingRuc" cssClass="input-large"  maxlength="100" path="billing.ruc"/>
+                        </div>
+
+                        <div class="controls">
+                            <label><s:message code="label.customer.billing.dv" text="DV"/></label>
+                            <form:input id="customerBillingDv" cssClass="input-small"  maxlength="100" path="billing.dv" disabled="true"/>
+                        </div>
 
 			            <div class="controls">
 			            	<label><s:message code="label.customer.billing.streetaddress" text="Street Address"/></label>

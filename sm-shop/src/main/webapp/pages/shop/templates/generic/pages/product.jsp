@@ -230,16 +230,18 @@
 												</dl>
 											</div>
 										</div>
-										<div class="tab-pane" id="reviews">
-											<div class="customer-review-top">
-												<h4>
-													<s:message code="label.product.customer.reviews"
-														text="Customer reviews" />
-												</h4>
-												<!-- reviews -->
-												<jsp:include page="/pages/shop/common/catalog/reviews.jsp" />
+										<c:if test="${allowRantingAndReviews}">
+											<div class="tab-pane" id="reviews">
+												<div class="customer-review-top">
+													<h4>
+														<s:message code="label.product.customer.reviews"
+															text="Customer reviews" />
+													</h4>
+													<!-- reviews -->
+													<jsp:include page="/pages/shop/common/catalog/reviews.jsp" />
+												</div>
 											</div>
-										</div>
+										</c:if>
 									</div>
 								</div>
 							</div>
@@ -292,12 +294,12 @@
 </div>
 
 <script>
-		
+
 		$(function () {
-			
+
 			$('.popup-img').magnificPopup({type:'image'});
-		
-		
+
+
 		    $('.thumbImg').click(function(){
 		    	var igId = $(this).attr('imgId');
 		        var url = $(this).attr('rel');
@@ -306,10 +308,10 @@
 		        //re bind action
 		        $('.popup-img').magnificPopup({type:'image'});
 		    })
-		    
-		})
-		
 
-			
+		})
+
+
+
 		</script>
 

@@ -15,7 +15,6 @@ response.setDateHeader ("Expires", -1);
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
 
-
 <c:if test="${googleMapsKey != ''}">
 	<script src="https://maps.googleapis.com/maps/api/js?key=<c:out value="${googleMapsKey}"/>&libraries=places&callback=googleInitialize"
 		        async defer></script>
@@ -26,6 +25,7 @@ response.setDateHeader ("Expires", -1);
 <c:set var="creditCardInformationsPage" value="creditCardInformations" scope="request" />
 
 <script src="<c:url value="/resources/js/jquery.maskedinput.min.js" />"></script>
+<script src="<c:url value="/resources/js/ruc.js" />"></script>
 
 
 <!-- subtotals template -->
@@ -203,7 +203,10 @@ function setPaymentModule(module) {
 	}
 	else if(module.indexOf('stripe') >= 0) {
 		$('#paymentMethodType').val('CREDITCARD');
-	}		
+	}
+	else if(module.indexOf('stripe3') >= 0) {
+		$('#paymentMethodType').val('CREDITCARD');
+	}
 	else if(module.indexOf('beanstream') >= 0) {
 		$('#paymentMethodType').val('CREDITCARD');
 	}
@@ -435,6 +438,11 @@ function bindActions() {
 			shippingQuotes();
 		}
      });
+
+     $("input[id=customerBillingRuc]").on('blur', function() {
+            var ruc = $("#customerBillingRuc").val()
+            $('#customerBillingDV').val(String(calculateDV(ruc)));
+     });
     
     //shipping / billing decision checkbox
     $("#shipToBillingAdress").click(function() {
@@ -476,6 +484,11 @@ function bindActions() {
 			//console.log('PP ');
 			$('#paymentMethodType').val('PAYPAL');
 			initPayment('PAYPAL');
+		}
+		else if(paymentSelection.indexOf('stripe3') >= 0) {
+			//console.log('Stripe ');
+			$('#paymentMethodType').val('CREDITCARD');
+			initStripePayment3();
 		}
 		else if(paymentSelection.indexOf('stripe') >= 0) {
 			//console.log('Stripe ');
@@ -1157,7 +1170,28 @@ $(document).ready(function() {
 										  			</div>
 													
 									  	  </div>
-									  	  
+
+                                           <!-- RUC/CI - DV -->
+									       <div class="row-fluid common-row row">
+									       			<div class="span4 col-md-4">
+										  			<div class="control-group form-group">
+														<label><s:message code="label.generic.ruc" text="RUC"/></label>
+										    				<div class="controls">
+                                                                <form:input id="customerBillingRuc" cssClass="input-large billing-ruc form-control form-control-lg" path="customer.billing.ruc" title="${msgRuc}"/>
+										    				</div>
+										  			</div>
+										  			</div>
+
+													<div class="span4 col-md-4">
+									  				   <div class="control-group form-group">
+														<label><s:message code="label.generic.dv" text="DV"/></label>
+									    					<div class="controls">
+										      					<form:input id="customerBillingDV" cssClass="input-large form-control form-control-lg" path="customer.billing.dv" disabled="true"/>
+									    					</div>
+									  				   </div>
+													</div>
+									  	  </div>
+
 									  	  <c:if test="${shippingQuote!=null}">
 											<!-- display only if a shipping quote exist -->
 											<div class="row-fluid common-row row">
@@ -1458,7 +1492,7 @@ $(document).ready(function() {
 													    			
 													    			<!-- exception for stripe which has it's own page -->
 													    			<c:choose>
-													    				<c:when test="${(paymentMethod.paymentMethodCode=='stripe') or (paymentMethod.paymentMethodCode=='braintree')}">
+													    				<c:when test="${(paymentMethod.paymentMethodCode=='stripe') or (paymentMethod.paymentMethodCode=='braintree') or (paymentMethod.paymentMethodCode=='stripe3')}">
 													    					<c:set var="pageName" value="${fn:toLowerCase(paymentMethod.paymentMethodCode)}" />
 													    				</c:when>
 													    				<c:otherwise>

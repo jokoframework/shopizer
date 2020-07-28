@@ -30,9 +30,9 @@ import springfox.documentation.annotations.ApiIgnore;
 @RequestMapping("/api/v1")
 @Api(tags = { "Shipping - Expedition management resource (Shipping Management Api)" })
 @SwaggerDefinition(tags = { @Tag(name = "Shipping - Expedition management resource", description = "Manage shipping expedition") })
-public class ExpeditionApi {
+public class ShippingExpeditionApi {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(ExpeditionApi.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ShippingExpeditionApi.class);
 
 	@Autowired
 	private AuthorizationUtils authorizationUtils;
@@ -40,7 +40,7 @@ public class ExpeditionApi {
 	@Autowired
 	private ShippingFacade shippingFacade;
 
-	@RequestMapping(value = { "/private/expedition" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/private/shipping/expedition" }, method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public ExpeditionConfiguration expedition(
@@ -57,7 +57,7 @@ public class ExpeditionApi {
 	}
 	
 	
-	@RequestMapping(value = { "/private/expedition" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/private/shipping/expedition" }, method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public void saveExpedition(

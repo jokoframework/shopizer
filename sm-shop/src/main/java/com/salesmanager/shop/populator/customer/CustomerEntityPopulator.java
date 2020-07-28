@@ -67,7 +67,15 @@ public class CustomerEntityPopulator
                 if(source.getBilling().getNeighborhood() != null) {
                     address.setNeighborhood(source.getBilling().getNeighborhood());
                 }
-                
+
+                if(source.getBilling().getRuc() != null) {
+                    address.setRuc(source.getBilling().getRuc());
+                }
+
+                if(source.getBilling().getDv() != null) {
+                    address.setDv(source.getBilling().getDv());
+                }
+
                 address.setStateProvince(source.getBilling().getState());
 
                 target.setBilling( address );
