@@ -230,7 +230,7 @@ public class InitStoreData implements InitData {
 		    tech.setParent(book);
 
 		    categoryService.create(tech);
-		    categoryService.addChild(book, tech);
+		    categoryService.addChild(book, tech, en );
 
 		    Category web = new Category();
 		    web.setMerchantStore(store);
@@ -258,7 +258,7 @@ public class InitStoreData implements InitData {
 		    web.setParent(book);
 
 		    categoryService.create(web);
-		    categoryService.addChild(book, web);
+		    categoryService.addChild(book, web, en);
 
 
 
@@ -288,7 +288,7 @@ public class InitStoreData implements InitData {
 		    fiction.setParent(novs);
 
 		    categoryService.create(fiction);
-		    categoryService.addChild(novs, fiction);
+		    categoryService.addChild(novs, fiction, en);
 		    
 		    
 		    Category business = new Category();
@@ -345,7 +345,7 @@ public class InitStoreData implements InitData {
 		    cloud.setParent(tech);
 
 		    categoryService.create(cloud);
-		    categoryService.addChild(tech, cloud);
+		    categoryService.addChild(tech, cloud, en);
 
 		    // Add products
 		    // ProductType generalType = productTypeService.

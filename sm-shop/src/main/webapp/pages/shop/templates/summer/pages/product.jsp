@@ -138,7 +138,6 @@ response.setDateHeader ("Expires", -1);
 
 
 		<script>
-
 			$(function () {
 				$('#productTabs a:first').tab('show');
 				$('#productTabs a').click(function (e) {
@@ -151,7 +150,6 @@ response.setDateHeader ("Expires", -1);
 					setImageZoom(img.attr('id'));
 				})
 			})
-
 			<!-- lens plugin -->
 			function setImageZoom(id) {
 			    $('#' + id).elevateZoom({
@@ -160,7 +158,4 @@ response.setDateHeader ("Expires", -1);
 		    			lensSize    : 240
 		   		});
 			}
-
-
 		</script>
-

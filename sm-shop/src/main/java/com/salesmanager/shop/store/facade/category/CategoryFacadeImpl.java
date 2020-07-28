@@ -401,7 +401,7 @@ public class CategoryFacadeImpl implements CategoryFacade {
 	}
 
 	@Override
-	public void move(Long child, Long parent, MerchantStore store) {
+	public void move(Long child, Long parent, MerchantStore store, Language language) {
 
 		Validate.notNull(child, "Child category must not be null");
 		Validate.notNull(parent, "Parent category must not be null");
@@ -426,7 +426,7 @@ public class CategoryFacadeImpl implements CategoryFacade {
 			}
 
 			p.getAuditSection().setModifiedBy("Api");
-			categoryService.addChild(p, c);
+			categoryService.addChild(p, c, language);
 
 		} catch (Exception e) {
 			throw new ServiceRuntimeException(e);

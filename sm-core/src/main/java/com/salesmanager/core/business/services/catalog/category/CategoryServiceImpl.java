@@ -298,7 +298,7 @@ public class CategoryServiceImpl extends SalesManagerEntityServiceImpl<Long, Cat
 	}
 
 	@Override
-	public void addChild(Category parent, Category child) throws ServiceException {
+	public void addChild(Category parent, Category child, Language language) throws ServiceException {
 
 		if (child == null || child.getMerchantStore() == null) {
 			throw new ServiceException("Child category and merchant store should not be null");
@@ -317,7 +317,7 @@ public class CategoryServiceImpl extends SalesManagerEntityServiceImpl<Long, Cat
 
 			} else {
 
-				Category p = getById(parent.getId(), parent.getMerchantStore().getId());// parent
+				Category p = getById(parent.getId(), language.getId());// parent
 
 				String lineage = p.getLineage();
 				int depth = p.getDepth();
@@ -338,7 +338,7 @@ public class CategoryServiceImpl extends SalesManagerEntityServiceImpl<Long, Cat
 			if (subCategories != null && subCategories.size() > 0) {
 				for (Category subCategory : subCategories) {
 					if (child.getId() != subCategory.getId()) {
-						addChild(child, subCategory);
+						addChild(child, subCategory, language);
 					}
 				}
 

@@ -180,11 +180,7 @@ public class Address extends AddressLocation implements Serializable {
 
 	public void setRuc(String ruc) { this.ruc = ruc; }
 
-	public String getDv() {
-		return dv;
-	}
+	public String getDv() { return dv; }
 
-	public void setDv(String dv) {
-		this.dv = dv;
-	}
+	public void setDv(String dv) { this.dv = dv; }
 }

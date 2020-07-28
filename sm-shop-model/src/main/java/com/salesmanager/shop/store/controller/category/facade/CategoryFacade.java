@@ -83,7 +83,7 @@ public interface CategoryFacade {
 	 * @param parent
 	 * @param store
 	 */
-	void move(Long child, Long parent, MerchantStore store);
+	void move(Long child, Long parent, MerchantStore store, Language language);
 	
 	/**
 	 * Set category visible or not
