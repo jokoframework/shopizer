@@ -124,7 +124,7 @@ public class ProductTest extends com.salesmanager.test.common.AbstractSalesManag
 	    novell.setParent(book);
 
 	    categoryService.create(novell);
-	    categoryService.addChild(book, novell);
+	    categoryService.addChild(book, novell, en);
 
 	    Category tech = new Category();
 	    tech.setMerchantStore(store);
@@ -149,7 +149,7 @@ public class ProductTest extends com.salesmanager.test.common.AbstractSalesManag
 	    tech.setParent(book);
 
 	    categoryService.create(tech);
-	    categoryService.addChild(book, tech);
+	    categoryService.addChild(book, tech, en);
 
 	    Category fiction = new Category();
 	    fiction.setMerchantStore(store);
@@ -174,7 +174,7 @@ public class ProductTest extends com.salesmanager.test.common.AbstractSalesManag
 	    fiction.setParent(novell);
 
 	    categoryService.create(fiction);
-	    categoryService.addChild(book, fiction);
+	    categoryService.addChild(book, fiction, en);
 
 	    Manufacturer oreilley = new Manufacturer();
 	    oreilley.setMerchantStore(store);

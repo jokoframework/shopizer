@@ -87,6 +87,9 @@
 			}},
 			{"menu":{
 				"code":"catalogue","url":"/admin/products/products.html","role":"PRODUCTS","order":2
+			}},
+			{"menu":{
+				"code":"catalogue-products-csv","url":"/admin/products/importProductCsv.html","role":"PRODUCTS","order":3
 			}}
 		]
 	}},
@@ -98,6 +101,9 @@
 			}},
 			{"menu":{
 				"code":"catalogue-categories-list","url":"/admin/categories/categories.html","role":"PRODUCTS","order":1
+			}},
+			{"menu":{
+				"code":"catalogue-categories-csv","url":"/admin/categories/importCategoryCsv.html","role":"PRODUCTS","order":2
 			}}
 		]
 	}},

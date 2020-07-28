@@ -168,7 +168,7 @@ public class CategoryApi {
 	@PutMapping(value = "/private/category/{id}/move/{parent}", produces = { APPLICATION_JSON_VALUE })
 	@ApiOperation(httpMethod = "PUT", value = "Move a category under another category", notes = "Move category {id} under category {parent}")
 	@ApiImplicitParams({ @ApiImplicitParam(name = "store", dataType = "string", defaultValue = "DEFAULT") })
-	public void move(@PathVariable Long id, @PathVariable Long parent, @ApiIgnore MerchantStore merchantStore) {
+	public void move(@PathVariable Long id, @PathVariable Long parent, @ApiIgnore MerchantStore merchantStore, @ApiIgnore Language language) {
 		// superadmin, admin and admin_catalogue
 		String authenticatedUser = userFacade.authenticatedUser();
 		if (authenticatedUser == null) {
@@ -178,7 +178,7 @@ public class CategoryApi {
 		userFacade.authorizedGroup(authenticatedUser, Stream.of(Constants.GROUP_SUPERADMIN, Constants.GROUP_ADMIN, Constants.GROUP_ADMIN_CATALOGUE, Constants.GROUP_ADMIN_RETAIL).collect(Collectors.toList()));
 
 		
-		categoryFacade.move(id, parent, merchantStore);
+		categoryFacade.move(id, parent, merchantStore, language);
 		return;
 	}
 
