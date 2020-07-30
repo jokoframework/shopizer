@@ -2,11 +2,17 @@ package com.salesmanager.shop.admin.controller.products;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,8 +20,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 import javax.imageio.ImageIO;
 import javax.inject.Inject;
@@ -26,6 +34,7 @@ import javax.validation.Valid;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +42,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,6 +55,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.salesmanager.core.business.exception.ServiceException;
 import com.salesmanager.core.business.services.catalog.category.CategoryService;
@@ -1100,7 +1111,7 @@ public class ProductController {
 		    validateRequiredFields(csvRecord, errorProcessor);
 		    if (errorProcessor.hasErrors()) {
 				return "admin-products-import-csv";
-			}
+			}	
 		    String sku = csvRecord.get(ProductImportHeader.SKU.name());
 		    com.salesmanager.shop.admin.model.catalog.Product product = getProductToProcessBySkuAndLanguage(sku, language );
 		    buildProductDataFromCsvRecord(store, product, csvRecord, errorProcessor);
@@ -1108,6 +1119,7 @@ public class ProductController {
 		    buildProductAvailabilityFromCsvRecord(store, product, csvRecord, errorProcessor);
 		    buildProductDescriptionFromCsvRecord(product, language, csvRecord);
 		    buildProductPriceFromCsvRecord(product, language, csvRecord, errorProcessor);
+		    buildProductImages(product, language, csvRecord, errorProcessor);
 		    if (errorProcessor.hasErrors()) {
 		    	addRowNumberAndInfoToErrors(rowNumber, errorProcessor);
 				return "admin-products-import-csv";
@@ -1274,7 +1286,7 @@ public class ProductController {
 			productDescription.setName(name);
 			productDescription.setDescription("<p>"+csvRecord.get(ProductImportHeader.DESCRIPTION.name())+"</p>");
 			productDescription.setProduct(product.getProduct());
-			productDescription.setSeUrl(name.toLowerCase().replaceAll("[^a-z\\s]", "").replaceAll("\\s", "-"));
+			productDescription.setSeUrl(name.toLowerCase().replaceAll("[^a-z_0-9\\s]", "").replaceAll("\\s", "-"));
 			productDescription.setMetatagDescription(name.toLowerCase());
 			productDescription.setMetatagTitle(name.toLowerCase());
 			productDescription.setMetatagKeywords(name.toLowerCase());
@@ -1327,5 +1339,103 @@ public class ProductController {
 		priceDescription.setProductPrice(newProductPrice);
 		productPriceDescriptions.add(priceDescription);
 		newProductPrice.setDescriptions(productPriceDescriptions);
+	  }
+	  
+	  private void buildProductImages(com.salesmanager.shop.admin.model.catalog.Product product, Language language, CSVRecord csvRecord, ImportErrorProcessor errorProcessor) {
+		  if(product.getProduct().getImages()!=null && !product.getProduct().getImages().isEmpty()) {
+			  return;
+		  }
+		  String sku = csvRecord.get(ProductImportHeader.SKU);
+		  String imagesFolder = configuration.getProperty("PRODUCT_IMAGES_FOLDER");
+		  //process only the first image
+		  try (Stream<Path> paths = Files.walk(Paths.get(imagesFolder))) {
+			    Optional<Path> pathFile = paths.filter(file -> file.toFile().isFile() && 
+			    		file.getFileName().toString().split("_")[0].equals(sku))
+			    .findFirst();
+			    
+			    if(pathFile.isPresent()) {
+			    	
+			    	MultipartFile multipartFile = pathToMultipartFile(pathFile.get());
+					    	
+			    	product.setImage(multipartFile);
+			    	
+			    	// validate image
+					validateImageProperties(multipartFile, errorProcessor);
+						
+					String imageName = product.getImage().getOriginalFilename();
+
+					ProductImage productImage = new ProductImage();
+					productImage.setDefaultImage(true);
+					productImage.setImage(product.getImage().getInputStream());
+					productImage.setProductImage(imageName);
+
+					List<ProductImageDescription> imagesDescriptions = new ArrayList<>();
+
+					ProductImageDescription imageDescription = new ProductImageDescription();
+					imageDescription.setName(imageName);
+					imageDescription.setLanguage(language);
+					imageDescription.setProductImage(productImage);
+					imagesDescriptions.add(imageDescription);
+					
+					Product innerProduct = product.getProduct();
+
+					productImage.setDescriptions(imagesDescriptions);
+					productImage.setProduct(innerProduct);
+
+					innerProduct.getImages().add(productImage);
+
+					// product displayed
+					product.setProductImage(productImage);	
+			    }
+		  }catch(NoSuchFileException e) {
+			  LOGGER.warn("Image folder "+imagesFolder+" does not exists", e);
+			  errorProcessor.addNewError("message.csv.product.images.folder.not.exists", imagesFolder);
+		  }catch(Exception e) {
+			  LOGGER.warn("Error trying to upload images", e);
+			  errorProcessor.addNewError("message.csv.product.images.error");
+		  } 
+	  }
+	  
+	  private MultipartFile pathToMultipartFile(Path pathFile) throws IOException {
+		  File file = pathFile.toFile();
+	    	try(FileInputStream input = new FileInputStream(file)){
+		    	String mimeType = Files.probeContentType(pathFile);
+	    		 return new MockMultipartFile("file", file.getName(), mimeType, IOUtils.toByteArray(input));
+	    	}
+	  }  
+	  
+	  private void validateImageProperties(MultipartFile multipartFile, ImportErrorProcessor errorProcessor) {
+		  try {
+
+				String maxHeight = configuration.getProperty("PRODUCT_IMAGE_MAX_HEIGHT_SIZE");
+				String maxWidth = configuration.getProperty("PRODUCT_IMAGE_MAX_WIDTH_SIZE");
+				String maxSize = configuration.getProperty("PRODUCT_IMAGE_MAX_SIZE");
+
+				BufferedImage image = ImageIO.read(multipartFile.getInputStream());
+
+				if (!StringUtils.isBlank(maxHeight)) {
+					int maxImageHeight = Integer.parseInt(maxHeight);
+					if (image.getHeight() > maxImageHeight) {
+						errorProcessor.addNewErrorWithExtra("message.image.height", " {" + maxHeight + "}");
+					}
+				}
+
+				if (!StringUtils.isBlank(maxWidth)) {
+					int maxImageWidth = Integer.parseInt(maxWidth);
+					if (image.getWidth() > maxImageWidth) {
+						errorProcessor.addNewErrorWithExtra("message.image.width", " {" + maxWidth + "}");
+					}
+				}
+
+				if (!StringUtils.isBlank(maxSize)) {
+					int maxImageSize = Integer.parseInt(maxSize);
+					if (multipartFile.getSize() > maxImageSize) {
+						errorProcessor.addNewErrorWithExtra("message.image.size", " {" + maxSize + "}");
+					}
+				}
+
+			} catch (Exception e) {
+				LOGGER.error("Cannot validate product image", e);
+			}
 	  }
 }

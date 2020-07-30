@@ -24,9 +24,7 @@ public enum ProductImportHeader {
 		DESCRIPTION(false,"description"),
 		PRODUCT_PRICE_SPECIAL_AMOUNT(false,"special.amount"),
 		PRODUCT_PRICE_SPECIAL_ST_DATE(false,"special.amount.from"),
-		PRODUCT_PRICE_SPECIAL_END_DATE(false,"special.amount.to"),
-		IMAGE_TYPE(false,"image.type"),
-		PRODUCT_IMAGE_URL(false,"image.url");
+		PRODUCT_PRICE_SPECIAL_END_DATE(false,"special.amount.to");
 
 	  private boolean required;
 	  private String description;
