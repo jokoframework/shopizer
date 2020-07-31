@@ -30,7 +30,7 @@ for (var i = 0; i < productList.products.length; i++) {
     }
     productHtml = productHtml + '<a href="<c:url value="/shop/product/" />' + productList.products[i].description.friendlyUrl + '.html<sm:breadcrumbParam/>"><h4 class="name" itemprop="name">' + productList.products[i].description.name +'</h4></a>';
     productHtml = productHtml + '<div class="bottom">'
-    if(productList.products[i].quantity>0) {
+    if(productList.products[i].quantity>0 || productList.products[i].productAlwaysInStock) {
         productHtml = productHtml + '<div class="store-btn form-inline">'
         if(productList.products[i].quantityOrderMaximum>=-1 || productList.products[i].quantityOrderMaximum>1 && !productList.products[i].productVirtual) {
             productHtml = productHtml + '<div class="form-group product-qty">'

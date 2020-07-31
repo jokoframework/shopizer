@@ -217,9 +217,9 @@ public class ShoppingCartFacadeImpl
         }
         	
         for(ProductAvailability availability : availabilities) {
-        	if(availability.getProductQuantity() == null || availability.getProductQuantity().intValue() ==0) {
+            if(!product.isProductAlwaysInStock() && (availability.getProductQuantity() == null || availability.getProductQuantity().intValue() ==0)) {
                 throw new Exception( "Item with id " + product.getId() + " is not available");
-        	}
+            }
         }
         
         if(!product.isAvailable()) {

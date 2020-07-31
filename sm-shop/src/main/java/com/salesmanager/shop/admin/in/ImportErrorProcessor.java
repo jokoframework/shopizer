@@ -53,6 +53,11 @@ public class ImportErrorProcessor {
 	  	this.bindingResult.addError(error);
 	}
 	
+	public void addNewErrorWithExtra(String messageCode, String extraInfo, @Nullable Object... arguments) {
+		ObjectError error = new ObjectError(this.objectName, null, arguments, messages.getMessage(messageCode, this.locale) + extraInfo);
+	  	this.bindingResult.addError(error);
+	}
+	
 	public boolean hasErrors() {
 	  	return this.bindingResult.hasErrors();
 	}

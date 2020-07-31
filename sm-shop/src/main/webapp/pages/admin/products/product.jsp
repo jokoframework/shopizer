@@ -321,7 +321,12 @@ var priceFormatMessage = '<s:message code="message.price.cents" text="Wrong form
                         </div>
                   </div>
 
-                 
+                 <div class="control-group">
+                        <label><s:message code="label.product.always.in.stock" text="Always in stock"/></label>
+                        <div class="controls">
+                                 <form:checkbox path="product.productAlwaysInStock" />
+                        </div>
+                 </div>
 
                   <div class="control-group">
                         <label><s:message code="label.product.ordermin" text="Quantity order minimum"/></label>
