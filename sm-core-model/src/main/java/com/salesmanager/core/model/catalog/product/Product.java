@@ -167,6 +167,9 @@ public class Product extends SalesManagerEntity<Long, Product> implements Audita
 	@Column(name = "PRODUCT_ITEM_WEIGHT")
 	private Double productItemWeight;
 
+	@Column(name = "PRODUCT_QUANTITY_UNLIMITED")
+	private boolean productAlwaysInStock;
+
 	@NotEmpty
 	@Pattern(regexp="^[a-zA-Z0-9_]*$")
 	@Column(name = "SKU")
@@ -521,4 +524,12 @@ public class Product extends SalesManagerEntity<Long, Product> implements Audita
 	public Double getProductItemWeight() { return productItemWeight; }
 
 	public void setProductItemWeight(Double productItemWeight) { this.productItemWeight = productItemWeight; }
+
+	public boolean isProductAlwaysInStock() {
+		return productAlwaysInStock;
+	}
+
+	public void setProductAlwaysInStock(boolean productAlwaysInStock) {
+		this.productAlwaysInStock = productAlwaysInStock;
+	}
 }

@@ -428,8 +428,8 @@ public class ReadableProductPopulator extends
 					target.setQuantity(availability.getProductQuantity() == null ? 1:availability.getProductQuantity());
 					target.setQuantityOrderMaximum(availability.getProductQuantityOrderMax() == null ? 1:availability.getProductQuantityOrderMax());
 					target.setQuantityOrderMinimum(availability.getProductQuantityOrderMin()==null ? 1:availability.getProductQuantityOrderMin());
-					if(availability.getProductQuantity().intValue() > 0 && target.isAvailable()) {
-							target.setCanBePurchased(true);
+					if(target.isProductAlwaysInStock() || (availability.getProductQuantity().intValue() > 0 && target.isAvailable())) {
+						target.setCanBePurchased(true);
 					}
 				//}
 			}
@@ -437,6 +437,7 @@ public class ReadableProductPopulator extends
 	
 			target.setSku(source.getSku());
 			target.setProductItemWeight(source.getProductItemWeight());
+			target.setProductAlwaysInStock(source.isProductAlwaysInStock());
 			
 			FinalPrice price = pricingService.calculateProductPrice(source);
 			
