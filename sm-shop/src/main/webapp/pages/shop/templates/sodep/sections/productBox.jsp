@@ -17,7 +17,6 @@ response.setDateHeader ("Expires", -1);
 <script>
 
 	$(function(){
-
 		initQtBindings();
 
 	});
@@ -72,7 +71,7 @@ response.setDateHeader ("Expires", -1);
 														</h3>
 															<a href="<c:url value="/shop/product/" /><c:out value="${product.description.friendlyUrl}"/>.html<sm:breadcrumbParam productId="${product.id}"/>"><h4><c:out value="${product.description.name}"/></h4></a>
 															<div class="bottom">
-																<c:if test="${product.quantity>0}">
+																<c:if test="${product.quantity<0 || product.productAlwaysInStock}">
 																	<div class="store-btn form-inline">
 																	<div class="form-group product-qty">
 																		<a class="btn button btn-info updateQty" productid="<c:out value="${product.id}"/>" stepBy="<c:out value="-${product.productItemWeight}"/>"><i class="fas fa-minus"></i></a>

@@ -87,6 +87,8 @@ public class PersistableProductPopulator extends
 			target.setAvailable(source.isAvailable());
 			target.setPreOrder(source.isPreOrder());
 			target.setRefSku(source.getRefSku());
+			target.setProductAlwaysInStock(source.isProductAlwaysInStock());
+
 			if(source.getId() != null && source.getId().longValue()==0) {
 				target.setId(null);
 			} else {
@@ -221,7 +223,7 @@ public class PersistableProductPopulator extends
 				productAvailability.setProductQuantityOrderMin(1);
 				productAvailability.setProductQuantityOrderMax(1);
 				productAvailability.setAvailable(Boolean.valueOf(target.isAvailable()));
-				
+
 				for(com.salesmanager.shop.model.catalog.product.PersistableProductPrice priceEntity : source.getProductPrices()) {
 					
 					ProductPrice price = new ProductPrice();

@@ -380,7 +380,7 @@ public class OrderFacadeImpl implements OrderFacade {
 			for (ShoppingCartItem item : shoppingCartItems) {
 
 				/**
-				 * Before processing order quantity of item must be > 0
+				 * Before processing order quantity of item must be > 0 or it should have AlwaysInStock flag enabled
 				 */
 
 				Product product = productService.getById(item.getProductId());
@@ -392,7 +392,7 @@ public class OrderFacadeImpl implements OrderFacade {
 				for (ProductAvailability availability : product.getAvailabilities()) {
 					if (availability.getRegion().equals(Constants.ALL_REGIONS)) {
 						double qty = availability.getProductQuantity();
-						if (qty < item.getQuantity()) {
+						if (qty < item.getQuantity() && !item.getProduct().isProductAlwaysInStock()) {
 							throw new ServiceException(ServiceException.EXCEPTION_INVENTORY_MISMATCH);
 						}
 					}

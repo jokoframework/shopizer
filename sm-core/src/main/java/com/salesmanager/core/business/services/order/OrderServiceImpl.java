@@ -200,10 +200,11 @@ public class OrderServiceImpl  extends SalesManagerEntityServiceImpl<Long, Order
                 throw new ServiceException(ServiceException.EXCEPTION_INVENTORY_MISMATCH);
             for(ProductAvailability availability : p.getAvailabilities()) {
                 double qty = availability.getProductQuantity();
-                if(qty < orderProduct.getProductQuantity()) {
+                if(qty < orderProduct.getProductQuantity() && !p.isProductAlwaysInStock()) {
                     throw new ServiceException(ServiceException.EXCEPTION_INVENTORY_MISMATCH);
                 }
                 qty = qty - orderProduct.getProductQuantity();
+                qty = p.isProductAlwaysInStock() ? qty : qty - orderProduct.getProductQuantity();
                 availability.setProductQuantity(qty);
             }
             productService.update(p);
