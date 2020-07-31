@@ -20,9 +20,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.imageio.ImageIO;
@@ -1144,10 +1144,16 @@ public class ProductController {
 	
 	 public void validateRequiredFields(CSVRecord csvRecord, ImportErrorProcessor errorProcessor) {
 		 for(ProductImportHeader header : ProductImportHeader.values()) {
-			 String record = csvRecord.get(header.name());
-			 if(header.isRequired() && (record == null || record.isEmpty())) {
-				 errorProcessor.addNewError("message.csv.filed.required", header.name());
-			 }
+			 try{
+				 String record = csvRecord.get(header.name());
+				 if(header.isRequired() && (record == null || record.isEmpty())) {
+					 errorProcessor.addNewError("message.csv.filed.required", header.name());
+				 }
+			 }catch(IllegalArgumentException e) {
+				if (header.isRequired()) {
+					errorProcessor.addNewError("message.csv.filed.required", header.name());
+				}
+			}	
 		 }
 	  }
 	
@@ -1289,7 +1295,8 @@ public class ProductController {
 			productDescription.setSeUrl(name.toLowerCase().replaceAll("[^a-z_0-9\\s]", "").replaceAll("\\s", "-"));
 			productDescription.setMetatagDescription(name.toLowerCase());
 			productDescription.setMetatagTitle(name.toLowerCase());
-			productDescription.setMetatagKeywords(name.toLowerCase());
+			String metatagsField  = csvRecord.get(ProductImportHeader.META_TAGS.name());
+			productDescription.setMetatagKeywords(metatagsField);
 			productDescription.setProductHighlight(name);
 			productDescriptions.add(productDescription);
 			product.getProduct().setDescriptions(productDescriptions);
@@ -1349,13 +1356,15 @@ public class ProductController {
 		  String imagesFolder = configuration.getProperty("PRODUCT_IMAGES_FOLDER");
 		  //process only the first image
 		  try (Stream<Path> paths = Files.walk(Paths.get(imagesFolder))) {
-			    Optional<Path> pathFile = paths.filter(file -> file.toFile().isFile() && 
-			    		file.getFileName().toString().split("_")[0].equals(sku))
-			    .findFirst();
-			    
-			    if(pathFile.isPresent()) {
-			    	
-			    	MultipartFile multipartFile = pathToMultipartFile(pathFile.get());
+ 			    		
+			    List<Path> pathFiles = paths.filter(file -> file.toFile().isFile() && 
+			    		file.getFileName().toString().split(" ")[0].equals(sku))
+			    		.collect(Collectors.toList());
+			    		
+
+		    	for(Path pathFile : pathFiles) {
+		    		MultipartFile multipartFile = pathToMultipartFile(pathFile);
+		    		
 					    	
 			    	product.setImage(multipartFile);
 			    	
@@ -1365,7 +1374,7 @@ public class ProductController {
 					String imageName = product.getImage().getOriginalFilename();
 
 					ProductImage productImage = new ProductImage();
-					productImage.setDefaultImage(true);
+					productImage.setDefaultImage(isDefault(pathFiles, pathFile));
 					productImage.setImage(product.getImage().getInputStream());
 					productImage.setProductImage(imageName);
 
@@ -1386,7 +1395,8 @@ public class ProductController {
 
 					// product displayed
 					product.setProductImage(productImage);	
-			    }
+			    
+		    	}
 		  }catch(NoSuchFileException e) {
 			  LOGGER.warn("Image folder "+imagesFolder+" does not exists", e);
 			  errorProcessor.addNewError("message.csv.product.images.folder.not.exists", imagesFolder);
@@ -1394,6 +1404,16 @@ public class ProductController {
 			  LOGGER.warn("Error trying to upload images", e);
 			  errorProcessor.addNewError("message.csv.product.images.error");
 		  } 
+	  }
+	  
+	  private boolean isDefault(List<Path> pathFiles , Path current) {
+		  if(pathFiles.size()!=1) {
+  			String[] fileNameParts = current.getFileName().toString().split("_");
+  			if(fileNameParts.length == 1 || fileNameParts[1].equals("1")) {
+  				return true;
+  			}
+		  }
+		  return false;
 	  }
 	  
 	  private MultipartFile pathToMultipartFile(Path pathFile) throws IOException {
