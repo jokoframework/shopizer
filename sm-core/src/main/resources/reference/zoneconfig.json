@@ -939,22 +939,7 @@
 		"zoneCode": "WAAU",
 		"zoneName": "Western Australia",
 		"countryCode": "AU"
-	} ,
-	  {
-		  "zoneCode": "ASU",
-		  "zoneName": "Asuncion",
-		  "countryCode": "PY"
-	  },
-	  {
-		  "zoneCode": "CEN",
-		  "zoneName": "Central",
-		  "countryCode": "PY"
-	  },
-	  {
-		  "zoneCode": "OTR",
-		  "zoneName": "Other",
-		  "countryCode": "PY"
-	} 
+	}
 ]  ,
 
   "fr":[
@@ -2842,19 +2827,94 @@
 			"countryCode": "AU"
 		},
 		{
-			"zoneCode": "ASU",
+			"zoneCode": "PY-ASU",
 			"zoneName": "Asunción",
 			"countryCode": "PY"
 		},
 		{
-			"zoneCode": "CEN",
+			"zoneCode": "PY-16",
+			"zoneName": "Alto Paraguay",
+			"countryCode": "PY"
+		},
+		{
+			"zoneCode": "PY-10",
+			"zoneName": "Alto Paraná",
+			"countryCode": "PY"
+		},
+		{
+			"zoneCode": "PY-13",
+			"zoneName": "Amambay",
+			"countryCode": "PY"
+		},
+		{
+			"zoneCode": "PY-19",
+			"zoneName": "Boquerón",
+			"countryCode": "PY"
+		},
+		{
+			"zoneCode": "PY-5",
+			"zoneName": "Caaguazú",
+			"countryCode": "PY"
+		},
+		{
+			"zoneCode": "PY-6",
+			"zoneName": "Caazapá",
+			"countryCode": "PY"
+		},
+		{
+			"zoneCode": "PY-14",
+			"zoneName": "Canindeyú",
+			"countryCode": "PY"
+		},
+		{
+			"zoneCode": "PY-11",
 			"zoneName": "Central",
 			"countryCode": "PY"
 		},
 		{
-			"zoneCode": "OTR",
-			"zoneName": "Otro",
+			"zoneCode": "PY-1",
+			"zoneName": "Concepción",
+			"countryCode": "PY"
+		},
+		{
+			"zoneCode": "PY-3",
+			"zoneName": "Cordillera",
+			"countryCode": "PY"
+		},
+		{
+			"zoneCode": "PY-4",
+			"zoneName": "Guairá",
+			"countryCode": "PY"
+		},
+		{
+			"zoneCode": "PY-7",
+			"zoneName": "Itapúa",
+			"countryCode": "PY"
+		},
+		{
+			"zoneCode": "PY-8",
+			"zoneName": "Misiones",
+			"countryCode": "PY"
+		},
+		{
+			"zoneCode": "PY-12",
+			"zoneName": "Ñeembucú",
+			"countryCode": "PY"
+		},
+		{
+			"zoneCode": "PY-9",
+			"zoneName": "Paraguarí",
+			"countryCode": "PY"
+		},
+		{
+			"zoneCode": "PY-15",
+			"zoneName": "Presidente Hayes",
+			"countryCode": "PY"
+		},
+		{
+			"zoneCode": "PY-2",
+			"zoneName": "San Pedro",
 			"countryCode": "PY"
 		}
-] 
+]
 }
