@@ -435,6 +435,7 @@ public class ProductController {
 			newProduct.setProductShipeable(product.getProduct().isProductShipeable());
 			newProduct.setTaxClass(product.getProduct().getTaxClass());
 			newProduct.setSortOrder(product.getProduct().getSortOrder());
+			newProduct.setProductAlwaysInStock(product.getProduct().isProductAlwaysInStock());
 
 			if(product.getProduct().getProductItemWeight() != null) {
 				newProduct.setProductItemWeight(product.getProduct().getProductItemWeight());
@@ -625,6 +626,7 @@ public class ProductController {
 			availability.setRegionVariant(pAvailability.getRegionVariant());
 			availability.setProduct(newProduct);
 
+			
 			Set<ProductPrice> prices = pAvailability.getPrices();
 			for (ProductPrice pPrice : prices) {
 
@@ -1198,9 +1200,11 @@ public class ProductController {
 		  innerProductData.setProductWidth(productWidth);
 		  innerProductData.setProductHeight(productHeight);
 		  innerProductData.setProductWeight(productWeight);
-		  
+
 		  //default values, shipeable tax and type
 		  innerProductData.setProductShipeable(true);
+		  innerProductData.setProductAlwaysInStock(true);
+
 		  try {
 			  TaxClass defaultTaxClass = taxClassService.getByCode(TaxClass.DEFAULT_TAX_CLASS);
 			  ProductType generalType = productTypeService.getProductType(ProductType.GENERAL_TYPE);  
