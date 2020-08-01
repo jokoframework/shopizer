@@ -30,7 +30,7 @@ public class ProductEntity extends Product implements Serializable {
 	private boolean available;
 	private boolean visible = true;
 	private Double productItemWeight = 1d;
-	private boolean productAlwaysInStock;
+	private Boolean productAlwaysInStock = false;
 	/*
 	 * private BigDecimal productLength; private BigDecimal productWidth;
 	 * private BigDecimal productHeight; private BigDecimal productWeight;
@@ -241,11 +241,15 @@ public class ProductEntity extends Product implements Serializable {
 
 	public void setProductItemWeight(Double productItemWeight) { this.productItemWeight = productItemWeight; }
 
-	public boolean isProductAlwaysInStock() {
+	public Boolean isProductAlwaysInStock() {
 		return productAlwaysInStock;
 	}
 
-	public void setProductAlwaysInStock(boolean productAlwaysInStock) {
+	public Boolean getProductAlwaysInStock() {
+		return productAlwaysInStock;
+	}
+
+	public void setProductAlwaysInStock(Boolean productAlwaysInStock) {
 		this.productAlwaysInStock = productAlwaysInStock;
 	}
 }
